@@ -230,7 +230,7 @@
               </div>
             </div>
             <div class="col border border-2 border-tertiary-subtle pb-2">
-              <p class="title text-center">Sigarilyas</p>
+              <p class="title text-center">{{ $crop->crop_name}}</p>
 
                     
               @if(Session::has('success'))

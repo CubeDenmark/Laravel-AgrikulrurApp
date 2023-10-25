@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\auctions;
+use App\Models\crops;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\QueryException;
@@ -116,8 +117,9 @@ public function sendBid(Request $request)
         foreach($auctions as $auction)
         {
             $creator = User::where('id', $auction->user_id)->get();
+            $crop = crops::where('crop_id', $auction->crop_id)->first();
         }
-        return view('bidding', compact('bids','auctions', 'highestbid', 'creator'))->with('success', 'highest bid fetched');
+        return view('bidding', compact('bids','auctions', 'highestbid', 'creator', 'crop'))->with('success', 'highest bid fetched');
 
         //$bids = bid::get('bids');
         //$bids = DB::table('bid')->select('bids')->orderBy('bids', 'desc')->first();
