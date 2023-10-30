@@ -1,109 +1,114 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 html {
-  font-size: 10px;
+    font-size: 10px;
 }
 
 /* Typography */
 body {
-  font-family: "Merriweather", serif;
+    font-family: "Merriweather", serif;
 }
 .title {
-  font-size: 5rem;
-  font-weight: bold;
-  font-family: "Oswald", sans-serif;
+    font-size: 5rem;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
 }
 .md-title {
-  font-size: 3rem;
-  font-weight: bold;
-  font-family: "Oswald", sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
+}
+.sm-title {
+    font-size: 2.5rem !important;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
 }
 p {
-  font-size: 3rem;
+    font-size: 3rem;
 }
 .desc {
-  text-indent: 1rem;
-  text-align: justify;
+    text-indent: 1rem;
+    text-align: justify;
 }
 #brand {
-  font-size: 4rem;
-  font-weight: bold;
-  font-family: "Oswald", sans-serif;
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
 }
 
 #nav-link {
-  font-size: 3rem;
-  font-weight: bold;
-  font-family: "Oswald", sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
 }
 /* Typography */
 
 /* Navigation Bar CSS */
 nav {
-  box-shadow: 1px 2px 5px #5d5b5b;
+    box-shadow: 1px 2px 5px #5d5b5b;
 }
 .nav-pic {
-  width: 15rem;
-  height: 15rem;
-  border-radius: 50%;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
 }
 #nav-link,
 #brand {
-  color: #6c9c82 !important;
+    color: #6c9c82 !important;
 }
 .logo-pic {
-  width: 15rem;
-  height: 15rem;
+    width: 15rem;
+    height: 15rem;
 }
 #nav-link,
 #brand {
-  color: #6c9c82 !important;
+    color: #6c9c82 !important;
 }
 
 .link-btn {
-  width: 50rem;
-  height: 7rem;
-  font-size: 4rem !important;
+    width: 50rem;
+    height: 7rem;
+    font-size: 4rem !important;
 }
 
 /* clears the ‘X’ from Internet Explorer */
 input[type="search"]::-ms-clear {
-  display: none;
-  width: 0;
-  height: 0;
+    display: none;
+    width: 0;
+    height: 0;
 }
 input[type="search"]::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
+    display: none;
+    width: 0;
+    height: 0;
 }
 input[type="search"] {
-  font-size: 1rem;
+    font-size: 1rem;
 }
 #myInput {
-  background-image: url("/assets/searc.png") !important; /* Add a search icon to input */
-  background-repeat: no-repeat !important; /* Do not repeat the icon image */
+    background-image: url("/assets/searc.png") !important; /* Add a search icon to input */
+    background-repeat: no-repeat !important; /* Do not repeat the icon image */
 }
 table img {
-  width: 50px;
-  height: 50px;
+    width: 50px;
+    height: 50px;
 }
 /* Placeholder Color */
 ::-webkit-input-placeholder {
-  color: #6c9c82 !important;
+    color: #6c9c82 !important;
 }
 
 ::-moz-placeholder {
-  color: #6c9c82 !important;
+    color: #6c9c82 !important;
 }
 
 ::-ms-placeholder {
-  color: #6c9c82 !important;
+    color: #6c9c82 !important;
 }
 
 ::placeholder {
-  color: #6c9c82 !important;
+    color: #6c9c82 !important;
 }
 /* Placeholder Color */
 
@@ -112,32 +117,35 @@ input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
-  display: none;
+    display: none;
 }
 @media screen and (max-width: 576px) {
-  .logo-pic {
-    width: 50px;
-    height: 50px;
-  }
-  .title {
-    font-size: 3rem;
-  }
-  #nav-link {
-    font-size: 2rem;
-  }
-  .desc {
-    font-size: 1.5rem;
-  }
-  .md-title {
-    font-size: 2.5rem;
-  }
+    .logo-pic {
+        width: 50px;
+        height: 50px;
+    }
+    .title {
+        font-size: 3rem;
+    }
+    #nav-link {
+        font-size: 2rem;
+    }
+    .desc {
+        font-size: 1.5rem;
+    }
+    .md-title {
+        font-size: 2.5rem;
+    }
+    .sm-title {
+        font-size: 1rem !important;
+    }
 }
 @media screen and (min-width: 768px) {
-  table,
-  table button {
-    font-size: 2rem !important;
-  }
-  input[type="search"] {
-    font-size: 2rem;
-  }
+    table,
+    table button {
+        font-size: 2rem !important;
+    }
+    input[type="search"] {
+        font-size: 2rem;
+    }
 }

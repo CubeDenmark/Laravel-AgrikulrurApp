@@ -76,20 +76,36 @@
         <tbody>
         @foreach($users as $user)
           <tr>
-            <td><img src="images/profiles/{{ $user->profile_img}}" class="rounded-circle" /></td>
+            <td><img src="images/profiles/{{ $user->profile_img}}" class="rounded-circle object-fit-cover" id="userImg" /></td>
             <td class="fw-bold">{{ $user->name}}</td>
             <td>{{ $user->phone}}</td>
             <td>{{ $user->email}}</td>
             <td>
               <div class="d-flex flex-column gap-2">
-                <!-- 
-                <button type="button" class="btn btn-outline-danger">
-                  Reject User
-                </button> -->
 
-                <a href="{{ url('rejectUser')}}?id={{ $user->id}}" class="btn btn-outline-danger btn-lg">
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#{{ $user->id }}activateUserBackdrop">
                   Reject User
-                </a>
+                </button>
+                <div class="modal fade" id="{{ $user->id }}activateUserBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Reject User: {{ $user->name }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to reject {{ $user->name}}?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary fs-2" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-outline-danger fs-2" href="{{ url('rejectUser')}}?id={{ $user->id}}">Reject User</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {{-- <a href="{{ url('rejectUser')}}?id={{ $user->id}}" class="btn btn-outline-danger btn-lg">
+                  Reject User
+                </a> --}}
                 <!-- Button trigger modal -->
                 <button
                   type="button"
@@ -145,12 +161,12 @@
                     <div class="modal-footer">
                       <button
                         type="button"
-                        class="btn btn-secondary"
+                        class="btn btn-secondary fs-2"
                         data-bs-dismiss="modal"
                       >
                         Close
                       </button>
-                      <a href="{{ url('activate')}}?id={{ $user->id}}" class="btn btn-success btn-lg btn-lg">
+                      <a href="{{ url('activate')}}?id={{ $user->id}}" class="btn btn-success fs-2">
                         Activate User
                       </a>
                     </div>

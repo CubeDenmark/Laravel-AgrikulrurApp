@@ -65,13 +65,34 @@
         <tbody>
           @foreach($auctions as $auction)
             <tr>
-              <td>{{ $auction->auction_id}}</td>
-              <td>{{ $auction->user_id}}</td>
+              <td><a href="{{ url('send-bid')}}?auction_id={{$auction->auction_id}}" class="btn btn-outline-success fs-lg-4 sm-title">View Listing ID:{{ $auction->auction_id}} </a></td>
+              <td>{{ $auction->user_id}}</td> <!--Crop Type dapat to-->
               <td>{{ $auction->created_at}}</td>
               <td>{{ $auction->user_id}}</td>
               <td>
                 <!-- <button class="btn btn-outline-danger">Remove Auction</button> -->
-                <a href="{{url('rmAuction')}}?auction_id={{ $auction->auction_id}}" class="btn btn-outline-danger">Remove Auction</a>
+                {{-- <a href="{{url('rmAuction')}}?auction_id={{ $auction->auction_id}}" class="btn btn-outline-danger">Remove Auction</a> --}}
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#{{ $auction->auction_id}}Backdrop">
+                  Remove Auction
+                </button>
+                <!-- Modal -->
+                  <div class="modal fade" id="{{ $auction->auction_id}}Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="staticBackdropLabel">Remove Auction ID: {{ $auction->auction_id}}</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure you want to remove <a href="{{ url('send-bid')}}?auction_id={{$auction->auction_id}}" target="_blank" class="btn btn-outline-success sm-title">Auction Listing ID:{{ $auction->auction_id}}</a> 
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary fs-2" data-bs-dismiss="modal">Close</button>
+                          <a class="btn btn-outline-danger fs-2"href="{{url('rmAuction')}}?auction_id={{ $auction->auction_id}}">Remove Auction</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </td>
             </tr>
           @endforeach
