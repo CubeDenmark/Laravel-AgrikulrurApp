@@ -59,8 +59,10 @@ public function sendMessage(Request $request)
             //return ['status' => 'Message Sent!'];
             if($bids)
             {
-                event(new NewMessageEvent($message, $channel, $user['name'], $profile_img));
-                return response()->json([$message => true]);
+		event(new NewMessageEvent($message, $channel, $user['name'], $profile_img));
+              
+		return response()->json([$message => true]);
+	
             }
             else
             {
