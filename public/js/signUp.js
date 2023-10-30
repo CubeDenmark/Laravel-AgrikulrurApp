@@ -8,15 +8,11 @@
 
 // changes radio label to the specific type of file they need to upload
 function radioChange(val) {
-    const form = document.getElementById("credentials_inp");
     const formText = document.getElementById("credentials-label");
-    const cred = document.getElementById("credentials");
     if (val === "farmer") {
         formText.innerText = `Enter RSBSA Number: `;
-        cred.type = "file";
     } else {
         formText.innerText = "Upload Valid ID: ";
-        cred.type = "file";
     }
 }
 // relocate the user to the SignComplete after signing up
@@ -59,5 +55,15 @@ function phoneCheck() {
         num.classList.remove("is-invalid");
         num.classList.add("is-valid");
         //btn.disabled = false;
+    }
+}
+function legalAgree() {
+    const termsBtn = document.getElementById("termsCheck");
+    const privacyBtn = document.getElementById("privacyCheck");
+    const btn = document.getElementById("form-submit");
+    if (termsBtn.checked === true && privacyBtn.checked === true) {
+        btn.disabled = false;
+    } else {
+        btn.disabled = true;
     }
 }

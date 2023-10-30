@@ -66,14 +66,14 @@
 
                 <!--Suggested Price-->
                 <div class="input-group mb-3">
-                  <span id="peso-sign" class="input-group-text cropTitle bg-success text-light">₱</span>
+                  <span id="peso-sign" class="input-group-text cropTitle bg-transparent text-light">₱</span>
                       <input
                         onkeyup="btnDis()"
                         name="suggested_price"
                         id="crop_price"
                         type="number"
                         class="form-control cropTitle bg-transparent text-light"
-                        placeholder="Suggested Price"
+                        placeholder="Suggested Price per Kilo"
                         aria-label="Price"
                         required
                       />

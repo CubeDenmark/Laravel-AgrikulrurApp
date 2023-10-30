@@ -47,24 +47,23 @@
             <img src="../assets/Sitaw.jpeg" alt="" class="mb-2" id="bid-image" />
           </div>
           <div class="row bg-light row-cols-2 p-2">
-            <div class="col border-end border-black">
+            <div class="col d-flex flex-column gap-3 border-end border-black">
               <p class="mt-2">Creator</p>
                 @foreach($creator as $farmer)
                     <div class="d-flex align-items-center">
                       <img
                         src="/images/profiles/{{ $farmer->profile_img }}"
                         alt=""
-                        class="rounded-circle m-2"
-                        style="width: 50px"
+                        class="rounded-circle m-2 object-fit-cover"
+                        width="50px"
+                        height="50px"
                       />
              
 
-                    <p class="fs-5 fw-bold">{{ $farmer->name }}</p>
-
-                      <!-- <p class="fs-5 fw-bold">Darren Ventura</p> -->
+                    <p class="fs-5 fw-bold">{{ $farmer->name }}</p> 
                     </div>
                   @endforeach
-              <p>Base Bid Price: 
+              <p class="mt-3">Base Bid Price: 
 
                @foreach($auctions as $auction)
                     <span id="bp2">{{ $auction->starting_price }}</span>
@@ -111,7 +110,7 @@
                           <img
                             src="/images/profiles/{{ $bid->profile_img }}"
                             alt=""
-                            class="rounded-circle"
+                            class="rounded-circle object-fit-cover"
                             id="table-img"
                           />
                         </td>
@@ -183,8 +182,9 @@
                   <img
                     src="/images/profiles/{{ $farmer->profile_img }}"
                     alt=""
-                    class="rounded-circle m-2"
-                    style="width: 50px"
+                    class="rounded-circle m-2 object-fit-cover"
+                    width="50px"
+                    height="50px"
                   />
 
                   
@@ -268,7 +268,7 @@
                             <img
                               src="/images/profiles/{{ $bid->profile_img }}"
                               alt=""
-                              class="rounded-circle"
+                              class="rounded-circle object-fit-cover"
                               id="table-img"
                             />
                           </td>
@@ -428,7 +428,10 @@
                                         const errorMessages = errors.join('<br>'); // Combine multiple error messages for the field
                                         const errorMessageElement = document.createElement('div');
                                         errorMessageElement.classList.add("new");
-                                        errorMessageElement.innerHTML = `<div class="alert alert-danger"><h2>Please Provide Higher Bid</2></div>`;
+                                        errorMessageElement.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <p class="fs-3 fw-bold">Please Provide a Higher Bid</p>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>`;
                                         validationErrorsDiv.appendChild(errorMessageElement);
                                     }
                                 }

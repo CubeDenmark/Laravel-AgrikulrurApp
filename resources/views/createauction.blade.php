@@ -55,42 +55,19 @@
                         {{$crop->crop_name}}
                       </option>
                       @endforeach
-
-                      <!-- 
-                      <option value="2" class="bg-success text-light"> 
-                        Kalabasa
-                      </option>
-
-                      <option value="3" class="bg-success text-light">
-                        Kamatis
-                      </option>
-
-                      <option value="4" class="bg-success text-light">
-                        Okra
-                      </option>
-
-                      <option value="5" class="bg-success text-light">
-                        Sigarilyas
-                      </option>
-
-                      <option value="6" class="bg-success text-light">
-                        Sitaw
-                      </option>
-                      -->
-
                 </select>
                 <!--Select Input-->
 
                 <!--Price Input-->
                 <div class="input-group mb-3">
-                  <span id="peso-sign" class="input-group-text fs-1 bg-success text-light">₱</span>
+                  <span id="peso-sign" class="input-group-text fs-1 bg-transparent text-light">₱</span>
                       <input
                         onkeyup="btnDis()"
                         name="input_price"
                         id="crop_price"
                         type="number"
                         class="form-control fs-1 bg-transparent text-light"
-                        placeholder="Crop Price"
+                        placeholder="Crop Price per Kilo"
                         aria-label="Price"
                         required
                       />
@@ -99,14 +76,14 @@
 
                 <!--Volume Input-->
                 <div class="input-group mb-3 bg-transparent">
-                  <span class="input-group-text fs-1 bg-success text-light">Kg:</span>
+                  <span class="input-group-text fs-1 bg-transparent text-light">Kg:</span>
                     <input
                       onkeyup="btnDis()"
                       name="input_volume"
                       id="crop_volume"
                       type="number"
                       class="form-control fs-1 bg-transparent text-light"
-                      placeholder="Crop Volume"
+                      placeholder="Crop Kilo"
                       aria-label="Volume"
                       required
                     />

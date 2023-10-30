@@ -76,12 +76,12 @@
             <div class="card">
               <img
                 src="../assets/Ampalaya.jpeg"
-                class="card-img-top"
+                class="card-img-top object-fit-cover"
                 alt="Ampalaya"
               />
               <div class="card-body">
                 <h5 class="card-title md-title">{{$crop->crop_name}}</h5>
-                <a href="{{ url('auctions') }}?type={{$crop->crop_id}}" class="btn btn-success">View Auctions</a>
+                <a href="{{ url('auctions') }}?type={{$crop->crop_id}}" class="btn btn-success fs-4">View Auctions</a>
               </div>
             </div>
           </div>

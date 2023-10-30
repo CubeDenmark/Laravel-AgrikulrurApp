@@ -76,14 +76,34 @@
         @foreach($users as $user)
           <tr>
             <td>
-              <img src="images/profiles/{{ $user->profile_img}}" class="rounded-circle" />
+              <img src="images/profiles/{{ $user->profile_img}}" class="rounded-circle object-fit-cover" id="userImg" />
               <small>ID : {{ $user->id }}</small>
             </td>
             <td class="fw-bold">{{ $user->name}}</td>
             <td>{{ $user->phone}}</td>
             <td>{{ $user->email }}</td>
             <td>
-            <a href="{{url('banUser')}}?id={{ $user->id}}" class="btn btn-outline-danger">Ban user</a>
+              <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#{{ $user->id }}userBackdrop">
+                Ban User
+              </button>
+            {{-- <a href="{{url('banUser')}}?id={{ $user->id}}" class="btn btn-outline-danger sm-title">Ban user</a> --}}
+            <div class="modal fade" id="{{ $user->id }}userBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ban User ID: {{ $user->id }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to Ban {{ $user->name}} ID:{{ $user->id}}?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary fs-2" data-bs-dismiss="modal">Close</button>
+                    <a class="btn btn-outline-danger fs-2" href="{{url('banUser')}}?id={{ $user->id}}">Ban User</a>
+                  </div>
+                </div>
+              </div>
+            </div>
             </td>
           </tr>
         @endforeach

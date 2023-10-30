@@ -34,55 +34,55 @@
     <!--Font Links-->
 
     <main>
-      <div class="container">
+      <div class="container d-flex flex-column justify-content-center align-items-center">
         <p class="title text-success mb-5">What would you like to do?</p>
-        <div class="row gap-5 gap-lg-2">
+        <div class="row gap-5 gap-lg-2 w-100">
           <div class="row">
             <div
-              class="col-12 d-flex justify-content-between align-items-center"
+              class="col-12 d-flex justify-content-center align-items-center"
             >
               <img
                 class="img-fluid d-none d-lg-block"
                 src="../assets/addCrop.svg"
               />
-              <a href="{{ url('addcrop') }}" class="btn btn-success link-btn">Add Crop</a>
+              <a href="{{ url('addcrop') }}" class="md-title btn btn-success link-btn">Add Crop</a>
             </div>
           </div>
           <div class="row">
             <div
-              class="col-12 d-flex justify-content-between align-items-center"
+              class="col-12 d-flex justify-content-center align-items-center"
             >
               <img
                 class="img-fluid d-none d-lg-block"
                 src="../assets/manageAuctions.svg"
               />
-              <a href="{{url('manageAuctions')}}" class="btn btn-success link-btn"
+              <a href="{{url('manageAuctions')}}" class="md-title btn btn-success link-btn"
                 >Manage Auctions</a
               >
             </div>
           </div>
           <div class="row">
             <div
-              class="col-12 d-flex justify-content-between align-items-center"
+              class="col-12 d-flex justify-content-center align-items-center"
             >
               <img
                 class="img-fluid d-none d-lg-block"
                 src="../assets/manageUsers.svg"
               />
-              <a href="{{url('manageUsers')}}" class="btn btn-success link-btn"
+              <a href="{{url('manageUsers')}}" class="md-title btn btn-success link-btn"
                 >Manage Users</a
               >
             </div>
           </div>
           <div class="row">
             <div
-              class="col-12 d-flex gap-5 justify-content-between align-items-center"
+              class="col-12 d-flex gap-5 justify-content-center align-items-center"
             >
               <img
                 class="img-fluid d-none d-lg-block"
                 src="../assets/manageGuidelines.svg"
               />
-              <a href="{{url('updateGuidelines')}}" class="btn btn-success link-btn"
+              <a href="{{url('updateGuidelines')}}" class="md-title btn btn-success link-btn"
                 >View/Update Pricing</a
               >
             </div>
