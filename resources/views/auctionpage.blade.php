@@ -54,7 +54,7 @@
 
       @foreach($auctionData as $auction)
           <div class="card" style="width: 18rem">
-                <img src="../assets/Ampalaya.jpeg" class="card-img-top" alt="" />
+                <img src="../assets/Ampalaya.jpeg" class="card-img-top object-fit-cover" alt="Ampalaya Auction" />
                   <div class="card-body">
                         <h5 class="card-title md-title">Farmer:{{$auction->user_id}}</h5>
                           <div class="card-text">

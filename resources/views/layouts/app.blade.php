@@ -109,7 +109,7 @@
             >
               <img
                 src="images/profiles/{{Auth::user()->profile_img}}"
-                class="rounded-circle object-fit-fill"
+                class="rounded-circle object-fit-cover"
                 width="100%"
                 height="100%"
               />

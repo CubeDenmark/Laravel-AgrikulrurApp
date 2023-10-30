@@ -48,7 +48,7 @@
 
           <img
             src="images/profiles/{{Auth::user()->profile_img}}"
-            class="rounded-circle object-fit-fill"
+            class="rounded-circle object-fit-cover"
             style="width: 35rem; height: 35rem"
             alt=""
             id="profile-pic"
