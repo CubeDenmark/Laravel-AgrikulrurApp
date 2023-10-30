@@ -60,7 +60,7 @@
                       src="../assets/winner.svg"
                       width="150px"
                       height="150px"
-                      class="rounded-circle bg-white object-fit-fill"
+                      class="rounded-circle bg-white object-fit-cover"
                     />
                     <div>
                       <p class="md-title text-success">
@@ -94,7 +94,7 @@
                       src="../assets/transferMoney.png"
                       width="150px"
                       height="150px"
-                      class="rounded-circle bg-white object-fit-fill"
+                      class="rounded-circle bg-white object-fit-cover"
                     />
                     <div>
                       <p class="md-title text-success">
@@ -125,7 +125,7 @@
                       src="../assets/present.svg"
                       width="150px"
                       height="150px"
-                      class="rounded-circle bg-white object-fit-fill"
+                      class="rounded-circle bg-white object-fit-cover"
                     />
                     <div>
                       <p class="md-title text-success">
@@ -175,7 +175,7 @@
                       src="../assets/winner.svg"
                       width="150px"
                       height="150px"
-                      class="rounded-circle bg-white object-fit-fill"
+                      class="rounded-circle bg-white object-fit-cover"
                     />
                     <div>
                       <p class="md-title text-success">
@@ -223,7 +223,7 @@
                       src="../assets/winner.svg"
                       width="150px"
                       height="150px"
-                      class="rounded-circle bg-white object-fit-fill"
+                      class="rounded-circle bg-white object-fit-cover"
                     />
                     <div>
                       <p class="md-title text-success">
@@ -275,7 +275,7 @@
                       src="../assets/winner.svg"
                       width="150px"
                       height="150px"
-                      class="rounded-circle bg-white object-fit-fill"
+                      class="rounded-circle bg-white object-fit-cover"
                     />
                     <div>
                       <p class="md-title text-success">
