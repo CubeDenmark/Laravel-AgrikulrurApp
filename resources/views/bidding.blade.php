@@ -811,9 +811,10 @@
         bidDiv2.append(alertMessage2);
         bidDiv2.classList.remove("border", "border-black");
 
-        
+	        
     });
-
+	
+    
 </script>
 
 

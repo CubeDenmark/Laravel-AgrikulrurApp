@@ -86,11 +86,6 @@ channel.here( (users) => {
 
 
 
-
-
-
-
-
 /* Example of listening for the 'NewMessageEvent' event
 window.Echo.channel('chats').listen('.recieve.message', (data) => {
     // Handle the received data (message) here
