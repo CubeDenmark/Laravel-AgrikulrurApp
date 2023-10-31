@@ -13,3 +13,7 @@ Note: change the ip address to your machine/pc's ip address
 
 
 -----------Test commit/push on Desktop SSH -----------
+
+
+
+------------------- Nag configure lang ng name and email pre -------------
