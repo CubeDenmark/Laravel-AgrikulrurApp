@@ -62,7 +62,7 @@
           @if(!empty($crops))
             @foreach($crops as $crop)
               <tr>
-                <td><img src="../assets/{{$crop->crop_name}}.jpeg" /></td>
+                <td><img src="images/crops/{{$crop->crop_image}}" /></td>
                 <td class="md-title">{{$crop->crop_name}}</td>
                 <td class="md-title text-success">₱{{$crop->suggested_price}}</td>
               </tr>

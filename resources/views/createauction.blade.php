@@ -42,7 +42,19 @@
         <div class="d-flex justify-content-center align-items-center">
           <div class="card mt-5 form-card">
             <div class="card-body">
-              <form class="d-flex flex-column" id="createForm" action="{{ route('newAuction') }}" method="POST">
+            @if (session('success'))
+              <div class="alert alert-success alert-dismissible fade show float-end addAlert" role="alert">
+                <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('success') }}</p>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              @endif
+              @if (session('failed'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <p class="fs-3 fw-bold">{{ session('failed') }}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              @endif
+              <form class="d-flex flex-column" id="createForm" action="{{ route('newAuction') }}" method="POST" enctype="multipart/form-data">
                 <!--Select Input-->
                 @csrf
                 <select type="text" id="crop_category" name="crop_id"  class="form-select mb-2 fs-1 bg-transparent text-light" aria-label="Default select example" required>
@@ -103,6 +115,7 @@
                     class="form-control fs-1 bg-transparent text-light"
                     placeholder="Picture"
                     aria-label="Picture"
+                    name="auction_cropImg"
                   />
                 </div>
                 <!--Picture Input-->

@@ -44,7 +44,9 @@
           <div
             class="row bg-light border-bottom border-black h-50 d-flex flex-lg-column justify-content-center align-items-center p-4"
           >
-            <img src="../assets/Sitaw.jpeg" alt="" class="mb-2" id="bid-image" />
+          @foreach($auctions as $auction) 
+            <img src="images/auctions/{{ $auction->auctionCropImage }}" alt="" class="mb-2" id="bid-image" /> 
+          @endforeach
           </div>
           <div class="row bg-light row-cols-2 p-2">
             <div class="col d-flex flex-column gap-3 border-end border-black">
@@ -325,12 +327,13 @@
                 </h1>
               </div>
               <div class="web-img-cont bg-danger-subtle overflow-hidden mb-2">
-                <img
-                  src="../assets/Sigarilyas.jpeg"
-                  alt=""
-                  id="web-img"
-                  class="w-100 h-100 object-fit-cover"
-                />
+              @foreach($auctions as $auction) 
+                <img 
+                  src="images/auctions/{{ $auction->auctionCropImage }}" 
+                  alt="{{ $auction->auctionCropImage }}" 
+                  class="w-100 h-100 object-fit-cover" 
+                  id="web-img" /> 
+              @endforeach
               </div>
               <div
                 class="d-flex justify-content-center align-items-center gap-5"

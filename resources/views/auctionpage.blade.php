@@ -34,7 +34,7 @@
     />
     
     <p class="title text-center mt-5 mb-5">
-      Welcome to the <span class="text-success">Amplaya Auctions</span>
+      Welcome to the <span class="text-success">{{$cropName->crop_name}} Auctions</span>
     </p>
     <div class="container-fluid d-flex justify-content-between">
       <span></span>
@@ -54,7 +54,7 @@
 
       @foreach($auctionData as $auction)
           <div class="card" style="width: 18rem">
-                <img src="../assets/Ampalaya.jpeg" class="card-img-top object-fit-cover" alt="Ampalaya Auction" />
+                <img src="images/auctions/{{$auction->auctionCropImage}}" alt="{{$auction->auctionCropImage}}" class="card-img-top object-fit-cover" />
                   <div class="card-body">
                         <h5 class="card-title md-title">Farmer:{{$auction->user_id}}</h5>
                           <div class="card-text">
