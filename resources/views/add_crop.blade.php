@@ -46,8 +46,8 @@
                 Add Crop
               </h1>
               @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <p class="fs-3 fw-bold">{{ session('success') }}</p>
+                <div class="alert alert-success alert-dismissible fade show float-end addAlert" role="alert">
+                  <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('success') }}</p>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
               @endif
