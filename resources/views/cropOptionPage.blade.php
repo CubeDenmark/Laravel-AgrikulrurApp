@@ -75,7 +75,7 @@
         <div class="col d-flex justify-content-center align-items-center">
             <div class="card">
               <img
-                src="../assets/Ampalaya.jpeg"
+                src="images/crops/{{$crop->crop_image}}"
                 class="card-img-top object-fit-cover"
                 alt="Ampalaya"
               />

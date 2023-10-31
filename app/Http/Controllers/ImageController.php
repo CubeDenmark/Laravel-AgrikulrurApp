@@ -38,7 +38,7 @@ class ImageController extends Controller
         }
         else
         {
-            return redirect()->back()->with('failure', 'Please provide an Image');;
+            return redirect()->back()->with('failed', 'Please provide an Image');;
         }
         
     }

@@ -26,21 +26,43 @@ class AuctionsControll extends Controller
     }
     public function newAuction(Request $request)
     {
-        //dd($request->all());
-        $crop_id = $request->crop_id;
-        $starting_price = $request->input_price;
-        $crop_volume = $request->input_volume;
-        $user = Auth::user();
-        
-        $new_auction = auctions::create([
-            'crop_id' => $crop_id,
-            'starting_price' => $starting_price,
-            'crop_volume' => $crop_volume,
-            'user_id' => $user['id'],
-            'status' => 'active',
-            'end_time' => Carbon::now()->addMinutes(2),
-        ]);
-        return back()->with('status', 'New Auction has been added');
+        if($request->hasFile("auction_cropImg"))
+        {
+            $request->validate([
+                'crop_id' => 'required',
+                'input_price' => 'required',
+                'input_volume' => 'required',
+                'auction_cropImg' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            ]);
+
+            $crop_id = $request->crop_id;
+            $starting_price = $request->input_price;
+            $crop_volume = $request->input_volume;
+            $user = Auth::user();
+            $dateNow = time();
+    
+            $cropImgLoc = 'auction_'.$dateNow.'_'.$crop_id.'.'.$request['auction_cropImg']->extension();
+    
+            $request->auction_cropImg->move(public_path('images/auctions'), $cropImgLoc);
+
+            $new_auction = auctions::create([
+                'crop_id' => $crop_id,
+                'starting_price' => $starting_price,
+                'crop_volume' => $crop_volume,
+                'user_id' => $user['id'],
+                'status' => 'active',
+                'end_time' => Carbon::now()->addMinutes(2),
+                'auctionCropImage' => $cropImgLoc,
+            ]);
+
+            return redirect()->back()->withSuccess('Upload image successful')
+            ->with('success', 'New Auction has been added');
+        }
+        else
+        {
+            return redirect()->back()->with('failed', 'Please provide an Image for the Auction');;
+        }
+
     }
 
 
@@ -48,21 +70,26 @@ class AuctionsControll extends Controller
     {
         $type = $request->input('type');
 
+        $cropName = crops::select('crop_name')
+        ->where('crop_id', $type)
+        ->first();
+
         $auctionData = auctions::select(
             'auctions.auction_id',
             'auctions.crop_id',
             'auctions.crop_volume',
             'auctions.starting_price',
             'users.name as user_id',
+            'auctions.auctionCropImage',
             DB::raw('COALESCE(MAX(bids.bid_amount), auctions.starting_price) as latest_bid_price')
         )
             ->join('users', 'auctions.user_id', '=', 'users.id')
             ->leftJoin('bids', 'auctions.auction_id', '=', 'bids.auction_id')
             ->where('auctions.crop_id', $type)
-            ->groupBy('auctions.auction_id', 'auctions.crop_id', 'auctions.crop_volume', 'auctions.starting_price', 'users.name')
+            ->groupBy('auctions.auction_id', 'auctions.crop_id', 'auctions.crop_volume', 'auctions.starting_price', 'users.name', 'auctions.auctionCropImage')
             ->get();
 
-            return view('auctionpage', compact('auctionData'));
+            return view('auctionpage', compact('auctionData', 'cropName'));
         //return response()->json($arr[0]->bid_amount);
         //return response()->json($arr[0]->bid_amount);
     }

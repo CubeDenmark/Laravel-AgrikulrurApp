@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('crop_name');
             $table->integer('suggested_price');
             $table->integer('user_id')->references('id')->on('users')->unsigned();
+            $table->string('crop_image');
             $table->timestamps();
         });
     }

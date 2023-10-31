@@ -11,5 +11,5 @@ class auctions extends Model
 
     protected $table = 'auctions';
 
-    protected $fillable = ['crop_id', 'starting_price', 'crop_volume', 'user_id', 'status', 'end_time'];
+    protected $fillable = ['crop_id', 'starting_price', 'crop_volume', 'user_id', 'status', 'end_time', 'auctionCropImage'];
 }

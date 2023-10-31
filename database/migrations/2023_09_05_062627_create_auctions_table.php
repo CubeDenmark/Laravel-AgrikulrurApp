@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('user_id')->references('id')->on('users')->unsigned();
             $table->string('status');
             $table->timestamp('end_time')->nullable();
+            $table->string('auctionCropImage');
             $table->timestamps();
         });
     }

@@ -168,7 +168,7 @@
         <tbody>
           @foreach($cropinfo as $info)
             <tr>
-              <td><img src="../assets/{{$info->crop_name}}.jpeg" /></td>
+              <td><img src="images/crops/{{$info->crop_image}}" /></td>
               <td class="md-title">{{$info->crop_name}}</td>
               <td class="md-title text-success">₱{{$info->suggested_price}}</td>
             </tr>
