@@ -135,3 +135,13 @@ input[type="number"] {
         width: 75% !important;
     }
 }
+@media screen and (max-width: 768px) {
+    .addAlert {
+        width: 75% !important;
+    }
+}
+@media screen and (max-width: 992px) {
+    .addAlert {
+        width: 50% !important;
+    }
+}

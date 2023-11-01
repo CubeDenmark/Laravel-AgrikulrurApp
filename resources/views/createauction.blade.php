@@ -41,19 +41,26 @@
       <div class="container-fluid">
         <div class="d-flex justify-content-center align-items-center">
           <div class="card mt-5 form-card">
-            <div class="card-body">
+            <h1 class="title text-center text-light mt-5">
+              Create New Auction
+            </h1>
+            <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between">
+              <span></span>
             @if (session('success'))
               <div class="alert alert-success alert-dismissible fade show float-end addAlert" role="alert">
                 <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('success') }}</p>
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
               @endif
+            
               @if (session('failed'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <p class="fs-3 fw-bold">{{ session('failed') }}</p>
+                  <p class="md-title"><i class="fa-solid fa-circle-exclamation"></i> {{ session('failed') }}</p>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
               @endif
+            </div>
               <form class="d-flex flex-column" id="createForm" action="{{ route('newAuction') }}" method="POST" enctype="multipart/form-data">
                 <!--Select Input-->
                 @csrf

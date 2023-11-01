@@ -45,18 +45,23 @@
             <h1 class="title text-center text-light mt-5">
                 Add Crop
               </h1>
-              @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show float-end addAlert" role="alert">
-                  <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('success') }}</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex justify-content-between">
+                  <span></span>
+                @if (session('success'))
+                  <div class="alert alert-success alert-dismissible fade show float-end addAlert" role="alert">
+                    <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('success') }}</p>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  @endif
+                
+                  @if (session('failed'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <p class="md-title"><i class="fa-solid fa-circle-exclamation"></i> {{ session('failed') }}</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  @endif
                 </div>
-              @endif
-              @if (session('failed'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <p class="fs-3 fw-bold">{{ session('failed') }}</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-              @endif
               <form class="d-flex flex-column" id="createForm" action="{{ route('newCrop') }}" method="POST" enctype="multipart/form-data">
                 <!--Select Input-->
                 @csrf
