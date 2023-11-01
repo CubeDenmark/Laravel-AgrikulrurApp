@@ -44,14 +44,18 @@
     />
 
     <main class="container-fluid">
-      <div class="d-flex justify-content-between align-items-center m-2">
+      <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center m-2">
         <p class="md-title">Last Updated: January 2, 2023</p>
-        <a href="{{url('updatePriceForm')}}" class="btn btn-success upd-btn">Update</a>
+
+        <div class="d-flex gap-3">
+          <a href="{{url('updatePriceForm')}}" target="_blank" class="btn btn-outline-success upd-btn">D.A. Price Watch</a> <!-- gdltry.html from Agri Beta -->
+          <a href="{{url('updatePriceForm')}}" class="btn btn-success upd-btn">Update</a>
+        </div>
       </div>
       <table class="table text-center text-md-start" id="myTable">
         <thead class="bg-success">
           <tr>
-            <th scope="col" class="bg-success text-light">Photo</th>
+            <th scope="col" class="d-none d-md-block bg-success text-light">Photo</th>
             <th scope="col" class="bg-success text-light">Produce</th>
             <th scope="col" class="bg-success text-light">
               Market Price per Kg
@@ -62,8 +66,11 @@
           @if(!empty($crops))
             @foreach($crops as $crop)
               <tr>
-                <td><img src="images/crops/{{$crop->crop_image}}" /></td>
-                <td class="md-title">{{$crop->crop_name}}</td>
+                <td class="d-none d-md-block"><img src="images/crops/{{$crop->crop_image}}" class="object-fit-cover" /></td>
+                <td class="md-title">
+                  <img src="images/crops/{{$crop->crop_image}}" class="d-block d-md-none object-fit-cover mx-auto" />
+                  {{$crop->crop_name}}
+                </td>
                 <td class="md-title text-success">₱{{$crop->suggested_price}}</td>
               </tr>
             @endforeach
