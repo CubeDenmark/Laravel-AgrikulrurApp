@@ -46,20 +46,23 @@
     <p class="title text-center mt-5 mb-5">
       Welcome to the <span class="text-success">Supply Auction Page</span>
     </p>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex flex-column-reverse flex-lg-row justify-content-between">
       <p class="md-title text-start mx-4">Offered Produce Auctions</p>
-      <div class="d-flex align-items-center">
-        <a
-          href="AuctionPage.html"
-          class="md-title text-start mx-4 text-decoration-none text-success"
-          >Supply</a
-        >
-        <p class="md-title text-start mx-4">|</p>
-        <a
-          href="DemandAuctionPage.html"
-          class="md-title text-start mx-4 text-decoration-none text-dark"
-          >Demand</a
-        >
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="d-block d-lg-none"></span>
+        <div class="d-flex">
+          <a
+            href="AuctionPage.html"
+            class="md-title text-start mx-4 text-decoration-none text-success"
+            >Supply</a
+          >
+          <p class="md-title text-start mx-4">|</p>
+          <a
+            href="DemandAuctionPage.html"
+            class="md-title text-start mx-4 text-decoration-none text-dark"
+            >Demand</a
+          >
+        </div>
       </div>
     </div>
     <!--Titles-->

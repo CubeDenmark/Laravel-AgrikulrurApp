@@ -44,7 +44,7 @@
     />
 
     
-    <main class="container-fluid d-flex justify-content-center vh-100 pt-5">
+    <main class="container-fluid d-flex justify-content-center min-vh-100 pt-5">
       <form action="{{ route('updatePrice')}}" method="get">  
         @if(!empty($crops))
           @foreach($crops as $crop)
