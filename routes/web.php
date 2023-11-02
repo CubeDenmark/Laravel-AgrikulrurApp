@@ -97,7 +97,7 @@ Route::controller(ImageController::class)->group(function(){
 });
 
 
-
+Route::get('/manual_close' ,[AuctionsControll::class , 'manual_close']);
 /*Route::get('/playground', function () {
     event(new App\Events\ChatMessageEvent());
 

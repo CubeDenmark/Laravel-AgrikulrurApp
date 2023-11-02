@@ -247,13 +247,14 @@
                       >
                         Exit
                       </button>
-                      <button
+                      <a
                         type="button"
                         class="btn btn-success fs-3"
-                        data-bs-dismiss="modal"
+                        
+                        href="{{ url('manual_close')}}?auction_id={{ $auction->auction_id }}"
                       >
                         Close the Bidding
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -530,13 +531,14 @@
                                 >
                                   Exit
                                 </button>
-                                <button
+                                <a
                                   type="button"
                                   class="btn btn-success fs-3"
-                                  data-bs-dismiss="modal"
+                                  
+                                  href="{{ url('manual_close')}}?auction_id={{ $auction->auction_id }}"
                                 >
                                   Close the Bidding
-                                </button>
+                                </a>
                               </div>
                             </div>
                           </div>
