@@ -30,7 +30,7 @@ class adminUserseeder extends Seeder
             'crop_name' => 'Ampalaya', 
             'suggested_price' => 60,
             'user_id' => 1,
-            'crop_image' => 'Ampalaya.jpeg',
+            'crop_image' => 'crop_Ampalaya.jpeg',
         ]);
         $new_auction = auctions::create([
             'crop_id' => 1, 
