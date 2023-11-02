@@ -60,6 +60,7 @@
                       src="../assets/winner.svg"
                       width="150px"
                       height="150px"
+                      id="notif-img"
                       class="rounded-circle bg-white object-fit-cover"
                     />
                     <div>
@@ -94,6 +95,7 @@
                       src="../assets/transferMoney.png"
                       width="150px"
                       height="150px"
+                      id="notif-img"
                       class="rounded-circle bg-white object-fit-cover"
                     />
                     <div>
@@ -125,6 +127,7 @@
                       src="../assets/present.svg"
                       width="150px"
                       height="150px"
+                      id="notif-img"
                       class="rounded-circle bg-white object-fit-cover"
                     />
                     <div>

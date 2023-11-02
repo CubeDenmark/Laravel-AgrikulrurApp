@@ -1,85 +1,102 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 html {
-  font-size: 10px;
+    font-size: 10px;
 }
 
 /* Typography */
 body {
-  font-family: "Merriweather", serif;
+    font-family: "Merriweather", serif;
 }
 .title {
-  font-size: 5rem;
-  font-weight: bold;
-  font-family: "Oswald", sans-serif;
+    font-size: 5rem;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
 }
 .md-title {
-  font-size: 3rem;
-  font-weight: bold;
-  font-family: "Oswald", sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
 }
 .sm-title {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 p {
-  font-size: 3rem;
+    font-size: 3rem;
 }
 .desc {
-  text-indent: 1rem;
-  text-align: justify;
+    text-indent: 1rem;
+    text-align: justify;
 }
 #brand {
-  font-size: 4rem;
-  font-weight: bold;
-  font-family: "Oswald", sans-serif;
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
 }
 #nav-link {
-  font-size: 3rem;
-  font-weight: bold;
-  font-family: "Oswald", sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: "Oswald", sans-serif;
 }
 
 /* Typography */
 
 /* Navigation Bar CSS */
 nav {
-  box-shadow: 1px 2px 5px #5d5b5b;
+    box-shadow: 1px 2px 5px #5d5b5b;
 }
 .nav-pic {
-  width: 15rem;
-  height: 15rem;
-  border-radius: 50%;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
 }
 .logo-pic {
-  width: 15rem;
-  height: 15rem;
+    width: 15rem;
+    height: 15rem;
 }
 .dropdown-menu {
-  width: 15rem !important;
+    width: 15rem !important;
 }
 #nav-link,
 #brand {
-  color: #6c9c82 !important;
+    color: #6c9c82 !important;
+}
+
+@media screen and (max-width: 360px) {
+    #notif-img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .md-title {
+        font-size: 1.5rem;
+    }
+    .sm-title {
+        font-size: 1rem;
+    }
 }
 @media screen and (max-width: 576px) {
-  .logo-pic {
-    width: 50px;
-    height: 50px;
-  }
-  .title {
-    font-size: 3rem;
-  }
-  #nav-link {
-    font-size: 2rem;
-  }
-  .desc {
-    font-size: 1.5rem;
-  }
-  .md-title {
-    font-size: 2.5rem;
-  }
-  .sm-title {
-    font-size: 2rem;
-  }
+    #notif-img {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    .logo-pic {
+        width: 50px;
+        height: 50px;
+    }
+    .title {
+        font-size: 3rem;
+    }
+    #nav-link {
+        font-size: 2rem;
+    }
+    .desc {
+        font-size: 1.5rem;
+    }
+    .md-title {
+        font-size: 2.5rem;
+    }
+    .sm-title {
+        font-size: 2rem;
+    }
 }

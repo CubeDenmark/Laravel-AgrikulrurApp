@@ -243,6 +243,16 @@ class AuctionsControll extends Controller
         }*/
 
     }
+    public function manual_close(Request $request)
+    {
+        $auction_id = $request->input('auction_id');
+        $close_auction = auctions::where('auction_id', $auction_id)->update(['status' => 'closed']);
+        IF($close_auction)
+        {
+            return back()->with('closed', 'You have registered successfully');
+        }
+        return back()->with('active', 'Failed to close');
+    }
    /* public function registerUser(Request $request)
     {
         $request->validate([
