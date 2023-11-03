@@ -258,6 +258,36 @@ class AuctionsControll extends Controller
         }
         return back()->with('active', 'Failed to close');
     }
+    public function update_base(Request $request)
+    {
+        $request->validate([
+            'new_base'=>'required',
+            //'auction_id'=>'required',
+        ]);
+
+        $new_bid = $request->input('new_base');
+        $auction_id = $request->input('auction_id');
+        $bids = bids::where('auction_id', $auction_id)->get('bid_amount')->max();
+        if(empty($bids))
+        {
+            auctions::where('auction_id', $auction_id)->update(['starting_price' => $new_bid]);
+            return back()->with('updated', 'Update bid successfully');     
+        }
+        else
+        {
+            return back()->with('failedUpdate', 'Your auction have bid/s already');
+            //return back()->with('error', 'The operation was successful.');
+        }
+        
+    }
+
+
+
+
+
+
+
+
    /* public function registerUser(Request $request)
     {
         $request->validate([

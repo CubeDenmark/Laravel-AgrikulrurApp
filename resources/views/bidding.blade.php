@@ -427,6 +427,23 @@
                           @elseif(Auth::user()->user_type == 1)
                           <p class="title text-success text-center">Have a good day Admin!</p>
                         @elseif(Auth::user()->id == $farmer->id)
+
+                        <!-- For update bid price -->
+                        @if (session('updated'))
+                          <div class="alert alert-success alert-dismissible fade show float-end addAlert" role="alert">
+                            <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('updated') }}</p>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                          @endif
+                        
+                          @if (session('failedUpdate'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <p class="md-title"><i class="fa-solid fa-circle-exclamation"></i> {{ session('failedUpdate') }}</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                          @endif
+                          <!-- For update bid price -->
+
                           <button
                           class="btn btn-success"
                           data-bs-toggle="modal"
@@ -444,6 +461,7 @@
                           aria-labelledby="updateModalLabel"
                           aria-hidden="true"
                         >
+                        
                           <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -459,15 +477,17 @@
                                 ></button>
                               </div>
                               <div class="modal-body">
-                                <form action="" id="updForm">
+                                <form action="{{ route('update_base') }}" id="updForm" method="POST">
+                                  @csrf
                                   <input
-                                    type="email"
+                                    type="number"
                                     class="form-control mb-3 h-full fs-3"
                                     id="email-inp"
-                                    value="20"
+                                    value="{{ $auction->starting_price }}"
                                     autocomplete="off"
+                                    name="new_base"
                                   />
-                                </form>
+                                
                               </div>
                               <div class="modal-footer">
                                 <button
@@ -477,13 +497,17 @@
                                 >
                                   Close
                                 </button>
+                                <input type="hidden" 
+                                  name="auction_id" 
+                                  value="{{ $auction->auction_id }}">
                                 <button
-                                  type="button"
                                   class="btn btn-success fs-3"
                                   id="updateBbpBtn"
+                                  type="submit"
                                 >
                                   Save changes
                                 </button>
+                                </form>
                               </div>
                             </div>
                           </div>
