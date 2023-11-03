@@ -198,16 +198,21 @@ class AuctionsControll extends Controller
     {
         $creator = Auth::user()->id;
         $auction = $request->input('auction_id');
+        $winner = pending_transactions::where('auction_id', $auction)->first('bidder_id');
         pending_transactions::where('creator_id', $creator)->where('auction_id', $auction)
         ->update(['creator_status' => 'paid', 'status' => 'completed']);
         
-        $users = User::where('id', $creator)->get();
+        
+        $users = User::where('id', $winner->bidder_id)->get();
         
         return view('cong_farmer', compact('users'));
     }
-    public function finished()
+    public function finished(Request $request)
     {
-        $users = User::where('id', Auth::user()->id)->get();
+        $auction = $request->input('auction_id');
+        $farmer = pending_transactions::where('auction_id', $auction)->first('creator_id');
+        $users = User::where('id', $farmer->creator_id)->get();
+        
         return view('finish', compact('users'));
     }
     public function update_info(Request $request)
