@@ -276,7 +276,6 @@ class AuctionsControll extends Controller
         else
         {
             return back()->with('failedUpdate', 'Your auction have bid/s already');
-            //return back()->with('error', 'The operation was successful.');
         }
         
     }
