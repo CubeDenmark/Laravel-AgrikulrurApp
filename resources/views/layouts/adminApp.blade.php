@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
   </head>
   <body>
     <!--Navigation Bar-->

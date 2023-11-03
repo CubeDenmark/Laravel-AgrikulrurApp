@@ -59,9 +59,9 @@
                         <h5 class="card-title md-title">Farmer:{{$auction->user_id}}</h5>
                           <div class="card-text">
                             <!-- <p class="fs-2">Price: {{$auction->auction_id}}</p> -->
-                            <p class="fs-2">Volume: {{$auction->crop_volume}}</p>
-                            <p class="fs-2">Base Bid Price: {{$auction->starting_price}}</p>
-                            <p class="fs-2 highlight-text">Latest Bid Price: {{$auction->latest_bid_price}}</p>
+                            <p class="fs-2">Volume: {{$auction->crop_volume}}kg</p>
+                            <p class="fs-2">Base Bid Price: ₱{{$auction->starting_price}}/kg</p>
+                            <p class="fs-2 highlight-text">Latest Bid Price: ₱{{$auction->latest_bid_price}}/kg</p>
                           </div>
                         <a href="{{ url('send-bid') }}?auction_id={{$auction->auction_id}}" class="btn btn-success fs-1 w-50">Bid</a>
                   </div>
