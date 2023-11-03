@@ -72,6 +72,7 @@
                @endforeach
               
               </p>
+              <p>Volume: {{ $auction->crop_volume}}kg </p>
             </div>
             <div class="col border-black">
               <p class="mt-2">Ending In</p>
@@ -117,7 +118,7 @@
                           />
                         </td>
                         <td>{{ $bid->name }}</td>
-                        <td>₱ {{ $bid->bid_amount }}</td>
+                        <td>₱{{ $bid->bid_amount }}/kg</td>
                         <td>{{ $bid->created_at }}</td>
                     </tr>
                     @endforeach
@@ -399,7 +400,7 @@
                             />
                           </td>
                           <td>{{ $bid->name }}</td>
-                          <td>₱ {{ $bid->bid_amount }}</td>
+                          <td>₱ {{ $bid->bid_amount }} /kg</td>
                           <td>{{ $bid->created_at }}</td>
                         </tr>
                       @endforeach

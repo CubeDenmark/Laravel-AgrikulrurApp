@@ -158,7 +158,7 @@
       <table class="table text-center text-md-start" id="myTable">
         <thead class="bg-success">
           <tr>
-            <th scope="col" class="bg-success text-light">Photo</th>
+            <th scope="col" class="d-none d-md-block bg-success text-light">Photo</th>
             <th scope="col" class="bg-success text-light">Produce</th>
             <th scope="col" class="bg-success text-light">
               Market Price per Kg
@@ -167,11 +167,14 @@
         </thead>
         <tbody>
           @foreach($cropinfo as $info)
-            <tr>
-              <td><img src="images/crops/{{$info->crop_image}}" class="object-fit-cover"/></td>
-              <td class="md-title">{{$info->crop_name}}</td>
-              <td class="md-title text-success">₱{{$info->suggested_price}}</td>
-            </tr>
+          <tr>
+            <td class="d-none d-md-block"><img src="images/crops/{{$info->crop_image}}" class="object-fit-cover" /></td>
+            <td class="md-title">
+              <img src="images/crops/{{$info->crop_image}}" class="d-block d-md-none object-fit-cover mx-auto" />
+              {{$info->crop_name}}
+            </td>
+            <td class="md-title text-success">₱{{$info->suggested_price}}</td>
+          </tr>
           @endforeach
           <!-- 
           <tr> 
