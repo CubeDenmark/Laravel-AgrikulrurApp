@@ -1,7 +1,7 @@
 @extends('layouts.adminApp')
 
 @section('admin')
-  <title>Create New Auction</title>
+  <title>Add Crops</title>
     <!-- Boostrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
