@@ -45,7 +45,7 @@ public function sendMessage(Request $request)
             $user = Auth::user();
             $profile_img = "/images/profiles/".Auth::user()->profile_img;
             $now = Carbon::now();
-            $on_time = Carbon::parse($now)->format('g:i:s A');
+            $on_time = Carbon::parse($now)->format('g:i A');
             //{{ \Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y H:i:s')}}
             //= 2023-11-04 20:22:59
             //{{ \Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y g:i:s A')}}

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\end_auction;
+use App\Events\notifier;
 use App\Models\bids;
 use App\Models\consNotif;
 use App\Models\farmerNotif;
@@ -246,18 +248,70 @@ class AuctionsControll extends Controller
         }else{
             return back()->with('failed', 'Failed to Update T-T. Something went wrong');
         }*/
-
     }
+
+    
     public function manual_close(Request $request)
     {
-        $auction_id = $request->input('auction_id');
-        $close_auction = auctions::where('auction_id', $auction_id)->update(['status' => 'closed']);
-        IF($close_auction)
+        $thisAuction_id = $request->input('auction_id');
+        $openAuctions = auctions::where('auction_id', $thisAuction_id)->first();
+        $close_auction = auctions::where('auction_id', $thisAuction_id)->update(['status' => 'closed']);
+        
+        $thesebids = bids::where('auction_id', $thisAuction_id)->get();
+            
+            foreach($thesebids as $bid)
+            {
+                $auction_id = $openAuctions->auction_id;
+                $crop_id = $openAuctions->crop_id;
+                $creator_id = $openAuctions->user_id;
+                $bidder_id =  $bid->user_id;
+                
+                         
+                /*farmerNotif::create([
+                    'auction_id' => $auction_id,
+                    'crop_id' => $crop_id,
+                    'creator_id' => $creator_id,
+                ]); 
+                
+                consNotif::create([
+                    'auction_id' => $auction_id,
+                    'crop_id' => $crop_id,
+                    'bidder_id' => $bidder_id,
+                ]);
+     
+                
+            /*  notifications::create([
+                    'auction_id' => $auction_id,
+                    'crop_id' => $crop_id,
+                    'creator_id' => $creator_id,
+                    'bidder_id' => $bidder_id,
+                ]); */
+               /*event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
+                event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));*/    
+               
+            }
+            farmerNotif::create([
+                'auction_id' => $auction_id,
+                'crop_id' => $crop_id,
+                'creator_id' => $creator_id,
+            ]); 
+            
+            consNotif::create([
+                'auction_id' => $auction_id,
+                'crop_id' => $crop_id,
+                'bidder_id' => $bidder_id,
+            ]);
+            event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
+            event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
+        
+        if($close_auction)
         {
             return back()->with('closed', 'You have registered successfully');
         }
         return back()->with('active', 'Failed to close');
     }
+
+
     public function update_base(Request $request)
     {
         $request->validate([
