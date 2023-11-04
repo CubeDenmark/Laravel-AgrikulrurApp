@@ -21,7 +21,7 @@
     ></script>
   </head>
   <body>
-<main class="container-md my-auto bg-body-tertiary pb-3 pt-5">
+<main class="container-md my-auto pb-3 pt-5">
     <div class="row row-cols-2">
         <!--Image Container-->
         <div class="col mt-auto d-none d-lg-block my-auto">
