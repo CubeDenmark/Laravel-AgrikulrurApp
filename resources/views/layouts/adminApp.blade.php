@@ -33,7 +33,7 @@
           >
             <li class="nav-item me-2">
               <a class="nav-link text-success" id="nav-link" href="{{ url('addcrop') }}"
-                ><i class="fa-solid fa-gavel"></i>Add Crop</a
+                ><i class="fa-solid fa-circle-plus"></i> </i>Add Crop</a
               >
             </li>
             <li class="nav-item me-2">
@@ -56,7 +56,7 @@
             </li>
             <li class="nav-item me-2">
               <a class="nav-link text-success" href="{{url('updateGuidelines')}}" id="nav-link"
-                ><i class="fa-solid fa-table"></i> View/Update Pricing
+                ><i class="fa-solid fa-table"></i> Update Pricing
                 Guidelines</a
               >
             </li>

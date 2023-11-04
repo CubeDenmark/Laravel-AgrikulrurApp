@@ -21,7 +21,7 @@
     ></script>
   </head>
   <body>
-    <main class="container bg-body-tertiary p-5 login_cont">
+    <main class="container bg-body p-5 login_cont">
       <!--Image Container-->
       <div class="row">
         <div class="col d-none d-lg-block my-auto">

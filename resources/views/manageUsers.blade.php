@@ -64,7 +64,7 @@
       <table class="table" id="myTable">
         <thead class="bg-success">
           <tr>
-            <th scope="col" class="bg-success text-light">Photo</th>
+            <th scope="col" class="bg-success text-light d-none d-sm-block">Photo</th>
             <th scope="col" class="bg-success text-light">Name</th>
             <th scope="col" class="bg-success text-light">Contact Number</th>
             <th scope="col" class="bg-success text-light">Email</th>
@@ -75,11 +75,17 @@
 
         @foreach($users as $user)
           <tr>
-            <td>
+            <td class="d-none d-sm-block">
               <img src="images/profiles/{{ $user->profile_img}}" class="rounded-circle object-fit-cover" id="userImg" />
               <small>ID : {{ $user->id }}</small>
             </td>
-            <td class="fw-bold">{{ $user->name}}</td>
+            <td class="fw-bold">
+              <div class="d-flex flex-column d-sm-none">
+                <img src="images/profiles/{{ $user->profile_img}}" class="rounded-circle object-fit-cover" id="userImg" />
+                <small>ID : {{ $user->id }}</small>
+              </div>
+              {{ $user->name}}
+            </td>
             <td>{{ $user->phone}}</td>
             <td>{{ $user->email }}</td>
             <td>
