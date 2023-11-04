@@ -119,7 +119,7 @@
                         </td>
                         <td>{{ $bid->name }}</td>
                         <td>₱{{ $bid->bid_amount }}/kg</td>
-                        <td>{{ $bid->created_at }}</td>
+                        <td>{{ $bid->on_time }}</td>
                     </tr>
                     @endforeach
                   @endif
@@ -401,7 +401,7 @@
                           </td>
                           <td>{{ $bid->name }}</td>
                           <td>₱ {{ $bid->bid_amount }} /kg</td>
-                          <td>{{ $bid->created_at }}</td>
+                          <td>{{ $bid->on_time }}</td>
                         </tr>
                       @endforeach
        
@@ -733,6 +733,7 @@
         let inputPrice2 = data.message;
         let bidder_id = data.bidder;
         let profile_img = data.profile_img;
+        let on_time = data.bid_on;
 
         let row = document.createElement("tr");
 
@@ -757,9 +758,9 @@
         //const d = new Date();
         let date = document.createElement("td");
 
-        @foreach($bids as $bid)
-        date.innerText =  '{{ $bid->created_at }}';
-        @endforeach
+        
+        date.innerText = `${on_time}`;
+        
         
 
         row.appendChild(date);

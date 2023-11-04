@@ -11,5 +11,5 @@ class bids extends Model
 
     protected $table = 'bids';
 
-    protected $fillable = ['bid_amount', 'user_id', 'auction_id', 'crop_type'];
+    protected $fillable = ['bid_amount', 'user_id', 'auction_id', 'crop_type', 'on_time'];
 }
