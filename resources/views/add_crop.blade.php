@@ -41,10 +41,9 @@
       <div class="container-fluid">
         <div class="d-flex justify-content-center align-items-center">
           <div class="card mt-5 form-card">
-            <div class="card-body">
             <h1 class="title text-center text-light mt-5">
-                Add Crop
-              </h1>
+              Add Crop
+            </h1>
               <div class="card-body d-flex flex-column">
                 <div class="d-flex justify-content-between">
                   <span></span>
@@ -133,7 +132,7 @@
                 </div>
               </form>
             </div>
-          </div>
+
         </div>
       </div>
     </section>
