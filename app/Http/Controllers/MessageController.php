@@ -9,6 +9,7 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Events\NewMessageEvent;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\bids;
@@ -43,6 +44,16 @@ public function sendMessage(Request $request)
             $bidder = $request->input('bidder');
             $user = Auth::user();
             $profile_img = "/images/profiles/".Auth::user()->profile_img;
+            $now = Carbon::now();
+            $on_time = Carbon::parse($now)->format('g:i:s A');
+            //{{ \Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y H:i:s')}}
+            //= 2023-11-04 20:22:59
+            //{{ \Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y g:i:s A')}}
+            //=04/11/2023 8:25:26 PM
+            //Carbon::parse($now)->format('g:i:s A')
+            //= 8:33:47 PM
+
+
     
             // Process the message, perform any validations, database operations, etc.
     
@@ -54,14 +65,15 @@ public function sendMessage(Request $request)
                 'user_id' => $user['id'],
                 'auction_id' => $channel,
                 'crop_type' => "$crop_type->crop_id",
+                'on_time' => $on_time,
                 ],
             );
             //return ['status' => 'Message Sent!'];
             if($bids)
             {
-		event(new NewMessageEvent($message, $channel, $user['name'], $profile_img));
+		        event(new NewMessageEvent($message, $channel, $user['name'], $profile_img, $on_time));
               
-		return response()->json([$message => true]);
+		        return response()->json([$message => true]);
 	
             }
             else
@@ -108,7 +120,7 @@ public function sendBid(Request $request)
     {
         $on_auction = $request->input('auction_id');
 
-        $bids = bids::select('bids.bid_id', 'users.name', 'bids.bid_amount','users.profile_img', 'bids.created_at')
+        $bids = bids::select('bids.bid_id', 'users.name', 'bids.bid_amount','users.profile_img', 'bids.on_time')
         ->join('users', 'bids.user_id', '=', 'users.id')
         ->where('bids.auction_id', $on_auction)
         ->orderBy('bid_amount', 'desc')

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('user_id')->references('id')->on('users')->unsigned();
             $table->integer('auction_id')->references('auction_id')->on('auctions')->unsigned();
             $table->string('crop_type');
+            $table->string('on_time');
             $table->timestamps();
         });
     }
