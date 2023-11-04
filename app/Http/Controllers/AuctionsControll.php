@@ -51,7 +51,7 @@ class AuctionsControll extends Controller
                 'crop_volume' => $crop_volume,
                 'user_id' => $user['id'],
                 'status' => 'active',
-                'end_time' => Carbon::now()->addMinutes(2),
+                'end_time' => Carbon::now()->addHours(6),
                 'auctionCropImage' => $cropImgLoc,
             ]);
 
