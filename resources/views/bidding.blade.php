@@ -42,10 +42,10 @@
         <!-- Mobile Container -->
         <div class="col main-cont d-lg-none">
           <div
-            class="row bg-light border-bottom border-black h-50 d-flex flex-lg-column justify-content-center align-items-center p-4"
+            class="row bg-light border-bottom border-black h-50 p-2"
           >
           @foreach($auctions as $auction) 
-            <img src="images/auctions/{{ $auction->auctionCropImage }}" alt="" class="mb-2 object-fit-cover" id="bid-image" /> 
+            <img src="images/auctions/{{ $auction->auctionCropImage }}" alt="" class="mb-2 object-fit-cover h-100 w-100" id="bid-image" /> 
           @endforeach
           </div>
           <div class="row bg-light row-cols-2 p-2">
