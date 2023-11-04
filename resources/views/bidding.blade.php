@@ -45,7 +45,7 @@
             class="row bg-light border-bottom border-black h-50 d-flex flex-lg-column justify-content-center align-items-center p-4"
           >
           @foreach($auctions as $auction) 
-            <img src="images/auctions/{{ $auction->auctionCropImage }}" alt="" class="mb-2" id="bid-image" /> 
+            <img src="images/auctions/{{ $auction->auctionCropImage }}" alt="" class="mb-2 object-fit-cover" id="bid-image" /> 
           @endforeach
           </div>
           <div class="row bg-light row-cols-2 p-2">
@@ -78,7 +78,7 @@
               <p class="mt-2">Ending In</p>
               <div class="d-flex align-items-center">
                 @foreach($auctions as $auction)
-                  <p class="fs-1 fw-bold mt-3">{{ $auction->end_time }}</p>
+                  <p class="fs-1 fw-bold mt-3" id="biddingTime">{{ $auction->end_time }}</p>
                 @endforeach
               </div>
               <p class="mt-3">
@@ -370,7 +370,7 @@
 
               @foreach($auctions as $auction)
                   <!-- <p class="fs-1 fw-bold mt-3">{{ $auction->created_at }}</p> -->
-                  <p class="md-title">Bidding will end at: {{ $auction->created_at }}</p>
+                  <p class="md-title">Bidding will end at: <span id="biddingTime2"></span></p>
                 @endforeach
               @foreach($auctions as $auction)
               <p class="md-title">Volume: {{ $auction->crop_volume}}kg</p>
@@ -846,7 +846,33 @@
 	
     
 </script>
+<script>
+  // kunin time sa db
+  let rawDate = '{{ $auction->end_time }}';
+  // convert date to milliseconds
+  let endDate = new Date(rawDate).getTime();
 
+  //running every second
+  let countDown = setInterval(() => {
+    let nowDate = new Date().getTime();
+    let distance = endDate - nowDate;
+
+    // kung may days
+    let days = Math.floor(distance/(1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+    let seconds = Math.floor((distance%(1000*60))/1000);
+    document.getElementById("biddingTime").innerHTML =  hours + "h " + minutes + "m " + seconds + "s ";
+    document.getElementById("biddingTime2").innerHTML =  hours + "h " + minutes + "m " + seconds + "s ";
+    if(distance<0) {
+      clearInterval(countDown);
+      document.getElementById("biddingTime").innerHTML = "Auction is completed";
+      document.getElementById("biddingTime2").innerHTML = "Auction is completed";
+    }
+  }, 1000);
+  // check kung tama time
+  console.log(rawDate);
+</script>
 
       <!-- <script src="../js/biddings.js"></script> -->
 </main>
