@@ -31,6 +31,10 @@
       href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
       rel="stylesheet"
     />
+    <script
+    src="https://kit.fontawesome.com/fae056ab45.js"
+    crossorigin="anonymous"
+  ></script>
     <!--Font Links-->
 
     <main>
