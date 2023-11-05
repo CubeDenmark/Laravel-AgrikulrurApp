@@ -39,7 +39,7 @@
         <div class="row gap-5 gap-lg-2 w-100">
           <div class="row mx-auto">
             <div
-              class="col-12 d-flex justify-content-center align-items-center"
+              class="col-12 d-flex flex-lg-column flex-xl-row justify-content-center align-items-center"
             >
               <img
                 class="img-fluid d-none d-lg-block"
@@ -48,9 +48,10 @@
               <a href="{{ url('addcrop') }}" class="md-title btn btn-success link-btn">Add Crop</a>
             </div>
           </div>
+          <hr>
           <div class="row mx-auto">
             <div
-              class="col-12 d-flex justify-content-center align-items-center"
+              class="col-12 d-flex flex-lg-column flex-xl-row justify-content-center align-items-center"
             >
               <img
                 class="img-fluid d-none d-lg-block"
@@ -61,9 +62,10 @@
               >
             </div>
           </div>
+          <hr>
           <div class="row mx-auto">
             <div
-              class="col-12 d-flex justify-content-center align-items-center"
+              class="col-12 d-flex flex-lg-column flex-xl-row justify-content-center align-items-center"
             >
               <img
                 class="img-fluid d-none d-lg-block"
@@ -74,9 +76,10 @@
               >
             </div>
           </div>
+          <hr>
           <div class="row mx-auto">
             <div
-              class="col-12 d-flex gap-5 justify-content-center align-items-center"
+              class="col-12 d-flex flex-lg-column flex-xl-row gap-5 justify-content-center align-items-center"
             >
               <img
                 class="img-fluid d-none d-lg-block"
@@ -87,6 +90,7 @@
               >
             </div>
           </div>
+          <hr>
         </div>
       </div>
     </main>

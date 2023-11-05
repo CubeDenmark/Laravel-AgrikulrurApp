@@ -848,13 +848,18 @@
     
 </script>
 <script>
+  
   // kunin time sa db
   let rawDate = '{{ $auction->end_time }}';
+
   // convert date to milliseconds
   let endDate = new Date(rawDate).getTime();
 
   //running every second
-  let countDown = setInterval(() => {
+    let countDown = setInterval(() => {
+    // get auction status
+    let status = '{{$auction->status}}';
+    console.log(status);
     let nowDate = new Date().getTime();
     let distance = endDate - nowDate;
 
@@ -865,7 +870,8 @@
     let seconds = Math.floor((distance%(1000*60))/1000);
     document.getElementById("biddingTime").innerHTML =  hours + "h " + minutes + "m " + seconds + "s ";
     document.getElementById("biddingTime2").innerHTML =  hours + "h " + minutes + "m " + seconds + "s ";
-    if(distance<0) {
+    // end bidding if reached the time limit or manually closed
+    if(distance<0 || status === "closed") {
       clearInterval(countDown);
       document.getElementById("biddingTime").innerHTML = "Auction is completed";
       document.getElementById("biddingTime2").innerHTML = "Auction is completed";
