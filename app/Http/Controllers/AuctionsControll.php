@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\DB;
 
 class AuctionsControll extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function create_auction()
     {
         $crops = crops::all();

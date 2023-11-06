@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class CropsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function addcrop()
     {
         return view('add_crop');

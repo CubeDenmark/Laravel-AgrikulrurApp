@@ -17,7 +17,10 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      */
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function update_profile_image(Request $request)
     {
         if($request->hasFile("update_image"))
