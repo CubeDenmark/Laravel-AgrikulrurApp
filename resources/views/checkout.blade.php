@@ -75,16 +75,14 @@
                   type="text"
                   class="form-control fs-1 fw-bold text-light"
                   value="{{$user->phone}}"
-                  aria-describedby="basic-addon2"
                   readonly
-                  id="num"
-                />
-                
+                  id="myNum"
+                />   
                 <div class="input-group-append">
                   <button
                     class="btn btn-outline-light bg-transparent fs-1"
                     type="button"
-                    onclick="copy()"
+                    onclick="copyCont()"
                   >
                     <i class="fa-solid fa-copy text-white"></i>
                     Copy
@@ -111,16 +109,18 @@
                     Auction Id:
                     <span class="fw-bold" id="auction-id">{{$auction->auction_id}}</span>
                   </p>
-              @endforeach
+              
                 
                 <div
                   class="d-flex flex-column flex-lg-row justify-content-evenly align-items-center"
                 >
                   <img
-                    src="../assets/Ampalaya.jpeg"
+                    src="images/auctions/{{ $auction->auctionCropImage }}"
                     alt=""
                     style="width: 30rem"
+                    class="object-fit-cover"
                   />
+                @endforeach
                   @foreach($crops as $crop)
                   <p id="crop-type" class="fs-1 fw-bold mx-2">{{$crop->crop_name}}</p>
                   @endforeach
@@ -176,4 +176,5 @@
       </div>
     </main>
     <script src="../js/copy.js"></script>
+    
 @endsection

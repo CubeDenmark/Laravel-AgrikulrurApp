@@ -1,14 +1,14 @@
-function copy() {
-  // Get the text field
-  var copyText = document.getElementById("num");
+function copyCont() {
+    // Get the text field
+    var copyText = document.getElementById("myNum");
 
-  // Select the text field
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
 
-  // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value);
 
-  // Alert the copied text
-  alert("Copied Gcash Number: " + copyText.value);
+    // Alert the copied text
+    // alert("GCASH NUMBER COPIED");
 }

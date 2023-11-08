@@ -108,15 +108,17 @@
                     Auction Id:
                     <span class="fw-bold" id="auction-id">{{$auction->auction_id}}</span>
                   </p>
-              @endforeach
+             
                 <div
                   class="d-flex flex-column flex-lg-row justify-content-evenly align-items-center"
                 >
                   <img
-                    src="../assets/Ampalaya.jpeg"
+                    src="images/auctions/{{ $auction->auctionCropImage }}"
                     alt=""
                     style="width: 30rem"
+                    class="object-fit-cover"
                   />
+                  @endforeach
                   @foreach($crops as $crop)
                   <p id="crop-type" class="fs-1 fw-bold mx-2">{{$crop->crop_name}}</p>
                   @endforeach
@@ -146,5 +148,5 @@
         </div>
       </div>
     </main>
-    <script src="../copy.js"></script>
+    <script src="../js/copy.js"></script>
 @endsection
