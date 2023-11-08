@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="../css/SignUp.css" />
     <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon"> 
     <!-- Boostrap CSS -->
@@ -13,10 +13,15 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
+
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/fae056ab45.js"
       crossorigin="anonymous"
     ></script>
   </head>
@@ -88,7 +93,17 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="alert alert-danger " role="alert" id="passwordReminder" hidden>
+                            Password Must contain:
+                            <hr>
+                            <ul class="list-unstyled" id="passwordCheckings">
+                                <li id="8chars"><i class="fa-solid fa-xmark"></i> Atleast 8 Characters</li>
+                                <li id="uppercase"><i class="fa-solid fa-xmark"></i> Atleast 1 UPPERCASE Letter</li>
+                                <li id="lowercase"><i class="fa-solid fa-xmark"></i> Atleast 1 lowercase letter</li>
+                                <li id="oneNumber"><i class="fa-solid fa-xmark"></i> Atleast 1 Number</li>
+                                <li id="symbol"><i class="fa-solid fa-xmark"></i> Atleast 1 symbol ( !, @, #, $, %, ^, &, * )</li>
+                            </ul>
+                        </div>
                         <div class="row password_row">
                             <div class="col mb-2">
                                 <div class="form-floating">
@@ -96,7 +111,7 @@
                                     type="password"
                                     class="form-control @error('password') is-invalid @enderror"
                                     id="password"
-                                    onchange=""
+                                    onkeyup="checkPassword(value)"
                                     placeholder="Put Password Here"
                                     onchange=""
                                     name="password" 
@@ -119,7 +134,7 @@
                                     type="password"
                                     class="form-control"
                                     id="conf-password"
-                                    onchange="passCheck()"
+                                    onkeyup="passCheck()"
                                     placeholder="Confirm Password Here"
                                     name="password_confirmation" 
                                     required 
