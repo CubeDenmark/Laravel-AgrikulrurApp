@@ -21,7 +21,7 @@
 
     <div id="app">
        
-    @if(Auth::user()->user_type == 2 || Auth::user()->user_type == 3)
+    @if(Auth::user()->user_type == 0 || Auth::user()->user_type == 1)
        <!--Navigation Bar for Ordinary user-->
       <nav
       class="navbar nav-underline sticky-lg-top navbar-expand-xxl bg-body-tertiary"
@@ -143,7 +143,7 @@
       </div>
     </nav>
     <!--Navigation Bar for ordinary user (end)-->
-    @elseif(Auth::user()->user_type == 1)
+    @elseif(Auth::user()->type == 2)  <!-- @elseif(Auth::user()->user_type == 3) -->
          <!--Navigation Bar for Admin-->
     <nav
       class="navbar nav-underline sticky-lg-top navbar-expand-xxl bg-body-tertiary"

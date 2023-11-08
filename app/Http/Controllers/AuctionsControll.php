@@ -102,14 +102,14 @@ class AuctionsControll extends Controller
     }
     public function guidelines()
     {
-        $cropinfo = crops::all();
-        return view('guidelines', compact('cropinfo'));
+        //$cropinfo = crops::all();
+        return view('guideFromDA'); //, compact('cropinfo')
     }
     public function notifications()
     {
   
        
-        if(Auth::user()->user_type  == '2')
+        if(Auth::user()->user_type  == 0)
         {
             $toThisUser = Auth::user()->id;
             $notif = farmerNotif::where('creator_id', $toThisUser)->get();
@@ -118,7 +118,7 @@ class AuctionsControll extends Controller
                 return view('notifications', compact('notif', 'farmer_conpay'))->with('noti', 'autions fetched!');
 
         }
-        if(Auth::user()->user_type == '3')
+        if(Auth::user()->user_type == 1)
         {
             $toThisUser = Auth::user()->id;
             $notif = consNotif::where('bidder_id', $toThisUser)->get();
