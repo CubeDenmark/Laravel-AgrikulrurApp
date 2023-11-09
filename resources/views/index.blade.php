@@ -43,7 +43,7 @@
       class="navbar nav-underline sticky-lg-top navbar-expand-lg bg-body-tertiary"
     >
       <div class="container-fluid">
-        <a class="navbar-brand" id="brand" href="index.html">
+        <a class="navbar-brand" id="brand" href="/">
           <img src="assets/logo-nobg.png" alt="" class="logo-pic" />
           Agrikultur'App
         </a>
@@ -158,9 +158,10 @@
               <div class="col">
                 <img
                   src="https://scontent.fcrk2-2.fna.fbcdn.net/v/t1.15752-9/345256270_610531694346277_2834894021469238170_n.jpg?_nc_cat=105&cb=99be929b-3346023f&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeHlmVk2vHBYsfrsZGKzHaGbIMBH_mpVdvggwEf-alV2-NOhZyYjq9pYSFtL663z2mAEv9cpOoWSGfbCBVfGM1Ge&_nc_ohc=ujOghj-GoZUAX9ubAFQ&_nc_ht=scontent.fcrk2-2.fna&oh=03_AdTKHoCFykhzqh4cX2fMpe_-J_uEVJvuL2fvhrIghqSwZw&oe=64CAEDC6"
-                  alt=""
+                  alt="Making Pic"
                   class=""
                   id="about-pic"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -199,8 +200,9 @@
                 <figure class="figure">
                   <img
                     src="./assets/devTeam/Teddy.jpg"
-                    alt=""
+                    alt="Teddy Pascual"
                     class="img-thumbnail figure-img"
+                    loading="lazy"
                   />
                   <figcaption class="figure-caption text-center fs-1">
                     Teddy Pascual
@@ -219,8 +221,9 @@
                 <figure>
                   <img
                     src="./assets/devTeam/Denmark.jpg"
-                    alt=""
+                    alt="Denmark Cube"
                     class="img-thumbnail figure-img"
+                    loading="lazy"
                   />
                   <figcaption class="figure-caption text-center fs-1">
                     Denmark Cube
@@ -239,8 +242,9 @@
                 <figure>
                   <img
                     src="./assets/devTeam/Darren.png"
-                    alt=""
+                    alt="Darren Ventura"
                     class="img-thumbnail figure-img img-fluid"
+                    loading="lazy"
                   />
                   <figcaption class="figure-caption text-center fs-1">
                     Darren Ventura
@@ -259,8 +263,9 @@
                 <figure>
                   <img
                     src="./assets/devTeam/Emman.jpg"
-                    alt=""
+                    alt="Emmanuel Paulo"
                     class="img-thumbnail figure-img"
+                    loading="lazy"
                   />
                   <figcaption class="figure-caption text-center fs-1">
                     Emmanuel Paulo
@@ -595,7 +600,7 @@
           <p class="title">Want to buy a produce?</p>
           <a
             class="btn btn-success fs-2 w-auto border-black"
-            href="pages/SignUp.html"
+            href="{{ route('register') }}"
             >Get Started <i class="fa-solid fa-chevron-right"></i
           ></a>
         </div>
