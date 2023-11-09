@@ -157,7 +157,7 @@
             <div class="row mb-5">
               <div class="col">
                 <img
-                  src="https://scontent.fcrk2-2.fna.fbcdn.net/v/t1.15752-9/345256270_610531694346277_2834894021469238170_n.jpg?_nc_cat=105&cb=99be929b-3346023f&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeHlmVk2vHBYsfrsZGKzHaGbIMBH_mpVdvggwEf-alV2-NOhZyYjq9pYSFtL663z2mAEv9cpOoWSGfbCBVfGM1Ge&_nc_ohc=ujOghj-GoZUAX9ubAFQ&_nc_ht=scontent.fcrk2-2.fna&oh=03_AdTKHoCFykhzqh4cX2fMpe_-J_uEVJvuL2fvhrIghqSwZw&oe=64CAEDC6"
+                  src="./assets/balanti1.jpg"
                   alt="Making Pic"
                   class=""
                   id="about-pic"
