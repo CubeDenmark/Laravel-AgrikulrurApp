@@ -37,16 +37,21 @@
     </p>
     <div class="container-fluid d-flex justify-content-between">
       <span></span>
+      @if(Auth::user()->type == "farmer")
       <a
         href="{{ url('create_auction')}}"
         class="btn btn-success text-success mb-4 create-new-btn"
       >
-        <p class="md-title new-text-btn">
-          <i class="fa-regular fa-square-plus"></i> Create New Auction
-        </p>
+       
+        
+          <p class="md-title new-text-btn">
+            <i class="fa-regular fa-square-plus"></i> Create New Auction
+          </p>
+       
+        
       </a>
     </div>
-
+    @endif
     <section
       class="offered-produce container-fluid p-5 d-flex justify-content-center justify-content-lg-start" id="offered">
       <div class="desktop-view flex-wrap d-flex flex-column flex-lg-row justify-content-center justify-content-lg-start gap-5">

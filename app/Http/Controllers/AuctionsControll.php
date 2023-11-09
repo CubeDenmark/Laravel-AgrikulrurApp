@@ -109,7 +109,7 @@ class AuctionsControll extends Controller
     {
   
        
-        if(Auth::user()->user_type  == 0)
+        if(Auth::user()->type == "farmer")
         {
             $toThisUser = Auth::user()->id;
             $notif = farmerNotif::where('creator_id', $toThisUser)->get();
@@ -118,7 +118,7 @@ class AuctionsControll extends Controller
                 return view('notifications', compact('notif', 'farmer_conpay'))->with('noti', 'autions fetched!');
 
         }
-        if(Auth::user()->user_type == 1)
+        if(Auth::user()->type == "bidder")
         {
             $toThisUser = Auth::user()->id;
             $notif = consNotif::where('bidder_id', $toThisUser)->get();

@@ -45,12 +45,12 @@
           @foreach($notif as $notify)
             <tr>
                 <td>
-                    @if(Auth::user()->type == 0 )
+                    @if(Auth::user()->type == "farmer" )
                     <a
                       href="{{ url('send-bid')}}?auction_id={{$notify->auction_id}}"
                       class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
                     >
-                    @elseif(Auth::user()->type == 1)
+                    @elseif(Auth::user()->type == "bidder")
                     <a
                       href="{{ url('congratulation')}}?auction_id={{$notify->auction_id}}"
                       class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
@@ -65,9 +65,9 @@
                     />
                     <div>
                       <p class="md-title text-success">
-                        @if(Auth::user()->type == 0 )
+                        @if(Auth::user()->type == "farmer" )
                             Your auction listing has ended
-                        @elseif(Auth::user()->user_type == 3)
+                        @elseif(Auth::user()->type == "bidder")
                             Congratulations! You won an auction!
                         @endif
                       </p>
@@ -81,7 +81,7 @@
             @endforeach
         @endif
 
-          @if(Auth::user()->type == 0)
+          @if(Auth::user()->type == "farmer")
 
           @if(!empty($farmer_conpay))
             @foreach($farmer_conpay as $fConpay)
@@ -113,7 +113,7 @@
             @endforeach
           @endif
 
-          @elseif(Auth::user()->type == 1)
+          @elseif(Auth::user()->type == "bidder")
 
           
             @foreach($consumer_conpay as $cConpay)

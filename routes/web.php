@@ -79,7 +79,6 @@ Route::middleware(['auth', 'user-access:farmer,bidder'])->group(function () {
     Route::get('/notifications' ,[AuctionsControll::class , 'notifications']);
     Route::get('/auctions' ,[AuctionsControll::class , 'auctions']);
     Route::get('/send-bid' ,[MessageController::class , 'sendBid']);
-
     // Consumer
     Route::get('/demandAuctions' ,[demandAuctionsController::class , 'demandAuctions']);
 });
@@ -90,12 +89,8 @@ Route::middleware(['auth', 'user-access:farmer'])->group(function () {
     // Farmer-specific routes
     Route::get('/create_auction' ,[AuctionsControll::class , 'create_auction']);
     Route::post('/newAuction' ,[AuctionsControll::class , 'newAuction'])->name('newAuction');
-    Route::get('/congratulation' ,[AuctionsControll::class , 'congratulation']);
-    Route::get('/checkout' ,[AuctionsControll::class , 'checkout']);
     Route::get('/confirm_payment' ,[AuctionsControll::class , 'confirm_payment']);
-    Route::get('/checkout_farmer' ,[AuctionsControll::class , 'checkout_farmer']);
-    Route::get('/bidder_payment' ,[AuctionsControll::class , 'bidder_payment']);
-    Route::get('/finished' ,[AuctionsControll::class , 'finished']);
+    Route::get('/checkout_farmer' ,[AuctionsControll::class , 'checkout_farmer']);     
     Route::post('/update_profile_image' ,[ImageController::class ,'update_profile_image'])->name('update_profile_image');
     Route::post('/update_base', [AuctionsControll::class ,'update_base'])->name('update_base');
     Route::get('/manual_close' ,[AuctionsControll::class , 'manual_close']);
@@ -107,6 +102,10 @@ Route::middleware(['auth', 'user-access:bidder'])->group(function () {
     // Bidder-specific routes
     // Add other bidder-specific routes here
     Route::post('/send-message' ,[MessageController::class , 'sendMessage']);
+    Route::get('/congratulation' ,[AuctionsControll::class , 'congratulation']);
+    Route::get('/checkout' ,[AuctionsControll::class , 'checkout']);
+    Route::get('/bidder_payment' ,[AuctionsControll::class , 'bidder_payment']);
+    Route::get('/finished' ,[AuctionsControll::class , 'finished']);
 
 });
 

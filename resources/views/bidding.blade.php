@@ -138,7 +138,7 @@
 
             @if($auction->status == 'closed')
               <div class="alert alert-success w-100 h-100 text-center fs-3">This auction is completed!</div>
-            @elseif(Auth::user()->user_type == 1)
+            @elseif(Auth::user()->type == "admin")
               <div class="alert alert-success w-100 h-100 text-center fs-3">Have a great day Admin!</div>
             @elseif(Auth::user()->id == $farmer->id)
               <div
@@ -425,7 +425,7 @@
 
                         @if($auction->status == 'closed')
                           <div class="alert alert-success w-100 h-100 text-center fs-3">This auction is completed!</div>
-                          @elseif(Auth::user()->user_type == 1)
+                          @elseif(Auth::user()->type == "admin")
                           <p class="title text-success text-center">Have a good day Admin!</p>
                         @elseif(Auth::user()->id == $farmer->id)
 
