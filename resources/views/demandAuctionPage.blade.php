@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <title>Supply Auction Page</title>
+    <title>Auction Page</title>
     <!--Custom CSS Tag-->
     <link rel="stylesheet" href="../css/auction.css" />
     <!--Custom CSS Tag-->
@@ -41,109 +41,107 @@
       rel="stylesheet"
     />
     <!--Font Links-->
+ 
 
     <!--Titles-->
     <p class="title text-center mt-5 mb-5">
-      Welcome to the <span class="text-success">Supply Auction Page</span>
+      Welcome to the <span class="text-success">Demand Auction Page</span>
     </p>
-    <div class="d-flex flex-column-reverse flex-lg-row justify-content-between">
+    <div class="d-flex justify-content-between">
       <p class="md-title text-start mx-4">Offered Produce Auctions</p>
-      <div class="d-flex justify-content-between align-items-center">
-        <span class="d-block d-lg-none"></span>
-        <div class="d-flex">
-          <a
-            href="{{url('crop-options')}}"
-            class="md-title text-start mx-4 text-decoration-none text-success"
-            >Supply</a
-          >
-          <p class="md-title text-start mx-4">|</p>
-          <a
-            href="{{ url('demandAuctions') }}"
-            class="md-title text-start mx-4 text-decoration-none text-dark"
-            >Demand</a
-          >
-        </div>
+      <div class="d-flex align-items-center">
+        <a
+          href="{{url('crop-options')}}"
+          class="md-title text-start mx-4 text-decoration-none text-dark"
+          >Supply</a
+        >
+        <p class="md-title text-start mx-4">|</p>
+        <a
+          href="{{ url('demandAuctions') }}"
+          class="md-title text-start mx-4 text-decoration-none text-success"
+          >Demand</a
+        >
       </div>
     </div>
     <!--Titles-->
 
     <!--Offered Produce Section-->
-    <section class="offered-produce container-fluid p-5 min-h-100vh" id="offered">
-
+    <section
+      class="offered-produce container-fluid p-5 d-flex justify-content-center overflow-y-scroll"
+      id="offered"
+    >
       <!--Desktop View-->
       <div
-          class="row row-cols-1 row-cols-xl-4 row-cols-md-2 row-cols-lg-3 row-gap-4 column-gap-0 d-flex"
-        >
-        @foreach($crops as $crop)
-        <div class="col d-flex justify-content-center align-items-center">
-            <div class="card">
-              <img
-                src="images/crops/{{$crop->crop_image}}"
-                class="card-img-top object-fit-cover"
-                alt="Ampalaya"
-              />
-              <div class="card-body">
-                <h5 class="card-title md-title">{{$crop->crop_name}}</h5>
-                <a href="{{ url('auctions') }}?type={{$crop->crop_id}}" class="btn btn-success fs-4">View Auctions</a>
-              </div>
+        class="row row-cols-1 row-cols-xl-6 row-cols-lg-4 row-gap-4 column-gap-0 d-flex"
+      >
+        <div class="col d-flex d-md-block justify-content-center">
+          <div class="card">
+            <img src="../assets/Ampalaya.jpeg" class="card-img-top" alt="" />
+            <div class="card-body">
+              <h5 class="card-title md-title">Ampalaya</h5>
+              <a href="AmpalayaDemand.html" class="btn btn-success"
+                >View Auctions</a
+              >
             </div>
           </div>
-        @endforeach
-        
-      
-<!--  
-        <div class="col">
+        </div>
+        <div class="col d-flex d-md-block justify-content-center">
           <div class="card">
             <img src="../assets/Kalabasa.jpg" class="card-img-top" alt="" />
             <div class="card-body">
               <h5 class="card-title md-title">Kalabasa</h5>
 
-              <a href="Kalabasa.html" class="btn btn-success">View Auctions</a>
+              <a href="KalabasaDemand.html" class="btn btn-success"
+                >View Auctions</a
+              >
             </div>
           </div>
         </div>
-
-        <div class="col">
+        <div class="col d-flex d-md-block justify-content-center">
           <div class="card">
             <img src="../assets/Tomato.png" class="card-img-top" alt="" />
             <div class="card-body">
               <h5 class="card-title md-title">Kamatis</h5>
-              <a href="Kamatis.html" class="btn btn-success">View Auctions</a>
+              <a href="KamatisDemand.html" class="btn btn-success"
+                >View Auctions</a
+              >
             </div>
           </div>
         </div>
-
-        <div class="col">
+        <div class="col d-flex d-md-block justify-content-center">
           <div class="card">
             <img src="../assets/Okra.jpeg" class="card-img-top" alt="" />
             <div class="card-body">
               <h5 class="card-title md-title">Okra</h5>
-              <a href="Okra.html" class="btn btn-success">View Auctions</a>
+              <a href="OkraDemand.html" class="btn btn-success"
+                >View Auctions</a
+              >
             </div>
           </div>
         </div>
-
-        <div class="col">
+        <div class="col d-flex d-md-block justify-content-center">
           <div class="card">
             <img src="../assets/sigarilyas.jpg" class="card-img-top" alt="" />
             <div class="card-body">
               <h5 class="card-title md-title">Sigarilyas</h5>
-              <a href="Sigarilyas.html" class="btn btn-success">View Auctions</a>
+              <a href="SigarilyasDemand.html" class="btn btn-success"
+                >View Auctions</a
+              >
             </div>
           </div>
         </div>
-
-        <div class="col">
+        <div class="col d-flex d-md-block justify-content-center">
           <div class="card">
             <img src="../assets/sitaw.jpg" class="card-img-top" alt="" />
             <div class="card-body">
               <h5 class="card-title md-title">Sitaw</h5>
-              <a href="Sitaw.html" class="btn btn-success">View Auctions</a>
+              <a href="SitawDemand.html" class="btn btn-success"
+                >View Auctions</a
+              >
             </div>
           </div>
         </div>
       </div>
--->
       <!--Desktop View-->
     </section>
     <!--Offered Produce Section-->

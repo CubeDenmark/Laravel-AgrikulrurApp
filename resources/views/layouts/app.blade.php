@@ -120,9 +120,16 @@
               id="dropdown-menu"
               aria-labelledby="dropdownMenuButton"
             >
-              <a class="dropdown-item text-success" href="{{ url('profile') }}"
+              @if(Auth::user()->type == "farmer")
+              <a class="dropdown-item text-success" href="{{ url('farmerProfile') }}"
                 ><i class="fa-solid fa-user"></i> Profile</a
               >
+              @endif
+              @if(Auth::user()->type == "bidder")
+              <a class="dropdown-item text-success" href="{{ url('consumerProfile') }}"
+                ><i class="fa-solid fa-user"></i> Profile</a
+              >
+              @endif
               <a class="dropdown-item text-success" href="{{ url('notifications') }}?id={{ Auth::user()->id }}"
                 ><i class="fa-solid fa-bell"></i> Notifications</a
               >
