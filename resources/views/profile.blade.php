@@ -53,6 +53,7 @@
             alt=""
             id="profile-pic"
           />
+          <p class="md-title">{{ Auth::user()->user_type == 2 ? "Farmer": "Consumer"}}</p>
           <label for="change-prof" class="md-title mt-5"
             >Change Profile Picture</label
           >
