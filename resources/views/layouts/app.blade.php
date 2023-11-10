@@ -44,6 +44,9 @@
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon fs-1"></span>
+          <!-- Notification Red Dot for Mobile -->
+          <div class="notif-dot "></div>
+          <!-- Notification Red Dot for Mobile -->
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul
@@ -62,7 +65,11 @@
                 class="nav-link text-success"
                 href="{{ url('notifications') }}?id={{ Auth::user()->id }}"
                 id="nav-link"
-                ><i class="fa-solid fa-bell"></i> Notifications</a
+                >
+                <!-- Notification Red Dot for Mobile -->
+                <i class="fa-solid fa-circle notif-dot-fa"></i>
+                <!-- Notification Red Dot for Mobile -->
+                <i class="fa-solid fa-bell"></i>Notifications</a
               >
             </li>
             <li class="nav-item me-2">
@@ -114,6 +121,9 @@
                 width="100%"
                 height="100%"
               />
+              <!-- Notification Red Dot for Desktop -->
+              <div class="d-none d-lg-block notif-dot"></div>
+              <!-- Notification Red Dot for Desktop -->
             </button>
             <div
               class="dropdown-menu fs-3"
@@ -124,7 +134,12 @@
                 ><i class="fa-solid fa-user"></i> Profile</a
               >
               <a class="dropdown-item text-success" href="{{ url('notifications') }}?id={{ Auth::user()->id }}"
-                ><i class="fa-solid fa-bell"></i> Notifications</a
+                ><i class="fa-solid fa-bell"></i>
+                Notifications 
+                <!-- Notification Red Dot for Desktop -->
+                <i class="fa-solid fa-circle notif-dot-fa"></i>
+                <!-- Notification Red Dot for Desktop -->
+                </a
               >
               <div class="dropdown-divider"></div>
                   <!-- Logout from built-in auth on laravel -->
