@@ -192,3 +192,8 @@ main {
         right: 5px;
     }
 }
+@media screen and (max-width: 991px) {
+    .notif-dot {
+        position: absolute;
+    }
+}
