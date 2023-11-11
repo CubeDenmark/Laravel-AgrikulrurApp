@@ -35,7 +35,31 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     enabledTransports: ['ws', 'wss'],
 // });
 
+
+//for localhost
  import Echo from 'laravel-echo';
+
+ import Pusher from 'pusher-js';
+ window.Pusher = Pusher;
+
+ window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: import.meta.env.VITE_PUSHER_APP_KEY,
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+    wsHost: '127.0.0.1', // Your domain
+    encrypted: false,
+    wsPort: 6001, // Yor http port
+    disableStats: true, // Change this to your liking this disables statistics
+    forceTLS: false,
+    enabledTransports: ['ws', 'wss'],
+    disabledTransports: ['sockjs', 'xhr_polling', 'xhr_streaming'] // Can be removed
+});
+//for localhost (end)
+
+
+ /*
+
+  import Echo from 'laravel-echo';
 
  import Pusher from 'pusher-js';
  window.Pusher = Pusher;
@@ -52,3 +76,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
      encrypted: true,
      disabledTransports: ['sockjs', 'xhr_polling', 'xhr_streaming']
  });
+
+
+ */

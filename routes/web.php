@@ -106,6 +106,9 @@ Route::middleware(['auth', 'user-access:bidder'])->group(function () {
     Route::get('/checkout' ,[AuctionsControll::class , 'checkout']);
     Route::get('/bidder_payment' ,[AuctionsControll::class , 'bidder_payment']);
     Route::get('/finished' ,[AuctionsControll::class , 'finished']);
+    Route::get('/create_demAuction' ,[demandAuctionsController::class , 'create_demAuction']);
+    Route::post('/new_demAuction' ,[demandAuctionsController::class , 'new_demAuction'])->name('new_demAuction');
+    Route::get('/selectAuction' ,[demandAuctionsController::class , 'selectAuction']);
 
 });
 

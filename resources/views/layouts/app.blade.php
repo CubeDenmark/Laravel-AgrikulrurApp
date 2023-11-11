@@ -76,12 +76,22 @@
             <li class="nav-item">
               <p class="desc text-end d-block d-xxl-none">
                 Logged In as:
-                <strong
-                  ><a
-                    href="{{ url('profile') }}"
+                <strong> 
+                @if(Auth::user()->type == "farmer")
+                  <a
+                    href="{{ url('farmerProfile') }}"
                     class="nav-link active text-success text-decoration-underline"
-                    >{{ Auth::user()->name }}</a
-                  ></strong
+                    >{{ Auth::user()->name }}
+                  </a>
+                @endif
+                @if(Auth::user()->type == "bidder")
+                  <a
+                    href="{{ url('consumerProfile') }}"
+                    class="nav-link active text-success text-decoration-underline"
+                    >{{ Auth::user()->name }}
+                  </a>
+                @endif
+                </strong
                 >
               </p>
             </li>

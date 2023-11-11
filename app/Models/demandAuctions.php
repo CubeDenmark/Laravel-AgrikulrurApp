@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class auctions extends Model
+class demandAuctions extends Model
 {
     use HasFactory;
 
-    protected $table = 'auctions';
+    protected $table = 'demand_auctions';
 
-    protected $fillable = [ 'crop_id', 
+    protected $fillable = [ 'crop_name', 
                             'starting_price', 
                             'crop_volume', 
-                            'user_id',
+                            'creator_id', 
                             'status', 
+                            'pick_up_date', 
                             'end_time', 
-                            'auctionCropImage'];
+                          ];
 }

@@ -311,7 +311,7 @@ class AuctionsControll extends Controller
         
         if($close_auction)
         {
-            return back()->with('closed', 'You have registered successfully');
+            return back()->with('closed', 'Auction is now closed');
         }
         return back()->with('active', 'Failed to close');
     }

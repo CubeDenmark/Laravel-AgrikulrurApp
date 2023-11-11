@@ -1,4 +1,3 @@
-
 <?php
 
 return [
@@ -39,24 +38,21 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
 		//'useTLS' => true,
-                'host' =>  'agrikulturapp.com',
-                'port' => 443,
-                'scheme' => env('PUSHER_SCHEME'),
-                'encrypted' => true,
-		'curl_options' => [
-			CURLOPT_SSL_VERIFYHOST => 0,
-			CURLOPT_SSL_VERIFYPEER => 0,
-		],
+                'host' => '127.0.0.1',
+                'port' => 6001,
+                'scheme' => 'http',
+                'encrypted' => false,
+                'useTLS' => false,//env('PUSHER_SCHEME', 'https') === 'https',
             ],
             'client_options' => [
                 // Guzzle client options: https://docs.guzzlephp.org/en/stable/request-options.html
             ],
         ],
-
         'ably' => [
             'driver' => 'ably',
             'key' => env('ABLY_KEY'),
         ],
+
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\auctions;
 use App\Models\crops;
+use App\Models\demandAuctions;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\QueryException;
@@ -13,6 +14,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\bids;
+use App\Models\demand_bids;
 use App\Services\ValidationService; // Import the ValidationService
 
 
@@ -23,16 +25,16 @@ public function sendMessage(Request $request)
     {
         $requestData = $request->all();
 
-        $website_info = bids::where([
+        $website_info = demand_bids::where([
             ['bid_amount', '=' ,$request->input('message')],
             ['auction_id', '=', $request->input('channel')]
         ])->first();
 
-        $bids = bids::where('auction_id', $request->input('channel'))->get();
+        $bids = demand_bids::where('auction_id', $request->input('channel'))->get();
         $bid_max = $bids->max('bid_amount');
         
-        $base_price = auctions::where('auction_id', $request->input('channel'))->first('starting_price');
-        $crop_type = auctions::where('auction_id', $request->input('channel'))->first('crop_id');
+        $base_price = demandAuctions::where('auction_id', $request->input('channel'))->first('starting_price');
+        $crop_type = demandAuctions::where('auction_id', $request->input('channel'))->first('crop_name');
 
         if ($website_info != null || $request->input('message') <= $bid_max || $request->input('message') <= $base_price->starting_price) 
         {
@@ -59,12 +61,12 @@ public function sendMessage(Request $request)
     
             // Broadcast the event
             //NewMessageEvent::dispatch($messages);
-                $bids = bids::create(
+                $bids = demand_bids::create(
                 [
                 'bid_amount' => $message,
-                'user_id' => $user['id'],
+                'creator_id' => $user['id'],
                 'auction_id' => $channel,
-                'crop_type' => "$crop_type->crop_id",
+                'crop_name' => "$crop_type->crop_name",
                 'on_time' => $on_time,
                 ],
             );
