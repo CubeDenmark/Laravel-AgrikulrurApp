@@ -81,6 +81,7 @@ Route::middleware(['auth', 'user-access:farmer,bidder'])->group(function () {
     Route::get('/send-bid' ,[MessageController::class , 'sendBid']);
     // Consumer
     Route::get('/demandAuctions' ,[demandAuctionsController::class , 'demandAuctions']);
+    Route::get('/selectAuction' ,[demandAuctionsController::class , 'selectAuction']);
 });
 
 // Farmers Routes List
@@ -94,6 +95,8 @@ Route::middleware(['auth', 'user-access:farmer'])->group(function () {
     Route::post('/update_profile_image' ,[ImageController::class ,'update_profile_image'])->name('update_profile_image');
     Route::post('/update_base', [AuctionsControll::class ,'update_base'])->name('update_base');
     Route::get('/manual_close' ,[AuctionsControll::class , 'manual_close']);
+
+    Route::post('/send_bidDemand' ,[MessageController::class , 'send_bidDemand']);
 });
 
 // Bidder Routes List
@@ -101,14 +104,17 @@ Route::middleware(['auth', 'user-access:bidder'])->group(function () {
 
     // Bidder-specific routes
     // Add other bidder-specific routes here
-    Route::post('/send-message' ,[MessageController::class , 'sendMessage']);
+    Route::post('/send_bidSupply' ,[MessageController::class , 'send_bidSupply']);
     Route::get('/congratulation' ,[AuctionsControll::class , 'congratulation']);
     Route::get('/checkout' ,[AuctionsControll::class , 'checkout']);
     Route::get('/bidder_payment' ,[AuctionsControll::class , 'bidder_payment']);
     Route::get('/finished' ,[AuctionsControll::class , 'finished']);
     Route::get('/create_demAuction' ,[demandAuctionsController::class , 'create_demAuction']);
     Route::post('/new_demAuction' ,[demandAuctionsController::class , 'new_demAuction'])->name('new_demAuction');
-    Route::get('/selectAuction' ,[demandAuctionsController::class , 'selectAuction']);
+
+    Route::post('/update_baseDemand', [demandAuctionsController::class ,'update_baseDemand'])->name('update_baseDemand');
+    Route::get('/manual_closeDemand' ,[AuctionsControll::class , 'manual_closeDemand']);
+   
 
 });
 

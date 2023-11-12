@@ -140,7 +140,23 @@
               <div class="alert alert-success w-100 h-100 text-center fs-3">This auction is completed!</div>
             @elseif(Auth::user()->type == "admin")
               <div class="alert alert-success w-100 h-100 text-center fs-3">Have a great day Admin!</div>
-           @elseif(Auth::user()->id == "bidder")  <!--  $farmer->id -->
+           @elseif(Auth::user()->id == $farmer->id )  <!--  $farmer->id -->
+
+                <!-- For update bid price -->
+              @if (session('updated'))
+                <div class="alert alert-success alert-dismissible fade show float-end addAlert" role="alert">
+                  <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('updated') }}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+              
+                @if (session('failedUpdate'))
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p class="md-title"><i class="fa-solid fa-circle-exclamation"></i> {{ session('failedUpdate') }}</p>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                @endif
+                <!-- For update bid price -->
               <div
               class="border border-black w-75 d-flex justify-content-center align-items-center p-2 gap-2"
             >
@@ -168,6 +184,8 @@
                         <i class="fa-solid fa-pen-to-square"></i>
                         Update Base Bid Price
                       </h1>
+
+                      
                       <button
                         type="button"
                         class="btn-close"
@@ -176,31 +194,42 @@
                       ></button>
                     </div>
                     <div class="modal-body">
-                      <form action="" id="updForm">
-                        <input
-                          type="email"
-                          class="form-control mb-3 h-full fs-3"
-                          id="email-inp"
-                          value="20"
-                          autocomplete="off"
-                        />
+
+
+                    <!-- Modal Form Mobile -->
+                    
+                      <form action="{{ route('update_base') }}" id="updForm" method="POST">
+                          @csrf
+                            <input
+                              type="number"
+                              class="form-control mb-3 h-full fs-3"
+                              id="email-inp"
+                              value="{{ $auction->starting_price }}"
+                              autocomplete="off"
+                              name="new_base"
+                            />
+                      
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary fs-3"
+                          data-bs-dismiss="modal"
+                       >
+                          Close
+                        </button>
+                        <input type="hidden" 
+                                  name="auction_id" 
+                                  value="{{ $auction->auction_id }}">
+                        <button
+                          type="submit"
+                          class="btn btn-success fs-3"
+                          id="updateBbpBtn"
+                       >
+                          Save changes
+                        </button>
                       </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary fs-3"
-                        data-bs-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-success fs-3"
-                        id="updateBbpBtn"
-                      >
-                        Save changes
-                      </button>
+
                     </div>
                   </div>
                 </div>
@@ -261,6 +290,8 @@
                 </div>
               </div>
             </div>
+            @elseif(Auth::user()->type == "farmer")
+              <p class="title text-success text-center">Farmer cannot place bid on Supply auction</p>
             @else
               <div
                 class="border border-black w-75 d-flex justify-content-center align-items-center p-2 gap-2" id="bid-div"
@@ -427,7 +458,7 @@
                           <div class="alert alert-success w-100 h-100 text-center fs-3">This auction is completed!</div>
                           @elseif(Auth::user()->type == "admin")
                           <p class="title text-success text-center">Have a good day Admin!</p>
-                         @elseif(Auth::user()->id == "bidder") <!--$farmer->id -->
+                         @elseif(Auth::user()->id == $farmer->id) <!--$farmer->id -->
 
                         <!-- For update bid price -->
                         @if (session('updated'))
@@ -568,6 +599,8 @@
                             </div>
                           </div>
                         </div>
+                        @elseif(Auth::user()->type == "farmer")
+                          <p class="title text-success text-center">Farmer cannot place bid on Supply auction</p>
                         @else
                             <input
                             type="number"
@@ -611,7 +644,7 @@
                     // AJAX request to send the message to the server
                     $.ajax({
                         method: 'POST',
-                        url: '/send-message', // Replace with your route
+                        url: '/send_bidSupply', // Replace with your route
                         data: 
                         { 
                           _token: '{{ csrf_token() }}',
@@ -668,7 +701,7 @@
                     // AJAX request to send the message to the server
                     $.ajax({
                         method: 'POST',
-                        url: '/send-message', // Replace with your route
+                        url: '/send_bidSupply', // Replace with your route
                         data: 
                         { 
                           _token: '{{ csrf_token() }}',
@@ -752,7 +785,7 @@
         row.appendChild(name);
         
         let price = document.createElement("td");
-        price.innerText = `₱${inputPrice2} /kg`;
+        price.innerText = `₱ ${inputPrice2} /kg`;
         row.appendChild(price);
 
         //const d = new Date();

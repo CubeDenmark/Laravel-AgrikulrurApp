@@ -84,8 +84,10 @@ class demandAuctionsController extends Controller
             'demand_auctions.end_time',
             'demand_auctions.crop_name',
             'demand_auctions.starting_price',
+            'demand_auctions.status',
+            'demand_auctions.creator_id',
             'demand_bids.on_time',
-            'users.name as creator_id',
+            'users.name as creator_name',
             'users.profile_img',
             'demand_bids.crop_name',
             'demand_bids.bid_amount',
@@ -101,6 +103,8 @@ class demandAuctionsController extends Controller
                         'demand_auctions.pick_up_date', 
                         'demand_auctions.crop_name',
                         'demand_auctions.starting_price',
+                        'demand_auctions.status',
+                        'demand_auctions.creator_id',
                         'demand_bids.on_time',
                         'users.name', 
                         'users.profile_img',
@@ -110,7 +114,13 @@ class demandAuctionsController extends Controller
                     )
             ->get();
 
-            return view('demandBidding', compact('auctionData'))->with('success', 'highest bid fetched');
+            $bids = demand_bids::select('demand_bids.bid_id', 'users.name', 'demand_bids.bid_amount','users.profile_img', 'demand_bids.on_time')
+            ->join('users', 'demand_bids.bidder_id', '=', 'users.id')
+            ->where('demand_bids.auction_id', $on_auction)
+            ->orderBy('bid_amount', 'desc')
+            ->get();
+
+            return view('demandBidding', compact('auctionData', 'bids'))->with('success', 'highest bid fetched');
 
 
 
@@ -141,5 +151,27 @@ class demandAuctionsController extends Controller
         }
         return view('demandBidding', compact('bids','auctions', 'highestbid', 'creator', 'crop'))->with('success', 'highest bid fetched');
         */
+    }
+
+    public function update_baseDemand(Request $request)
+    {
+        $request->validate([
+            'new_base'=>'required',
+            //'auction_id'=>'required',
+        ]);
+
+        $new_bid = $request->input('new_base');
+        $auction_id = $request->input('auction_id');
+        $bids = demand_bids::where('auction_id', $auction_id)->get('bid_amount')->max();
+        if(empty($bids))
+        {
+            demandAuctions::where('auction_id', $auction_id)->update(['starting_price' => $new_bid]);
+            return back()->with('updated', 'Update bid successfully');     
+        }
+        else
+        {
+            return back()->with('failedUpdate', 'Your auction have bid/s already');
+        }
+        
     }
 }

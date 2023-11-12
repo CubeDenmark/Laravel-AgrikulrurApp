@@ -36,7 +36,14 @@
     />
     @vite('resources/js/app.js')
     <!--Font Links-->
-   
+    @if(!empty($auctionData))            
+          @foreach($auctionData as $auction) 
+                    
+          @endforeach
+          @foreach($auctionData as $farmer) 
+                    
+          @endforeach
+      @endif
     <main class="container-fluid">
       <div class="row main-row">
         <!-- Mobile Container -->
@@ -44,14 +51,14 @@
           <div
             class="row bg-light border-bottom border-black h-50 p-2"
           >
-          @foreach($auctionData as $auction) 
+          
             <img src="images/auctions/{{ $auction->auctionCropImage }}" alt="" class="mb-2 object-fit-cover h-100 w-100" id="bid-image" /> 
-          @endforeach
+          
           </div>
           <div class="row bg-light row-cols-2 p-2">
             <div class="col d-flex flex-column gap-3 border-end border-black">
               <p class="mt-2">Creator</p>
-                @foreach($auctionData as $farmer)
+                
                     <div class="d-flex align-items-center">
                       <img
                         src="/images/profiles/{{ $farmer->profile_img }}"
@@ -62,14 +69,14 @@
                       />
              
 
-                    <p class="fs-5 fw-bold">{{ $farmer->creator_id }}</p> 
+                    <p class="fs-5 fw-bold">{{ $farmer->creator_name }}</p> 
                     </div>
-                  @endforeach
+                  
               <p class="mt-3">Base Bid Price: 
 
-               @foreach($auctionData as $auction)
+               
                     <span id="bp2">{{ $auction->starting_price }}</span>
-               @endforeach
+               
               
               </p>
               <p>Volume: {{ $auction->crop_volume}}kg </p>
@@ -77,16 +84,16 @@
             <div class="col border-black">
               <p class="mt-2">Ending In</p>
               <div class="d-flex align-items-center">
-                @foreach($auctionData as $auction)
+                
                   <p class="fs-1 fw-bold mt-3" id="biddingTime">{{ $auction->end_time }}</p>
-                @endforeach
+                
               </div>
               <p class="mt-3">
                 Latest Bid Price:              
                   @if(!empty($auctionData))
-                    @foreach($auctionData as $auction)
+                    
                       <span class="fw-bold" id="lbp3">{{ $auction->latest_bid_price }}</span>    
-                    @endforeach 
+                    
                   @endif
               </p>
             </div>
@@ -108,21 +115,21 @@
                   </thead>
                   <tbody id="tbody1">
                   
-                  @if(!empty($auctionData))            
-                    @foreach($auctionData as $bid) 
-                    <tr>
-                        <td class="text-center">
-                          <img
-                            src="/images/profiles/{{ $bid->profile_img }}"
-                            alt=""
-                            class="rounded-circle object-fit-cover"
-                            id="table-img"
-                          />
-                        </td>
-                        <td>{{ $bid->name }}</td>
-                        <td>₱{{ $bid->bid_amount }} /kg</td>
-                        <td>{{ $bid->on_time }}</td>
-                    </tr>
+                  @if(!empty($bids))            
+                    @foreach($bids as $bid) 
+                        <tr>
+                            <td class="text-center">
+                              <img
+                                src="/images/profiles/{{ $bid->profile_img }}"
+                                alt=""
+                                class="rounded-circle object-fit-cover"
+                                id="table-img"
+                              />
+                            </td>
+                            <td>{{ $bid->name }}</td>
+                            <td>₱ {{ $bid->bid_amount }} /kg</td>
+                            <td>{{ $bid->on_time }}</td>
+                        </tr>
                     @endforeach
                   @endif
 
@@ -142,7 +149,24 @@
               <div class="alert alert-success w-100 h-100 text-center fs-3">This auction is completed!</div>
             @elseif(Auth::user()->type == "admin")
               <div class="alert alert-success w-100 h-100 text-center fs-3">Have a great day Admin!</div>
-           @elseif(Auth::user()->id == "bidder")  <!--  $farmer->id -->
+            
+           @elseif(Auth::user()->id == $farmer->creator_id)  <!--  $farmer->id -->
+
+              <!-- For update bid price -->
+              @if (session('updated'))
+                <div class="alert alert-success alert-dismissible fade show float-end addAlert" role="alert">
+                  <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('updated') }}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+              
+                @if (session('failedUpdate'))
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p class="md-title"><i class="fa-solid fa-circle-exclamation"></i> {{ session('failedUpdate') }}</p>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                @endif
+                <!-- For update bid price -->
               <div
               class="border border-black w-75 d-flex justify-content-center align-items-center p-2 gap-2"
             >
@@ -178,15 +202,18 @@
                       ></button>
                     </div>
                     <div class="modal-body">
-                      <form action="" id="updForm">
+
+
+                    <form action="{{ route('update_baseDemand') }}" id="updForm" method="POST">
+                        @csrf
                         <input
-                          type="email"
+                          type="number"
                           class="form-control mb-3 h-full fs-3"
                           id="email-inp"
-                          value="20"
+                          value="{{ $auction->starting_price }}"
                           autocomplete="off"
+                          name="new_base"
                         />
-                      </form>
                     </div>
                     <div class="modal-footer">
                       <button
@@ -196,13 +223,17 @@
                       >
                         Close
                       </button>
+                      <input type="hidden" 
+                        name="auction_id" 
+                        value="{{ $auction->auction_id }}">
                       <button
-                        type="button"
+                        type="submit"
                         class="btn btn-success fs-3"
                         id="updateBbpBtn"
                       >
                         Save changes
                       </button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -263,6 +294,8 @@
                 </div>
               </div>
             </div>
+            @elseif(Auth::user()->type == "bidder")
+              <p class="title text-success text-center">Consumer cannot place bid on Demand auction</p>
             @else
               <div
                 class="border border-black w-75 d-flex justify-content-center align-items-center p-2 gap-2" id="bid-div"
@@ -290,9 +323,9 @@
             </div>
             <p class="fs-5 fw-light text-center text-secondary">
             Auction Id:
-                  @foreach($auctionData as $auction)
+                 
                   {{ $auction->auction_id }}
-                  @endforeach
+                  
             </p>
           </div>
         </div>
@@ -305,7 +338,7 @@
               <div
                 class="d-flex justify-content-center align-items-center gap-5"
               >
-              @foreach($auctionData as $farmer)
+              
                 <div class="d-flex align-items-center">
                   <img
                     src="/images/profiles/{{ $farmer->profile_img }}"
@@ -316,18 +349,18 @@
                   />
 
                   
-                    <p class="desc fw-bold">{{ $farmer->creator_id }}</p>
+                    <p class="desc fw-bold">{{ $farmer->creator_name }}</p>
                     <!-- <p class="fs-5 fw-bold"></p> -->
                   
                   <!-- <p class="desc fw-bold">Darren Ventura</p> -->
                 </div>
-                @endforeach
+                
                 <h1>|</h1>
                 <h1>
                   Auction Id:
-                  @foreach($auctionData as $auction)
+                
                   {{ $auction->auction_id }}
-                  @endforeach
+                  
                 </h1>
               </div>
               <div class="web-img-cont bg-danger-subtle overflow-hidden mb-2">
@@ -343,25 +376,25 @@
                 class="d-flex justify-content-center align-items-center gap-5"
               >
                 <p class="desc">Base Bid Price:
-                  @foreach($auctionData as $auction)
+                  
                     <span id="bp2">{{ $auction->starting_price }}</span>
-                  @endforeach
+                  
                 </p>
 
                 <p class="desc">|</p>
 
                 <p class="desc">Latest Bid Price: 
                   @if(!empty($auctionData))
-                    @foreach($auctionData as $auction)
+                    
                       <span id="lbp2">{{ $auction->latest_bid_price }}</span>    
-                    @endforeach 
+                    
                   @endif
                 </p>
 
               </div>
             </div>
             <div class="col border border-2 border-tertiary-subtle pb-2">
-              <p class="title text-center">Not Dynamic</p>
+              <p class="title text-center">{{$auction->crop_name}}</p>
 
                     
               @if(Session::has('success'))
@@ -372,13 +405,13 @@
               @endif
               
 
-              @foreach($auctionData as $auction)
+            
                   <!-- <p class="fs-1 fw-bold mt-3">{{ $auction->created_at }}</p> -->
-                  <p class="md-title">Bidding will end at: <span id="biddingTime2"></span></p>
-                @endforeach
-              @foreach($auctionData as $auction)
+                  <p class="md-title">Bidding will end at: <span id="biddingTime2">{{ $auction->end_time }}</span></p>
+                
+              
               <p class="md-title">Volume: {{ $auction->crop_volume}}kg</p>
-              @endforeach
+              
               <div class="d-flex flex-column align-items-center">
                 <p class="title">Top Bidders</p>
                 <div class="row bids-row bg-light-subtle mb-4 w-100">
@@ -393,21 +426,23 @@
                         </tr>
                       </thead>
                       <tbody id="tbody2">
-                      @foreach($auctionData as $bid) 
-                        <tr>
-                          <td class="text-center">
-                            <img
-                              src="/images/profiles/{{ $bid->profile_img }}"
-                              alt=""
-                              class="rounded-circle object-fit-cover"
-                              id="table-img"
-                            />
-                          </td>
-                          <td>{{ $bid->creator_id }}</td>
-                          <td>₱ {{ $bid->bid_amount }} /kg</td>
-                          <td>{{ $bid->on_time }}</td>
-                        </tr>
-                      @endforeach
+                      @if(!empty($bids))
+                          @foreach($bids as $bid) 
+                            <tr>
+                              <td class="text-center">
+                                <img
+                                  src="/images/profiles/{{ $bid->profile_img }}"
+                                  alt=""
+                                  class="rounded-circle object-fit-cover"
+                                  id="table-img"
+                                />
+                              </td>
+                              <td>{{ $bid->name }}</td>
+                              <td>₱ {{ $bid->bid_amount }} /kg</td>
+                              <td>{{ $bid->on_time }}</td>
+                            </tr>
+                          @endforeach
+                      @endif
        
                       </tbody>
                     </table>
@@ -429,9 +464,9 @@
 
                         @if($auction->status == 'closed')
                           <div class="alert alert-success w-100 h-100 text-center fs-3">This auction is completed!</div>
-                          @elseif(Auth::user()->type == "admin")
+                        @elseif(Auth::user()->type == "admin")
                           <p class="title text-success text-center">Have a good day Admin!</p>
-                         @elseif(Auth::user()->id == "bidder") <!--$farmer->id -->
+                        @elseif(Auth::user()->id == $farmer->creator_id) <!--$farmer->id -->
 
                         <!-- For update bid price -->
                         @if (session('updated'))
@@ -482,7 +517,7 @@
                                 ></button>
                               </div>
                               <div class="modal-body">
-                                <form action="{{ route('update_base') }}" id="updForm" method="POST">
+                                <form action="{{ route('update_baseDemand') }}" id="updForm" method="POST">
                                   @csrf
                                   <input
                                     type="number"
@@ -572,6 +607,8 @@
                             </div>
                           </div>
                         </div>
+                        @elseif(Auth::user()->type == "bidder")
+                          <p class="title text-success text-center">Consumer cannot place bid on Demand auction</p>
                         @else
                             <input
                             type="number"
@@ -615,12 +652,12 @@
                     // AJAX request to send the message to the server
                     $.ajax({
                         method: 'POST',
-                        url: '/send-message', // Replace with your route
+                        url: '/send_bidDemand', // Replace with your route
                         data: 
                         { 
                           _token: '{{ csrf_token() }}',
                           message: message,
-                          channel: '@foreach($auctionData as $auction){{ $auction->auction_id }}@endforeach',
+                          channel: '{{ $auction->auction_id }}',
                           bidder: "{{ Auth::user()['id'] }}",
                         },
                         success: function(response) {
@@ -672,12 +709,12 @@
                     // AJAX request to send the message to the server
                     $.ajax({
                         method: 'POST',
-                        url: '/send-message', // Replace with your route
+                        url: '/send_bidDemand', // Replace with your route
                         data: 
                         { 
                           _token: '{{ csrf_token() }}',
                           message: message,
-                          channel: '@foreach($auctionData as $auction){{ $auction->auction_id }}@endforeach',
+                          channel: '{{ $auction->auction_id }}',
                           bidder: "{{ Auth::user()['id'] }}",
                         },
                         success: function(response) {
@@ -756,7 +793,7 @@
         row.appendChild(name);
         
         let price = document.createElement("td");
-        price.innerText = `₱${inputPrice2} /kg`;
+        price.innerText = `₱ ${inputPrice2} /kg`;
         row.appendChild(price);
 
         //const d = new Date();

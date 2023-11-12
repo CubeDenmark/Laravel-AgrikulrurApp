@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Notification;
 use App\Events\end_auction;
 use App\Events\notifier;
 use App\Models\bids;
 use App\Models\consNotif;
 use App\Models\farmerNotif;
 use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use App\Models\auctions;
 use App\Models\crops;
 use App\Models\pending_transactions;
 use App\Models\notifications;
+//use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Carbon\Carbon;
@@ -263,37 +266,33 @@ class AuctionsControll extends Controller
         $close_auction = auctions::where('auction_id', $thisAuction_id)->update(['status' => 'closed']);
         
         $thesebids = bids::where('auction_id', $thisAuction_id)->get();
-            
+        
+        $bidders = bids::where('auction_id', $thisAuction_id)->pluck('user_id');
+        $farmer = auctions::where('auction_id', $thisAuction_id)->pluck('user_id');
+        
+        //$toNotify = $bidders->merge($farmer)->unique();
+        $toNotify = $bidders->merge($farmer)->unique()->toArray();
+
+        $user = User::whereIn('id', $toNotify)->get();
+        /*$user =  array();
+        foreach ($toNotify as $key => $value) 
+        {
+            $pushUser = User::where('id', [$key => $value])->get();
+            $user[] = $pushUser;
+        }*/
+        //$show = User::all();
+        //return response()->json($users);
+        
+        // Now, $userIds contains the unique user IDs from both tables
+
+        
             foreach($thesebids as $bid)
             {
                 $auction_id = $openAuctions->auction_id;
                 $crop_id = $openAuctions->crop_id;
                 $creator_id = $openAuctions->user_id;
-                $bidder_id =  $bid->user_id;
-                
-                         
-                /*farmerNotif::create([
-                    'auction_id' => $auction_id,
-                    'crop_id' => $crop_id,
-                    'creator_id' => $creator_id,
-                ]); 
-                
-                consNotif::create([
-                    'auction_id' => $auction_id,
-                    'crop_id' => $crop_id,
-                    'bidder_id' => $bidder_id,
-                ]);
-     
-                
-            /*  notifications::create([
-                    'auction_id' => $auction_id,
-                    'crop_id' => $crop_id,
-                    'creator_id' => $creator_id,
-                    'bidder_id' => $bidder_id,
-                ]); */
-               /*event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
-                event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));*/    
-               
+                $bidder_id =  $bid->user_id;          
+      
             }
             farmerNotif::create([
                 'auction_id' => $auction_id,
@@ -306,14 +305,24 @@ class AuctionsControll extends Controller
                 'crop_id' => $crop_id,
                 'bidder_id' => $bidder_id,
             ]);
+
+
+           
+
+
             event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
             event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
-        
+
+            Notification::send($user, new UserNotification($auction_id));
+
         if($close_auction)
         {
             return back()->with('closed', 'Auction is now closed');
         }
         return back()->with('active', 'Failed to close');
+        
+
+        
     }
 
 

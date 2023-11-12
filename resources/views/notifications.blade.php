@@ -41,7 +41,20 @@
       <table class="table table-striped table-bordered table-hover">
         <thead></thead>
         <tbody>
-        @if(!empty($notif))
+          @forelse (Auth::user()->notifications as $notification)
+          <tr>
+              <td>
+                <h3>{{ $notification->data['name'] }}</h3>
+              </td>
+            </tr>
+          @empty
+            <tr>
+              <td>
+                <h3>No record found</h3>
+              </td>
+            </tr>
+          @endforelse
+        <!-- @if(!empty($notif)) 
           @foreach($notif as $notify)
             <tr>
                 <td>
@@ -144,7 +157,7 @@
             @endforeach
           
 
-        @endif
+        @endif-->
           
         </tbody>
       </table>

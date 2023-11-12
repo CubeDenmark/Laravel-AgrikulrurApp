@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class demanBids_send implements ShouldBroadcast
+class demandBids_send implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
