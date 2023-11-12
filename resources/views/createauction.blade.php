@@ -41,6 +41,28 @@
       <div class="container-fluid">
         <div class="d-flex justify-content-center align-items-center">
           <div class="card mt-5 form-card">
+            {{-- Help Button --}}
+    <button class="btn btn-success help-btn border border-dark" data-bs-toggle="modal" data-bs-target="#auctionModal"><i class="fa-solid fa-circle-info help-txt"></i></button>
+    {{-- Help Button --}}
+
+    {{-- Help  Modal --}}
+    <div class="modal fade" id="auctionModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title md-title text-success" id="auctionModalLabel">Create Auction Guide</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/GkGxeuew2ac?si=JaPuwV-StTRh0mOZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary fs-2" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{{-- Help  Modal --}}
             <h1 class="title text-center text-light mt-5">
               Create New Auction
             </h1>

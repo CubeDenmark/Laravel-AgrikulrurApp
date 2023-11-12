@@ -154,6 +154,28 @@
 
 
     <main class="container-fluid">
+      {{-- Help Button --}}
+    <button class="btn btn-success help-btn" data-bs-toggle="modal" data-bs-target="#guidelinesModal"><i class="fa-solid fa-circle-info help-txt"></i></button>
+    {{-- Help Button --}}
+
+    {{-- Help  Modal --}}
+    <div class="modal fade" id="guidelinesModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title md-title text-success" id="guidelinesModalLabel">Pricing Guidelines Guide</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/GkGxeuew2ac?si=JaPuwV-StTRh0mOZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary fs-2" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{{-- Help  Modal --}}
       <p class="md-title">Last Updated: January 2, 2023</p>
       <table class="table text-center text-md-start" id="myTable">
         <thead class="bg-success">

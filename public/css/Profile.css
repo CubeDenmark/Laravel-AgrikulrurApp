@@ -163,6 +163,11 @@ main {
 .help-txt {
     font-size: xx-large;
 }
+.modal-open {
+    overflow: hidden;
+    overflow-y: scroll;
+    padding-right: 0 !important;
+}
 .notif-dot-fa {
     font-size: medium;
     opacity: 80%;
