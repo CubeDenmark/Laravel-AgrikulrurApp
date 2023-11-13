@@ -9,7 +9,8 @@ class notifications extends Model
 {
     use HasFactory;
 
+    
     protected $table = 'notifications';
 
-    protected $fillable = ['auction_id', 'crop_id', 'creator_id', 'bidder_id'];
+    protected $fillable = ['id', 'type', 'notifiable_type', 'notifiable_id', 'data'];
 }

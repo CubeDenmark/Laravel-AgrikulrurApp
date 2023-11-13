@@ -3,6 +3,8 @@
 @section('admin')
   <title>Add Crops</title>
     <!-- Boostrap CSS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -34,7 +36,6 @@
       rel="stylesheet"
     />
     <!--Font Links-->
-    
     
     <!--Create Form Section-->
     <section class="container-fluid create-form-section">
@@ -72,7 +73,7 @@
                       name="crop_name"
                       id="crop_volume"
                       type="text"
-                      class="form-control cropTitle bg-transparent text-light"
+                      class="form-control cropTitle bg-transparent text-light fs-1"
                       placeholder="Crop Name"
                       aria-label="Volume"
                       required
@@ -82,13 +83,13 @@
 
                 <!--Suggested Price-->
                 <div class="input-group mb-3">
-                  <span id="peso-sign" class="input-group-text cropTitle bg-transparent text-light">₱</span>
+                  <span id="peso-sign" class="input-group-text cropTitle bg-transparent text-light fs-1">₱</span>
                       <input
                         onkeyup="btnDis()"
                         name="suggested_price"
                         id="crop_price"
                         type="number"
-                        class="form-control cropTitle bg-transparent text-light"
+                        class="form-control cropTitle bg-transparent text-light fs-1"
                         placeholder="Suggested Price per Kilo"
                         aria-label="Price"
                         required
@@ -106,7 +107,7 @@
                     id="crop_picture"
                     type="file"
                     accept="image/png, image/jpeg"
-                    class="form-control cropTitle bg-transparent text-light"
+                    class="form-control cropTitle bg-transparent text-light fs-1"
                     placeholder="Picture"
                     aria-label="Picture"
                   />

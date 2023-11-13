@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('notificatio', function (Blueprint $table) {
             $table->id('notif_id');
             $table->integer('auction_id')->references('auction_id')->on('auctions')->unsigned();
             $table->string('crop_id');

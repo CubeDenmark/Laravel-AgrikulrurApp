@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -23,7 +25,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'address',
-        'user_type',
+        'type',
         'status',
         'profile_img',
         'val_img',
@@ -49,4 +51,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+     /**
+     * The attributes that should be cast.
+     *
+     * @param string @value
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     * 
+     */
+    protected function type(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => ["farmer", "bidder", "admin"][$value],
+        );
+    }
 }

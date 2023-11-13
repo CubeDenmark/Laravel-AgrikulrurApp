@@ -33,11 +33,11 @@ class AdminContoller extends Controller
     }
     public function manageUsers(Request $request)
     {
-        $theseUsers = User::where('user_type', '2')->orWhere('user_type', '3')->get(); 
+        $theseUsers = User::where('type', 0)->orWhere('type', 1)->get(); 
         $users = array();
         foreach ($theseUsers as $user) 
         {
-            if($user->status == '1' && ($user->user_type == '2' || $user->user_type == '3'))
+            if($user->status == '1' && ($user->type == 0 || $user->type == 1))
             {
                 $users[] = $user;
             }

@@ -21,7 +21,7 @@
 
     <div id="app">
        
-    @if(Auth::user()->user_type == 2 || Auth::user()->user_type == 3)
+    @if(Auth::user()->user_type == 0 || Auth::user()->user_type == 1)
        <!--Navigation Bar for Ordinary user-->
       <nav
       class="navbar nav-underline sticky-lg-top navbar-expand-xxl bg-body-tertiary"
@@ -44,6 +44,9 @@
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon fs-1"></span>
+          <!-- Notification Red Dot for Mobile -->
+          <div class="notif-dot "></div>
+          <!-- Notification Red Dot for Mobile -->
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul
@@ -62,7 +65,11 @@
                 class="nav-link text-success"
                 href="{{ url('notifications') }}?id={{ Auth::user()->id }}"
                 id="nav-link"
-                ><i class="fa-solid fa-bell"></i> Notifications</a
+                >
+                <!-- Notification Red Dot for Mobile -->
+                <i class="fa-solid fa-circle notif-dot-fa"></i>
+                <!-- Notification Red Dot for Mobile -->
+                <i class="fa-solid fa-bell"></i>Notifications</a
               >
             </li>
             <li class="nav-item me-2">
@@ -76,12 +83,22 @@
             <li class="nav-item">
               <p class="desc text-end d-block d-xxl-none">
                 Logged In as:
-                <strong
-                  ><a
-                    href="{{ url('profile') }}"
+                <strong> 
+                @if(Auth::user()->type == "farmer")
+                  <a
+                    href="{{ url('farmerProfile') }}"
                     class="nav-link active text-success text-decoration-underline"
-                    >{{ Auth::user()->name }}</a
-                  ></strong
+                    >{{ Auth::user()->name }}
+                  </a>
+                @endif
+                @if(Auth::user()->type == "bidder")
+                  <a
+                    href="{{ url('consumerProfile') }}"
+                    class="nav-link active text-success text-decoration-underline"
+                    >{{ Auth::user()->name }}
+                  </a>
+                @endif
+                </strong
                 >
               </p>
             </li>
@@ -114,17 +131,32 @@
                 width="100%"
                 height="100%"
               />
+              <!-- Notification Red Dot for Desktop -->
+              <div class="d-none d-lg-block notif-dot"></div>
+              <!-- Notification Red Dot for Desktop -->
             </button>
             <div
               class="dropdown-menu fs-3"
               id="dropdown-menu"
               aria-labelledby="dropdownMenuButton"
             >
-              <a class="dropdown-item text-success" href="{{ url('profile') }}"
+              @if(Auth::user()->type == "farmer")
+              <a class="dropdown-item text-success" href="{{ url('farmerProfile') }}"
                 ><i class="fa-solid fa-user"></i> Profile</a
               >
+              @endif
+              @if(Auth::user()->type == "bidder")
+              <a class="dropdown-item text-success" href="{{ url('consumerProfile') }}"
+                ><i class="fa-solid fa-user"></i> Profile</a
+              >
+              @endif
               <a class="dropdown-item text-success" href="{{ url('notifications') }}?id={{ Auth::user()->id }}"
-                ><i class="fa-solid fa-bell"></i> Notifications</a
+                ><i class="fa-solid fa-bell"></i>
+                Notifications 
+                <!-- Notification Red Dot for Desktop -->
+                <i class="fa-solid fa-circle notif-dot-fa"></i>
+                <!-- Notification Red Dot for Desktop -->
+                </a
               >
               <div class="dropdown-divider"></div>
                   <!-- Logout from built-in auth on laravel -->
@@ -143,7 +175,7 @@
       </div>
     </nav>
     <!--Navigation Bar for ordinary user (end)-->
-    @elseif(Auth::user()->user_type == 1)
+    @elseif(Auth::user()->type == 2)  <!-- @elseif(Auth::user()->user_type == 3) -->
          <!--Navigation Bar for Admin-->
     <nav
       class="navbar nav-underline sticky-lg-top navbar-expand-xxl bg-body-tertiary"

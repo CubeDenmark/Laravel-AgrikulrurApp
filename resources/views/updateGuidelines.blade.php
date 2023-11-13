@@ -48,7 +48,7 @@
         <p class="md-title">Last Updated: January 2, 2023</p>
 
         <div class="d-flex gap-3">
-          <a href="{{url('updatePriceForm')}}" target="_blank" class="btn btn-outline-success upd-btn">D.A. Price Watch</a> <!-- gdltry.html from Agri Beta -->
+          <a href="https://www.da.gov.ph/price-monitoring/" target="_blank" class="btn btn-outline-success upd-btn">D.A. Price Watch</a> <!-- gdltry.html from Agri Beta -->
           <a href="{{url('updatePriceForm')}}" class="btn btn-success upd-btn">Update</a>
         </div>
       </div>
