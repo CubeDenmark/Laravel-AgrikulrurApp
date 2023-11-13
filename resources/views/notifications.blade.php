@@ -173,7 +173,7 @@
           @empty
             <tr>
               <td>
-                <h3>No record found</h3>
+                <p class="md-title text-secondary">No notification found</p>
               </td>
             </tr>
           @endforelse
