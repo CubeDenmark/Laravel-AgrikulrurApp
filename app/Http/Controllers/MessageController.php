@@ -34,7 +34,7 @@ public function send_bidDemand(Request $request)
         $bid_max = $bids->max('bid_amount');
         $base_price = demandAuctions::where('auction_id', $request->input('channel'))->first('starting_price');
         $crop_name = demandAuctions::where('auction_id', $request->input('channel'))->first('crop_name');
-        if ($website_info != null || $request->input('message') <= $bid_max || $request->input('message') <= $base_price->starting_price) 
+        if ($website_info != null || $request->input('message') >= $bid_max || $request->input('message') >= $base_price->starting_price) 
         {
             return response()->json(['failed']);
         } else {

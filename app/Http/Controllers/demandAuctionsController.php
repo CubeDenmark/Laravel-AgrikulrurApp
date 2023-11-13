@@ -117,7 +117,7 @@ class demandAuctionsController extends Controller
             $bids = demand_bids::select('demand_bids.bid_id', 'users.name', 'demand_bids.bid_amount','users.profile_img', 'demand_bids.on_time')
             ->join('users', 'demand_bids.bidder_id', '=', 'users.id')
             ->where('demand_bids.auction_id', $on_auction)
-            ->orderBy('bid_amount', 'desc')
+            ->orderBy('bid_amount', 'asc')
             ->get();
 
             return view('demandBidding', compact('auctionData', 'bids'))->with('success', 'highest bid fetched');
