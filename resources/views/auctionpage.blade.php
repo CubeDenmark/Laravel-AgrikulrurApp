@@ -32,7 +32,7 @@
       rel="stylesheet"
     />
     {{-- Help Button --}}
-    <button class="btn btn-success help-btn" data-bs-toggle="modal" data-bs-target="#auctionModal"><i class="fa-solid fa-circle-info help-txt"></i></button>
+    <button class="btn btn-success help-btn" data-bs-toggle="modal" data-bs-target="#demandModal"><i class="fa-solid fa-circle-info help-txt"></i></button>
     {{-- Help Button --}}
 
     {{-- Help  Modal --}}
