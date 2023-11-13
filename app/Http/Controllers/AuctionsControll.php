@@ -136,32 +136,207 @@ class AuctionsControll extends Controller
     {
         //$user = $request->input('id');
         $auction_id = $request->input('auction_id');
-        return view('congratulation', compact('auction_id'));
+        $finishAuction = pending_transactions::where('auction_id', $auction_id)->first('auction_id');
+
+
+        foreach (Auth::user()->notifications as $notification)
+        {
+            if(
+                Auth::user()->id == $notification->data['bidder_id'] && 
+                $notification->data['auction_id'] == $auction_id
+                )
+            {
+                if(empty($finishAuction))
+                {
+                    return view('congratulation', compact('auction_id'));   
+                    
+                }
+                else
+                {
+                    return back()->with('finishedTrans'.$auction_id, 'Auction '.$auction_id.' transaction is completed');
+                    
+                }
+               
+            }
+            elseif(
+                Auth::user()->id == $notification->data['bidder_id'] && 
+                $notification->data['auction_id'] == $auction_id
+                )
+            {
+                if(empty($finishAuction))
+                {
+                    return view('congratulation', compact('auction_id'));   
+                    
+                }
+                else
+                {
+                    return back()->with('unAuthorized', 'Anuthorized auction or Transaction is already finished');
+                    
+                }
+                
+                /*
+                abort(403, 'Unauthorized access');
+                break;
+                */
+            }
+        }
+
+       
     }
     public function checkout(Request $request)
     {
         $auction_id = $request->input('auction_id');
-        $auctions = auctions::where('auction_id', $auction_id)->get();
-        foreach($auctions as $auction)
-        {
-            $creator = $auction->user_id;
-            $cropname = $auction->crop_id;
-            $users = User::where('id', $creator)->get();
-            $crops = crops::where('crop_id', $cropname)->get();
-            $highestbid = bids::where('auction_id', $auction->auction_id)->get('bid_amount')->max();
-            $volume =  $auction->crop_volume;
-            $highest = $highestbid->bid_amount;
-            $total = $highest * $volume;
+        $finishAuction = pending_transactions::where('auction_id', $auction_id)->first('auction_id');
 
-            return view('checkout', compact('auctions', 'users', 'crops', 'total'));
+        foreach (Auth::user()->notifications as $notification)
+        {
+            if(
+                Auth::user()->id == $notification->data['bidder_id'] && 
+                $notification->data['auction_id'] == $auction_id
+              )
+            {
+                if(empty($finishAuction))
+                {
+                    $auctions = auctions::where('auction_id', $auction_id)->get();
+                    foreach($auctions as $auction)
+                    {
+                        $creator = $auction->user_id;
+                        $cropname = $auction->crop_id;
+                        $users = User::where('id', $creator)->get();
+                        $crops = crops::where('crop_id', $cropname)->get();
+                        $highestbid = bids::where('auction_id', $auction->auction_id)->get('bid_amount')->max();
+                        $volume =  $auction->crop_volume;
+                        $highest = $highestbid->bid_amount;
+                        $total = $highest * $volume;
+            
+                        return view('checkout', compact('auctions', 'users', 'crops', 'total'));
+                    } 
+                }
+                else
+                {
+                    return back()->with('finishedTrans', 'Transaction is already finished');
+                }
+               
+            }
+            elseif(
+                Auth::user()->id == $notification->data['bidder_id'] && 
+                $notification->data['auction_id'] == $auction_id
+              )
+            {
+                if(empty($finishAuction))
+                {
+                    $auctions = auctions::where('auction_id', $auction_id)->get();
+                    foreach($auctions as $auction)
+                    {
+                        $creator = $auction->user_id;
+                        $cropname = $auction->crop_id;
+                        $users = User::where('id', $creator)->get();
+                        $crops = crops::where('crop_id', $cropname)->get();
+                        $highestbid = bids::where('auction_id', $auction->auction_id)->get('bid_amount')->max();
+                        $volume =  $auction->crop_volume;
+                        $highest = $highestbid->bid_amount;
+                        $total = $highest * $volume;
+            
+                        return view('checkout', compact('auctions', 'users', 'crops', 'total'));
+                    } 
+                }
+                else
+                {
+                    return back()->with('unAuthorized', 'Anuthorized auction or Transaction is already finished');
+                    
+                }
+                /*
+                abort(403, 'Unauthorized access');
+                break;
+                */
+            }
         }
+
+       
         
     }
     public function confirm_payment(Request $request)
     {
         $auction_id = $request->input('auction_id');
-        $auctions = auctions::where('auction_id', $auction_id)->get();
-        foreach($auctions as $auction)
+        $finishAuction = pending_transactions::where('auction_id', $auction_id)->first('auction_id');
+
+        foreach (Auth::user()->notifications as $notification)
+        {
+            if(
+                //Auth::user()->id == $notification->data['bidder_id'] && 
+                $notification->data['auction_id'] == $auction_id
+              )
+            {
+                if(!empty($finishAuction))
+                {
+                    $auctions = auctions::where('auction_id', $auction_id)->get();
+                    foreach($auctions as $auction)
+                    {
+                        $creator = $auction->user_id;
+                        $cropname = $auction->crop_id;
+                        $users = User::where('id', $creator)->get();
+                        $crops = crops::where('crop_id', $cropname)->get();
+                        $highestbid = bids::where('auction_id', $auction->auction_id)->get('bid_amount')->max();
+                        $volume =  $auction->crop_volume;
+                        $highest = $highestbid->bid_amount;
+                        $total = $highest * $volume;
+            
+                        return view('ConfirmPayment', compact('auctions', 'users', 'crops', 'total'));
+                    } 
+                }
+                else
+                {
+                    return back()->with('finishedTrans', 'Transaction is already finished');
+                }
+               
+            }
+            elseif(
+                Auth::user()->id == $notification->data['bidder_id'] && 
+                $notification->data['auction_id'] == $auction_id
+              )
+            {
+                if(!empty($finishAuction))
+                {
+                    $auctions = auctions::where('auction_id', $auction_id)->get();
+                    foreach($auctions as $auction)
+                    {
+                        $creator = $auction->user_id;
+                        $cropname = $auction->crop_id;
+                        $users = User::where('id', $creator)->get();
+                        $crops = crops::where('crop_id', $cropname)->get();
+                        $highestbid = bids::where('auction_id', $auction->auction_id)->get('bid_amount')->max();
+                        $volume =  $auction->crop_volume;
+                        $highest = $highestbid->bid_amount;
+                        $total = $highest * $volume;
+            
+                        return view('ConfirmPayment', compact('auctions', 'users', 'crops', 'total'));
+                    } 
+                }
+                else
+                {
+                    return back()->with('unAuthorized', 'Anuthorized auction or Transaction is already finished');
+                    
+                }
+                /*
+                abort(403, 'Unauthorized access');
+                break;
+                */
+            }
+            else
+            {
+                return back()->with('error','An error occurred');
+            }
+        }
+
+
+        
+
+
+
+
+
+
+       /* foreach($auctions as $auction)
         {
             $creator = $auction->user_id;
             $cropname = $auction->crop_id;
@@ -173,39 +348,120 @@ class AuctionsControll extends Controller
             $total = $highest * $volume;
 
             return view('ConfirmPayment', compact('auctions', 'users', 'crops', 'total'));
-        }
+        }*/
         
     }
     public function bidder_payment(Request $request)
     {
         $auction_id = $request->input('auction_id');
         $auctions = auctions::where('auction_id', $auction_id)->get();
-        foreach($auctions as $auction)
-        {
-            $creator = $auction->user_id;
-            $auction = $auction->auction_id;
-            //$winner_bid = bids::where('auction_id', $auction_id)->where(max('bid_amount'))->get('user_id');
-            //$bidder = $winner_bid->user_id;
-            $bidder = Auth::user()->id;
-            $users = User::where('id', $creator)->get();
-
-            $pend_payment = pending_transactions::create([
-                'auction_id' => $auction_id,
-                'creator_id' => $creator,
-                'bidder_id' => $bidder,
-                'creator_status' => 'not_paid',
-                'bidder_status' => 'paid',
-                'status' => 'pending',
-            ]);
-            $consumer_conpay = pending_transactions::where('bidder_id', Auth::user()->id)->where('creator_status', 'paid')->get();
-            $notif = consNotif::where('bidder_id', Auth::user()->id)->get();
-
-            return view('notifications', compact('notif', 'consumer_conpay'));
-        }
+        $existingTransaction = pending_transactions::where('auction_id', $auction_id)->first();
         
+        if ($existingTransaction) {
+            return redirect('notifications');
+            //$fail("A pending transaction for auction ID $value already exists.");
+        }
+        else
+        {
+            
+                foreach($auctions as $auction)
+                {
+                    $creator = $auction->user_id;
+                    $auction = $auction->auction_id;
+                    //$winner_bid = bids::where('auction_id', $auction_id)->where(max('bid_amount'))->get('user_id');
+                    //$bidder = $winner_bid->user_id;
+                    $bidder = Auth::user()->id;
+                    $users = User::where('id', $creator)->get();
+
+                    $pend_payment = pending_transactions::create([
+                        'auction_id' => $auction_id,
+                        'creator_id' => $creator,
+                        'bidder_id' => $bidder,
+                        'creator_status' => 'not_paid',
+                        'bidder_status' => 'paid',
+                        'status' => 'pending',
+                    ]);
+                    $user = User::where('id', $creator)->first();
+                    $creator_id = $creator;
+                    $bidder_id = $bidder;
+                    $phase = 2;
+                    //save the notifiaction on database
+                    Notification::send($user, new UserNotification($auction_id, $creator_id, $bidder_id, $phase));
+
+                    //$consumer_conpay = pending_transactions::where('bidder_id', Auth::user()->id)->where('creator_status', 'paid')->get();
+                    //$notif = consNotif::where('bidder_id', Auth::user()->id)->get();      
+                    //return view('notifications', compact('notif', 'consumer_conpay'));
+                }
+                 
+
+                return redirect('notifications');
+        }
     }
     public function checkout_farmer(Request $request)
     {
+        $auction_id = $request->input('auction_id');
+        $finishAuction = pending_transactions::where('auction_id', $auction_id)->first('auction_id');
+
+        foreach (Auth::user()->notifications as $notification)
+        {
+            if(
+                //Auth::user()->id == $notification->data['bidder_id'] && 
+                $notification->data['auction_id'] == $auction_id
+              )
+            {
+                if(!empty($finishAuction))
+                {
+                    $creator = Auth::user()->id;
+                    $auction = $request->input('auction_id');
+                    $winner = pending_transactions::where('auction_id', $auction)->first('bidder_id');
+                    pending_transactions::where('creator_id', $creator)->where('auction_id', $auction)
+                    ->update(['creator_status' => 'paid', 'status' => 'completed']);
+                    
+                    
+                    $users = User::where('id', $winner->bidder_id)->get();
+                    
+                    return view('cong_farmer', compact('users'));
+                }
+                else
+                {
+                    return back()->with('finishedTrans', 'Transaction is already finished');
+                }
+               
+            }
+            elseif(
+                Auth::user()->id == $notification->data['bidder_id'] && 
+                $notification->data['auction_id'] == $auction_id
+              )
+            {
+                if(!empty($finishAuction))
+                {
+                    $creator = Auth::user()->id;
+                    $auction = $request->input('auction_id');
+                    $winner = pending_transactions::where('auction_id', $auction)->first('bidder_id');
+                    pending_transactions::where('creator_id', $creator)->where('auction_id', $auction)
+                    ->update(['creator_status' => 'paid', 'status' => 'completed']);
+                    
+                    
+                    $users = User::where('id', $winner->bidder_id)->get();
+                    
+                    return view('cong_farmer', compact('users'));
+                }
+                else
+                {
+                    return back()->with('unAuthorized', 'Anuthorized auction or Transaction is already finished');
+                    
+                }
+                /*
+                abort(403, 'Unauthorized access');
+                break;
+                */
+            }
+            else
+            {
+                return back()->with('error','An error occurred');
+            }
+        }
+        /*
         $creator = Auth::user()->id;
         $auction = $request->input('auction_id');
         $winner = pending_transactions::where('auction_id', $auction)->first('bidder_id');
@@ -216,6 +472,7 @@ class AuctionsControll extends Controller
         $users = User::where('id', $winner->bidder_id)->get();
         
         return view('cong_farmer', compact('users'));
+        */
     }
     public function finished(Request $request)
     {
@@ -291,7 +548,8 @@ class AuctionsControll extends Controller
                 $auction_id = $openAuctions->auction_id;
                 $crop_id = $openAuctions->crop_id;
                 $creator_id = $openAuctions->user_id;
-                $bidder_id =  $bid->user_id;          
+                $bidder_id =  $bid->user_id;    
+                $phase = 1;      
       
             }
             farmerNotif::create([
@@ -306,14 +564,12 @@ class AuctionsControll extends Controller
                 'bidder_id' => $bidder_id,
             ]);
 
-
-           
-
-
+            //send notification on websocket
             event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
             event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
 
-            Notification::send($user, new UserNotification($auction_id));
+            //save the notifiaction on database
+            Notification::send($user, new UserNotification($auction_id, $creator_id, $bidder_id, $phase));
 
         if($close_auction)
         {

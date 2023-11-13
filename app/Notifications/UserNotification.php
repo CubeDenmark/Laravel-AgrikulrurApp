@@ -15,9 +15,16 @@ class UserNotification extends Notification
      * Create a new notification instance.
      */
     public $auction_id;
-    public function __construct($auction_id)
+    public $creator_id;
+    public $bidder_id;
+
+    public $phase;
+    public function __construct($auction_id, $creator_id, $bidder_id, $phase)
     {
         $this->auction_id = $auction_id;
+        $this->creator_id = $creator_id;
+        $this->bidder_id = $bidder_id;
+        $this->phase = $phase;
     }
 
     /**
@@ -49,7 +56,10 @@ class UserNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'name' => $this->auction_id,
+            'auction_id' => $this->auction_id,
+            'creator_id' => $this->creator_id,
+            'bidder_id' => $this->bidder_id,
+            'phase' => $this->phase,
         ];
     }
 }

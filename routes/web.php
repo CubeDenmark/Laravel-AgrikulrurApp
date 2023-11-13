@@ -105,8 +105,8 @@ Route::middleware(['auth', 'user-access:bidder'])->group(function () {
     // Bidder-specific routes
     // Add other bidder-specific routes here
     Route::post('/send_bidSupply' ,[MessageController::class , 'send_bidSupply']);
-    Route::get('/congratulation' ,[AuctionsControll::class , 'congratulation']);
-    Route::get('/checkout' ,[AuctionsControll::class , 'checkout']);
+    Route::get('/congratulation' ,[AuctionsControll::class , 'congratulation'])->name('congratulation');//->middleware('requestChecker');
+    Route::get('/checkout' ,[AuctionsControll::class , 'checkout']); //->middleware('requestChecker');
     Route::get('/bidder_payment' ,[AuctionsControll::class , 'bidder_payment']);
     Route::get('/finished' ,[AuctionsControll::class , 'finished']);
     Route::get('/create_demAuction' ,[demandAuctionsController::class , 'create_demAuction']);
