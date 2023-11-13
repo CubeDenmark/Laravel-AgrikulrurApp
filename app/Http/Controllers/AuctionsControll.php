@@ -105,8 +105,8 @@ class AuctionsControll extends Controller
     }
     public function guidelines()
     {
-        //$cropinfo = crops::all();
-        return view('guideFromDA'); //, compact('cropinfo')
+        $cropinfo = crops::all();
+        return view('guidelines', compact('cropinfo')); //, compact('cropinfo')
     }
     public function notifications()
     {
