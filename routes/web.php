@@ -78,10 +78,17 @@ Route::middleware(['auth', 'user-access:farmer,bidder'])->group(function () {
     Route::get('/guidelines' ,[AuctionsControll::class , 'guidelines']);
     Route::get('/notifications' ,[AuctionsControll::class , 'notifications']);
     Route::get('/auctions' ,[AuctionsControll::class , 'auctions']);
-    Route::get('/send-bid' ,[MessageController::class , 'sendBid']);
+   
     // Consumer
     Route::get('/demandAuctions' ,[demandAuctionsController::class , 'demandAuctions']);
     Route::get('/selectAuction' ,[demandAuctionsController::class , 'selectAuction']);
+});
+// Middleware for shared routes of Farmer,Bidder,  and Admin
+Route::middleware(['auth', 'user-access:farmer,bidder,admin'])->group(function () {
+
+    // Shared routes for both "farmer", "bidder", and "admin"
+    Route::get('/send-bid' ,[MessageController::class , 'sendBid']);
+    
 });
 
 // Farmers Routes List
