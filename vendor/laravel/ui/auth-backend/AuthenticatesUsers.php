@@ -85,6 +85,12 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
+
+        return $this->guard()->attempt(
+            $this->credentials($request), $request->boolean('remember')
+        );
+
+        /*
         //this is the login logic
         $users = User::where($this->username(), $request->email)->where('status', '1')->first();
      
@@ -94,7 +100,7 @@ trait AuthenticatesUsers
                     $this->credentials($request), $request->boolean('remember')
                 );
             }
-        
+        */
     }
 
     /**
@@ -116,6 +122,20 @@ trait AuthenticatesUsers
      */
     protected function sendLoginResponse(Request $request)
     {
+
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+
+        if ($response = $this->authenticated($request, $this->guard()->user())) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+                    ? new JsonResponse([], 204)
+                    : redirect()->intended($this->redirectPath());
+
+        /*
         $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
@@ -133,6 +153,7 @@ trait AuthenticatesUsers
         return $request->wantsJson()
                     ? new JsonResponse([], 204)
                     : redirect()->intended($this->redirectPath());
+        */
     }
 
     /**

@@ -21,7 +21,7 @@
 
     <div id="app">
        
-    @if(Auth::user()->user_type == 2 || Auth::user()->user_type == 3)
+    @if(Auth::user()->user_type == 0 || Auth::user()->user_type == 1)
        <!--Navigation Bar for Ordinary user-->
       <nav
       class="navbar nav-underline sticky-lg-top navbar-expand-xxl bg-body-tertiary"
@@ -83,12 +83,22 @@
             <li class="nav-item">
               <p class="desc text-end d-block d-xxl-none">
                 Logged In as:
-                <strong
-                  ><a
-                    href="{{ url('profile') }}"
+                <strong> 
+                @if(Auth::user()->type == "farmer")
+                  <a
+                    href="{{ url('farmerProfile') }}"
                     class="nav-link active text-success text-decoration-underline"
-                    >{{ Auth::user()->name }}</a
-                  ></strong
+                    >{{ Auth::user()->name }}
+                  </a>
+                @endif
+                @if(Auth::user()->type == "bidder")
+                  <a
+                    href="{{ url('consumerProfile') }}"
+                    class="nav-link active text-success text-decoration-underline"
+                    >{{ Auth::user()->name }}
+                  </a>
+                @endif
+                </strong
                 >
               </p>
             </li>
@@ -130,9 +140,16 @@
               id="dropdown-menu"
               aria-labelledby="dropdownMenuButton"
             >
-              <a class="dropdown-item text-success" href="{{ url('profile') }}"
+              @if(Auth::user()->type == "farmer")
+              <a class="dropdown-item text-success" href="{{ url('farmerProfile') }}"
                 ><i class="fa-solid fa-user"></i> Profile</a
               >
+              @endif
+              @if(Auth::user()->type == "bidder")
+              <a class="dropdown-item text-success" href="{{ url('consumerProfile') }}"
+                ><i class="fa-solid fa-user"></i> Profile</a
+              >
+              @endif
               <a class="dropdown-item text-success" href="{{ url('notifications') }}?id={{ Auth::user()->id }}"
                 ><i class="fa-solid fa-bell"></i>
                 Notifications 
@@ -158,7 +175,7 @@
       </div>
     </nav>
     <!--Navigation Bar for ordinary user (end)-->
-    @elseif(Auth::user()->user_type == 1)
+    @elseif(Auth::user()->type == 2)  <!-- @elseif(Auth::user()->user_type == 3) -->
          <!--Navigation Bar for Admin-->
     <nav
       class="navbar nav-underline sticky-lg-top navbar-expand-xxl bg-body-tertiary"

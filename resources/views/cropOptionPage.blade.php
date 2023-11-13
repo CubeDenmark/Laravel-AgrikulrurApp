@@ -75,13 +75,13 @@
         <span class="d-block d-lg-none"></span>
         <div class="d-flex">
           <a
-            href="AuctionPage.html"
+            href="{{url('crop-options')}}"
             class="md-title text-start mx-4 text-decoration-none text-success"
             >Supply</a
           >
           <p class="md-title text-start mx-4">|</p>
           <a
-            href="DemandAuctionPage.html"
+            href="{{ url('demandAuctions') }}"
             class="md-title text-start mx-4 text-decoration-none text-dark"
             >Demand</a
           >

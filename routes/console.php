@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Notification;
 use App\Events\NewMessageEvent;
 use App\Events\notifier;
 use App\Events\end_auction;
@@ -8,6 +9,8 @@ use App\Models\bids;
 use App\Models\notifications;
 use App\Models\farmerNotif;
 use App\Models\consNotif;
+use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Carbon\Carbon;
@@ -39,9 +42,18 @@ Artisan::command('fetch:auctions', function () {
         
         if($auction->end_time <= $now)
         {
+            $openAuctions = auctions::where('auction_id', $auction->auction_id)->first();
             auctions::where('end_time', '<=', $now)->update(['status' => 'closed']);
 
-            $thesebids = bids::where('auction_id', $auction->auction_id)->get();
+            $thesebids = bids::where('auction_id',  $openAuctions)->get();
+
+            $bidders = bids::where('auction_id',  $openAuctions)->pluck('user_id');
+            $farmer = auctions::where('auction_id', $openAuctions)->pluck('user_id');
+            
+            //$toNotify = $bidders->merge($farmer)->unique();
+            $toNotify = $bidders->merge($farmer)->unique()->toArray();
+
+            $user = User::whereIn('id', $toNotify)->get();
             
             foreach($thesebids as $bid)
             {
@@ -49,6 +61,7 @@ Artisan::command('fetch:auctions', function () {
                 $crop_id = $auction->crop_id;
                 $creator_id = $auction->user_id;
                 $bidder_id =  $bid->user_id;
+                $phase = 1;
                 
                          
                 /*farmerNotif::create([
@@ -87,6 +100,8 @@ Artisan::command('fetch:auctions', function () {
             ]);
             event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
             event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
+
+            Notification::send($user, new UserNotification($auction_id, $creator_id, $bidder_id, $phase));
               
         }
 
