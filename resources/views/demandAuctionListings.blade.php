@@ -33,7 +33,7 @@
     />
     
     <p class="title text-center mt-5 mb-5">
-      Welcome to Demand Auctions Page</span>
+      Welcome to Demand Auctions Page fafaf</span>
     </p>
     <div class="container-fluid d-flex justify-content-between">
       <span></span>
