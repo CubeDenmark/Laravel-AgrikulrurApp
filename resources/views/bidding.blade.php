@@ -392,7 +392,7 @@
 
               @foreach($auctions as $auction)
                   <!-- <p class="fs-1 fw-bold mt-3">{{ $auction->created_at }}</p> -->
-                  <p class="md-title">Bidding will end at: <span id="biddingTime2"></span></p>
+                  <p class="md-title">Bidding will end in: <span id="biddingTime2"></span></p>
                 @endforeach
               @foreach($auctions as $auction)
               <p class="md-title">Volume: {{ $auction->crop_volume}}kg</p>

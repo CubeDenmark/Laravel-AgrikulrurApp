@@ -164,7 +164,7 @@
                                         </span>
                                     @enderror
                                     <div class="invalid-feedback">Invalid Phone Number</div>
-                                    <label for="phone-number">Phone Number</label>
+                                    <label for="phone-number">Phone Number (registered to GCASH)</label>
                                 </div>
                             </div>
                         </div>
