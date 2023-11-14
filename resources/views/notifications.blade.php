@@ -367,8 +367,7 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
 
         let row = document.createElement("tr");
 
-        if(phase == 1)
-        {
+        
           let name = document.createElement("td");
         
           name.innerHTML = `
@@ -439,7 +438,7 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
         row.appendChild(name);
 
         $("tbody").prepend(row);
-        }
+        
 
        
        
