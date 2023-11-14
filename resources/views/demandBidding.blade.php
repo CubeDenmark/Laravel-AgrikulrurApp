@@ -49,10 +49,9 @@
         <!-- Mobile Container -->
         <div class="col main-cont d-lg-none">
           <div
-            class="row bg-light border-bottom border-black h-50 p-2"
-          >
-          
-            <img src="images/auctions/{{ $auction->auctionCropImage }}" alt="" class="mb-2 object-fit-cover h-100 w-100" id="bid-image" /> 
+            class="row bg-light d-flex align-items-center justify-content-center border-bottom border-black h-50 p-2"
+          >         
+            <p class="demand-text text-center text-success">{{$auction->crop_name}}</p> 
           
           </div>
           <div class="row bg-light row-cols-2 p-2">
@@ -295,7 +294,7 @@
               </div>
             </div>
             @elseif(Auth::user()->type == "bidder")
-              <p class="title text-success text-center">Consumer cannot place bid on Demand auction</p>
+              <p class="title text-success text-center">Consumers cannot place bid on Demand auction</p>
             @else
               <div
                 class="border border-black w-75 d-flex justify-content-center align-items-center p-2 gap-2" id="bid-div"
@@ -363,13 +362,9 @@
                   
                 </h1>
               </div>
-              <div class="web-img-cont bg-danger-subtle overflow-hidden mb-2">
+              <div class="web-img-cont d-flex align-items-center justify-content-center overflow-hidden mb-2">
               <!-- @foreach($auctionData as $auction)  -->
-                <img 
-                  src="images/auctions/{{ $auction->auctionCropImage }}" 
-                  alt="{{ $auction->auctionCropImage }}" 
-                  class="w-100 h-100 object-fit-cover" 
-                  id="web-img" /> 
+                <p class="demand-text text-success text-center">{{$auction->crop_name }}</p>
               <!-- @endforeach -->
               </div>
               <div
@@ -920,6 +915,8 @@
   }, 1000);
   // check kung tama time
   console.log(rawDate);
+  let aucData = "{{$auction}}"
+  console.log(aucData);
 </script>
     <!-- Google Translate Script -->
     <script type="text/javascript">

@@ -136,7 +136,9 @@ button.active {
 }
 .card {
     width: 25rem !important;
-    height: auto !important;
+    /* height: auto; */
+    max-height: 530px;
+    overflow-y: scroll;
 }
 .highlight-text {
     color: #198754;

@@ -92,7 +92,7 @@
         </div>
     </div>
     <div class="container-fluid d-flex justify-content-between">
-      
+      <span class="d-none d-sm-block"></span>
       @if(Auth::user()->type == "bidder")
       <a
         href="{{ url('create_demAuction')}}"
@@ -114,26 +114,30 @@
 
       @foreach($auctionData as $auction)
           <div class="card" style="width: 18rem">
-                <img src="images/auctions/{{$auction->auctionCropImage}}" alt="{{$auction->auctionCropImage}}" class="card-img-top object-fit-cover" />
+                <p class="title text-center my-auto">{{$auction->crop_name}}</p>
+                <hr>
                   <div class="card-body">
                         
-                          <div class="card-text">
-                            <!-- <p class="fs-2">Price: {{$auction->auction_id}}</p> -->
-                            <p class="fs-2">Crop name: <b>{{$auction->crop_name}}</b></p>
-                            <p class="fs-2">Volume: <b>{{$auction->crop_volume}}kg</b></p>
-                            <p class="fs-2">Base Bid Price: <b>₱{{$auction->starting_price}}/kg</b></p>
-                            <p class="fs-2">Pick-up Date: <b>{{$auction->pick_up_date}}</b></p>
-                            <p class="fs-2">Latest Bid Price: 
-                              <p class="fs-2 highlight-text">
-                                <b>
-                                  ₱{{$auction->latest_bid_price}}/kg
-                                </b>
-                              </p>
-                            </p>
+                          <div class="d-flex flex-column justify-content-between h-100">
+                            <div>
+                              <div class="card-text">
+                                <!-- <p class="fs-2">Price: {{$auction->auction_id}}</p> -->
+                                <p class="fs-2">Volume: <b>{{$auction->crop_volume}}kg</b></p>
+                                <p class="fs-2">Base Bid Price: <b>₱{{$auction->starting_price}}/kg</b></p>
+                                <p class="fs-2">Pick-up Date: <b>{{$auction->pick_up_date}}</b></p>
+                                <p class="fs-2">Latest Bid Price:
+                                  <p class="fs-2 highlight-text">
+                                    <b>
+                                      ₱{{$auction->latest_bid_price}}/kg
+                                    </b>
+                                  </p>
+                                </p>
+                              </div>
+                              <p class="fs-2">Farmer name: <br><h3 class="card-title md-title">{{$auction->creator_id}}</h3></p>
+                            </div>
+                                                    <a href="{{ url('selectAuction') }}?auction_id={{$auction->auction_id}}" class="btn btn-success fs-1 w-50">Bid</a>
+                                              </div>
                           </div>
-                          <p class="fs-2">Farmer name: <br><h3 class="card-title md-title">{{$auction->creator_id}}</h3></p>
-                        <a href="{{ url('selectAuction') }}?auction_id={{$auction->auction_id}}" class="btn btn-success fs-1 w-50">Bid</a>
-                  </div>
           </div>
         @endforeach
   
