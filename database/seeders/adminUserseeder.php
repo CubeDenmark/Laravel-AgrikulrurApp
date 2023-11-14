@@ -21,7 +21,7 @@ class adminUserseeder extends Seeder
             'password' => bcrypt('pass1234'),
             'phone' => '09121233333',
             'address' => 'Capas, Tarlac',
-            'type' => 1,
+            'type' => 2,
             'status' => '1', 
             'val_img' => 'valTeddy Pascual.jpg',
             'profile_img' => 'userProfileTeddy Pascual.jpg',
