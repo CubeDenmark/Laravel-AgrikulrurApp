@@ -89,7 +89,7 @@ class demandAuctionsController extends Controller
             'demand_bids.on_time',
             'users.name as creator_name',
             'users.profile_img',
-            'demand_bids.crop_name',
+            'demand_auctions.crop_name',
             'demand_bids.bid_amount',
             DB::raw('COALESCE(MAX(demand_bids.bid_amount), demand_auctions.starting_price) as latest_bid_price')
         )
@@ -108,7 +108,7 @@ class demandAuctionsController extends Controller
                         'demand_bids.on_time',
                         'users.name', 
                         'users.profile_img',
-                        'demand_bids.crop_name', 
+                        'demand_auctions.crop_name', 
                         'demand_bids.bid_amount',
                         'demand_auctions.end_time',
                     )
