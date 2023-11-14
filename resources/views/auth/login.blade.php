@@ -53,6 +53,11 @@
                     <strong>{{ $message }}</strong>
                 </span>
               @enderror
+              @if(session('error'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ session('error') }}</strong>
+                </span>
+              @endif
               <label for="email-inp">Email</label>
             </div>
             <div class="form-floating">
