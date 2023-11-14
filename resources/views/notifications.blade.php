@@ -374,6 +374,7 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
           name.innerHTML = `
                 <tr>
                   <td>
+                  @if(!empty(Auth::user()->id == $notification->data['creator_id']))
                   @if(Auth::user()->id == $notification->data['creator_id'] )
                             
                             <a
