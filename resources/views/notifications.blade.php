@@ -434,8 +434,7 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
                       </div>
                     </a>
                   </td>
-                </tr>
-                `;
+                </tr>`;
            
         row.appendChild(name);
 
