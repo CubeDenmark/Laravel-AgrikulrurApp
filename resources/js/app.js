@@ -40,7 +40,7 @@ $(document).ready(function() {
         });
     });
 */
-const channel = Echo.join('pressence.chat.1');
+/*const channel = Echo.join('pressence.chat.1');
 
 channel.here( (users) => {
     var userOnline = [users];
@@ -66,7 +66,7 @@ channel.here( (users) => {
     Li.textContent = username + ' : ' + message;
 
     ListMessage.append(Li);
-})
+})*/
 
 
 

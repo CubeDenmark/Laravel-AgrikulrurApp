@@ -164,7 +164,7 @@
                                         </span>
                                     @enderror
                                     <div class="invalid-feedback">Invalid Phone Number</div>
-                                    <label for="phone-number">Phone Number</label>
+                                    <label for="phone-number">Phone Number (registered to GCASH)</label>
                                 </div>
                             </div>
                         </div>
@@ -180,6 +180,11 @@
                                     name="address"
                                     value="{{ old('address') }}"
                                     />
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                     <label for="address">Address</label>
                                 </div>
                             </div>
@@ -194,7 +199,8 @@
                                     id="farmer-type"
                                     onchange="radioChange('farmer')"             
                                     name="user_type"
-                                    value="2"
+                                    value="0"
+                                    required
 
                                     />
                                     <label class="form-check-label" for="farmer-type">
@@ -210,7 +216,8 @@
                                     name="user_type"
                                     id="consumer-type"
                                     onchange="radioChange('consumer')"
-                                    value="3"
+                                    value="1"
+                                    required
 
                                     />
                                     <label class="form-check-label" for="consumer-type">
@@ -234,6 +241,7 @@
                                 
                                 name="valImage"
                                 value="{{ old('valImage') }}"
+                                required
                           
                             />
                             </div>
@@ -254,6 +262,7 @@
                                 
                                 name="userProfile"
                                 value="{{ old('userProfile') }}"
+                                required
                                 
                             />
                             </div>
@@ -405,6 +414,14 @@
         <!--Form Container-->
     </div>
     <script src="../js/signUp.js"></script>
+    <!-- Google Translate Script -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- Google Translate Script -->
 </main>
 </body>
 </html>

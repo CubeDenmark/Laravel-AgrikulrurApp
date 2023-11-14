@@ -90,7 +90,8 @@ p {
 
 /* Offered Produce Auction */
 .offered-produce {
-    height: auto;
+    min-height: 100vh;
+    height: 100%;
     background-image: linear-gradient(140deg, #6c9c82, #215136);
 }
 .new-text-btn {
@@ -135,7 +136,9 @@ button.active {
 }
 .card {
     width: 25rem !important;
-    height: auto !important;
+    /* height: auto; */
+    max-height: 530px;
+    overflow-y: scroll;
 }
 .highlight-text {
     color: #198754;

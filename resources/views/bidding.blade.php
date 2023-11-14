@@ -38,6 +38,47 @@
     <!--Font Links-->
    
     <main class="container-fluid">
+      <!-- Translate Button -->
+      <button id="translate-btn" class="btn btn-success rounded-circle position-absolute fs-1 m-2 opacity-50" data-bs-toggle="modal" data-bs-target="#translateModal"><i class="fa-solid fa-language" ></i></button>
+<div class="modal fade" id="translateModal" tabindex="-1" aria-labelledby="translateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">Translate Page?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div id="google_translate_element"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary fs-2" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+      <!-- Translate Button -->
+      {{-- Help Button --}}
+      <button class="btn btn-success help-btn" data-bs-toggle="modal" data-bs-target="#biddingModal"><i class="fa-solid fa-circle-info help-txt"></i></button>
+      {{-- Help Button --}}
+
+      {{-- Help  Modal --}}
+      <div class="modal fade" id="biddingModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title md-title text-success" id="biddingModalLabel">Bidding Page Guide</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/GkGxeuew2ac?si=JaPuwV-StTRh0mOZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary fs-2" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+{{-- Help  Modal --}}
       <div class="row main-row">
         <!-- Mobile Container -->
         <div class="col main-cont d-lg-none">
@@ -118,7 +159,7 @@
                           />
                         </td>
                         <td>{{ $bid->name }}</td>
-                        <td>₱{{ $bid->bid_amount }}/kg</td>
+                        <td>₱{{ $bid->bid_amount }} /kg</td>
                         <td>{{ $bid->on_time }}</td>
                     </tr>
                     @endforeach
@@ -138,9 +179,25 @@
 
             @if($auction->status == 'closed')
               <div class="alert alert-success w-100 h-100 text-center fs-3">This auction is completed!</div>
-            @elseif(Auth::user()->user_type == 1)
+            @elseif(Auth::user()->type == "admin")
               <div class="alert alert-success w-100 h-100 text-center fs-3">Have a great day Admin!</div>
-            @elseif(Auth::user()->id == $farmer->id)
+           @elseif(Auth::user()->id == $farmer->id )  <!--  $farmer->id -->
+
+                <!-- For update bid price -->
+              @if (session('updated'))
+                <div class="alert alert-success alert-dismissible fade show float-end addAlert" role="alert">
+                  <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('updated') }}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+              
+                @if (session('failedUpdate'))
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p class="md-title"><i class="fa-solid fa-circle-exclamation"></i> {{ session('failedUpdate') }}</p>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                @endif
+                <!-- For update bid price -->
               <div
               class="border border-black w-75 d-flex justify-content-center align-items-center p-2 gap-2"
             >
@@ -168,6 +225,8 @@
                         <i class="fa-solid fa-pen-to-square"></i>
                         Update Base Bid Price
                       </h1>
+
+                      
                       <button
                         type="button"
                         class="btn-close"
@@ -176,31 +235,42 @@
                       ></button>
                     </div>
                     <div class="modal-body">
-                      <form action="" id="updForm">
-                        <input
-                          type="email"
-                          class="form-control mb-3 h-full fs-3"
-                          id="email-inp"
-                          value="20"
-                          autocomplete="off"
-                        />
+
+
+                    <!-- Modal Form Mobile -->
+                    
+                      <form action="{{ route('update_base') }}" id="updForm" method="POST">
+                          @csrf
+                            <input
+                              type="number"
+                              class="form-control mb-3 h-full fs-3"
+                              id="email-inp"
+                              value="{{ $auction->starting_price }}"
+                              autocomplete="off"
+                              name="new_base"
+                            />
+                      
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary fs-3"
+                          data-bs-dismiss="modal"
+                       >
+                          Close
+                        </button>
+                        <input type="hidden" 
+                                  name="auction_id" 
+                                  value="{{ $auction->auction_id }}">
+                        <button
+                          type="submit"
+                          class="btn btn-success fs-3"
+                          id="updateBbpBtn"
+                       >
+                          Save changes
+                        </button>
                       </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary fs-3"
-                        data-bs-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-success fs-3"
-                        id="updateBbpBtn"
-                      >
-                        Save changes
-                      </button>
+
                     </div>
                   </div>
                 </div>
@@ -261,6 +331,8 @@
                 </div>
               </div>
             </div>
+            @elseif(Auth::user()->type == "farmer")
+              <p class="title text-success text-center">Farmer cannot place bid on Supply auction</p>
             @else
               <div
                 class="border border-black w-75 d-flex justify-content-center align-items-center p-2 gap-2" id="bid-div"
@@ -370,7 +442,7 @@
 
               @foreach($auctions as $auction)
                   <!-- <p class="fs-1 fw-bold mt-3">{{ $auction->created_at }}</p> -->
-                  <p class="md-title">Bidding will end at: <span id="biddingTime2"></span></p>
+                  <p class="md-title">Bidding will end in: <span id="biddingTime2"></span></p>
                 @endforeach
               @foreach($auctions as $auction)
               <p class="md-title">Volume: {{ $auction->crop_volume}}kg</p>
@@ -425,9 +497,9 @@
 
                         @if($auction->status == 'closed')
                           <div class="alert alert-success w-100 h-100 text-center fs-3">This auction is completed!</div>
-                          @elseif(Auth::user()->user_type == 1)
+                          @elseif(Auth::user()->type == "admin")
                           <p class="title text-success text-center">Have a good day Admin!</p>
-                        @elseif(Auth::user()->id == $farmer->id)
+                         @elseif(Auth::user()->id == $farmer->id) <!--$farmer->id -->
 
                         <!-- For update bid price -->
                         @if (session('updated'))
@@ -568,6 +640,8 @@
                             </div>
                           </div>
                         </div>
+                        @elseif(Auth::user()->type == "farmer")
+                          <p class="title text-success text-center">Farmer cannot place bid on Supply auction</p>
                         @else
                             <input
                             type="number"
@@ -611,7 +685,7 @@
                     // AJAX request to send the message to the server
                     $.ajax({
                         method: 'POST',
-                        url: '/send-message', // Replace with your route
+                        url: '/send_bidSupply', // Replace with your route
                         data: 
                         { 
                           _token: '{{ csrf_token() }}',
@@ -668,7 +742,7 @@
                     // AJAX request to send the message to the server
                     $.ajax({
                         method: 'POST',
-                        url: '/send-message', // Replace with your route
+                        url: '/send_bidSupply', // Replace with your route
                         data: 
                         { 
                           _token: '{{ csrf_token() }}',
@@ -752,7 +826,7 @@
         row.appendChild(name);
         
         let price = document.createElement("td");
-        price.innerText = `₱ ${inputPrice2}`;
+        price.innerText = `₱ ${inputPrice2} /kg`;
         row.appendChild(price);
 
         //const d = new Date();
@@ -880,6 +954,14 @@
   // check kung tama time
   console.log(rawDate);
 </script>
+<!-- Google Translate Script -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- Google Translate Script -->
 
       <!-- <script src="../js/biddings.js"></script> -->
 </main>

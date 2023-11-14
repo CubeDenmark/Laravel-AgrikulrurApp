@@ -43,9 +43,16 @@
       rel="stylesheet"
     />
 
+    @if(!empty($crops))
+            @foreach($crops as $crop)
+              
+                 
+                
+            @endforeach
+          @endif
     <main class="container-fluid">
       <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center m-2">
-        <p class="md-title">Last Updated: January 2, 2023</p>
+        <p class="md-title">Last Updated: {{$crop->updated_at->format('F j, Y')}}</p>
 
         <div class="d-flex gap-3">
           <a href="https://www.da.gov.ph/price-monitoring/" target="_blank" class="btn btn-outline-success upd-btn">D.A. Price Watch</a> <!-- gdltry.html from Agri Beta -->

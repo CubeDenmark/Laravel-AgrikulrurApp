@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\demandBids_send;
 use App\Models\auctions;
 use App\Models\crops;
+use App\Models\demandAuctions;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\QueryException;
@@ -13,13 +15,112 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\bids;
+use App\Models\demand_bids;
 use App\Services\ValidationService; // Import the ValidationService
 
 
 class MessageController extends Controller
 {
 
-public function sendMessage(Request $request)
+public function send_bidDemand(Request $request)
+    {
+        $requestData = $request->all();
+
+        $website_info = demand_bids::where([
+            ['bid_amount', '=' ,$request->input('message')],
+            ['auction_id', '=', $request->input('channel')]
+        ])->first();
+        $bids = demand_bids::where('auction_id', $request->input('channel'))->get();   
+        $bid_max = $bids->max('bid_amount');
+        $base_price = demandAuctions::where('auction_id', $request->input('channel'))->first('starting_price');
+        $crop_name = demandAuctions::where('auction_id', $request->input('channel'))->first('crop_name');
+        if ($website_info != null || $request->input('message') >= $bid_max || $request->input('message') >= $base_price->starting_price) 
+        {
+            return response()->json(['failed']);
+        } else {
+            
+            $message = $request->input('message');
+            $channel = $request->input('channel');
+            $bidder = $request->input('bidder');
+            $user = Auth::user();
+            $profile_img = "/images/profiles/".Auth::user()->profile_img;
+            $now = Carbon::now();
+            $on_time = Carbon::parse($now)->format('g:i A');
+            //{{ \Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y H:i:s')}}
+            //= 2023-11-04 20:22:59
+            //{{ \Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y g:i:s A')}}
+            //=04/11/2023 8:25:26 PM
+            //Carbon::parse($now)->format('g:i:s A')
+            //= 8:33:47 PM
+
+
+    
+            // Process the message, perform any validations, database operations, etc.
+    
+            // Broadcast the event
+            //NewMessageEvent::dispatch($messages);
+                $bids = demand_bids::create(
+                [
+                'bid_amount' => $message,
+                'bidder_id' => $user['id'],
+                'auction_id' => $channel,
+                'crop_name' => $crop_name->crop_name,
+                'on_time' => $on_time,
+                ],
+            );
+            //return ['status' => 'Message Sent!'];
+            if($bids)
+            {
+		        event(new demandBids_send($message, $channel, $user['name'], $profile_img, $on_time));
+              
+		        return response()->json([$message => true]);
+	
+            }
+            else
+            {
+                return response()->json(['Bid Not Sent' => true]);
+            }
+    
+
+            
+        }
+
+
+
+        /*
+        $message = $request->input('message');
+        $channel = $request->input('channel');
+        $bidder = $request->input('bidder');
+        $user = Auth::user();
+
+        // Process the message, perform any validations, database operations, etc.
+
+        // Broadcast the event
+        //NewMessageEvent::dispatch($messages);
+            $bids = bids::create(
+            [
+            'bid_amount' => $message,
+            'user_id' => $user['id'],
+            'auction_id' => $channel,
+            'crop_type' => "Okra",
+            ],
+        );
+        //return ['status' => 'Message Sent!'];
+        if($bids)
+        {
+            event(new NewMessageEvent($message, $channel, $bidder));
+            return response()->json([$message => true]);
+        }
+        else
+        {
+            return response()->json(['Message Not Sent' => true]);
+        }*/
+    }
+
+
+
+
+public function send_bidSupply(Request $request)
     {
         $requestData = $request->all();
 
@@ -116,6 +217,23 @@ public function sendMessage(Request $request)
             return response()->json(['Message Not Sent' => true]);
         }*/
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public function sendBid(Request $request)
     {
         $on_auction = $request->input('auction_id');
