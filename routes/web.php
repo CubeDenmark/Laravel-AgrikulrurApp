@@ -78,6 +78,7 @@ Route::middleware(['auth', 'user-access:farmer,bidder'])->group(function () {
     Route::get('/guidelines' ,[AuctionsControll::class , 'guidelines']);
     Route::get('/notifications' ,[AuctionsControll::class , 'notifications']);
     Route::get('/auctions' ,[AuctionsControll::class , 'auctions']);
+    Route::post('/update_profile_image' ,[ImageController::class ,'update_profile_image'])->name('update_profile_image');
    
     // Consumer
     Route::get('/demandAuctions' ,[demandAuctionsController::class , 'demandAuctions']);
@@ -99,7 +100,7 @@ Route::middleware(['auth', 'user-access:farmer'])->group(function () {
     Route::post('/newAuction' ,[AuctionsControll::class , 'newAuction'])->name('newAuction');
     Route::get('/confirm_payment' ,[AuctionsControll::class , 'confirm_payment']);
     Route::get('/checkout_farmer' ,[AuctionsControll::class , 'checkout_farmer']);     
-    Route::post('/update_profile_image' ,[ImageController::class ,'update_profile_image'])->name('update_profile_image');
+    
     Route::post('/update_base', [AuctionsControll::class ,'update_base'])->name('update_base');
     Route::get('/manual_close' ,[AuctionsControll::class , 'manual_close']);
 
