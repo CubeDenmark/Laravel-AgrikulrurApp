@@ -94,9 +94,9 @@
             alt=""
             id="profile-pic"
           />
-          @if(@Auth::user()->user_type == 0)
+          @if(Auth::user()->type == "farmer")
             <p class="md-title">Farmer</p>
-          @elseif
+          @elseif(Auth::user()->type == "bidder")
             <p class="md-title">Consumer</p>
           @else
           @endif

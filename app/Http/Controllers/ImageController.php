@@ -26,7 +26,7 @@ class ImageController extends Controller
         if($request->hasFile("update_image"))
         {
             $request->validate([
-                'update_image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+                'update_image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:10240',
             ]);
 
             $userid = Auth::user()->id;
@@ -41,7 +41,7 @@ class ImageController extends Controller
         }
         else
         {
-            return redirect()->back()->with('failed', 'Please provide an Image');;
+            return redirect()->back()->with('failed', 'Please provide an Image');
         }
         
     }
