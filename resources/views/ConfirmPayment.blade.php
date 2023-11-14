@@ -171,4 +171,11 @@
       </div>
     </main>
     <script src="../js/copy.js"></script>
+    <script>
+    // Disable the back button
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+    </script>
 @endsection

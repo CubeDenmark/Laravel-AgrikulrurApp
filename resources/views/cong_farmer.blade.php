@@ -58,4 +58,11 @@
         
       </div>
     </main>
+    <script>
+    // Disable the back button
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+    </script>
 @endsection

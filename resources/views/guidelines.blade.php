@@ -176,7 +176,15 @@
       </div>
     </div>
 {{-- Help  Modal --}}
-      <p class="md-title">Last Updated: January 2, 2023</p>
+
+        @if(!empty($cropinfo))
+            @foreach($cropinfo as $info)
+              
+            
+                
+            @endforeach
+          @endif
+      <p class="md-title">Last Updated: {{$info->updated_at->format('F j, Y')}}</p>
       <table class="table text-center text-md-start" id="myTable">
         <thead class="bg-success">
           <tr>

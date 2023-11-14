@@ -134,6 +134,20 @@
             @elseif($notification->data['phase'] == 2)
                     <tr>
                         <td>
+                        @if($notification->data['auction_id'])
+                                @if(session('finishedTrans'.$notification->data['auction_id']))
+                                  <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
+                                    <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('finishedTrans'.$notification->data['auction_id']) }}</p>
+                                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div> 
+                                @endif
+                            @endif
+                            @if(session('unAuthorized'))
+                              <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
+                                <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('unAuthorized') }}</p>
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div> 
+                            @endif
                             <a
                               href="{{ url('confirm_payment')}}?auction_id={{ $notification->data['auction_id'] }}"
                               class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
@@ -157,6 +171,31 @@
                           </a>
                         </td>
                       </tr>
+            @elseif($notification->data['phase'] == 3)
+                    <tr>
+                      <td>
+                          <a
+                            href="{{ url('finished')}}?auction_id={{ $notification->data['auction_id'] }}"
+                            class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                          >
+                          <img
+                            src="../assets/present.svg"
+                            width="150px"
+                            height="150px"
+                            id="notif-img"
+                            class="rounded-circle bg-white object-fit-cover"
+                          />
+                          <div>
+                            <p class="md-title text-success">
+                              Farmer just confirmed your payment! Claim your Item Now!
+                            </p>
+                            <p class="sm-title text-secondary">
+                              Auction ID: {{ $notification->data['auction_id'] }}
+                            </p>
+                          </div>
+                        </a>
+                      </td>
+                    </tr>
             @endif
 
 
@@ -170,6 +209,9 @@
               </td>
             </tr>
              -->
+             @if(!$notification->read_at)
+                {{ $notification->markAsRead() }}
+              @endif
           @empty
             <tr>
               <td>
@@ -335,6 +377,13 @@
         $("tbody").prepend(row);
     });
 </script>
+<script>
+    // Disable the back button
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+    </script>
 </main>
 @endsection
 
