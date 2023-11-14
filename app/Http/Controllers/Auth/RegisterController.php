@@ -67,8 +67,8 @@ class RegisterController extends Controller
             'user_type' => ['required', 'string', 'max:2'],
             'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-zA-Z])(?=.*\d).+$/'],
 
-            'valImage' => ['required','image','mimes:jpeg,jpg,png,gif,svg','max:2048'],
-            'userProfile' => ['required','image','mimes:jpeg,jpg,png,gif,svg','max:2048'],
+            'valImage' => ['required','image','mimes:jpeg,jpg,png,gif,svg','max:10240'],
+            'userProfile' => ['required','image','mimes:jpeg,jpg,png,gif,svg','max:10240'],
         ]);
         
     }
