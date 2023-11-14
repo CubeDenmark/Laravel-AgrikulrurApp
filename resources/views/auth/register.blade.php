@@ -180,6 +180,11 @@
                                     name="address"
                                     value="{{ old('address') }}"
                                     />
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                     <label for="address">Address</label>
                                 </div>
                             </div>
@@ -195,6 +200,7 @@
                                     onchange="radioChange('farmer')"             
                                     name="user_type"
                                     value="0"
+                                    required
 
                                     />
                                     <label class="form-check-label" for="farmer-type">
@@ -211,6 +217,7 @@
                                     id="consumer-type"
                                     onchange="radioChange('consumer')"
                                     value="1"
+                                    required
 
                                     />
                                     <label class="form-check-label" for="consumer-type">
@@ -234,6 +241,7 @@
                                 
                                 name="valImage"
                                 value="{{ old('valImage') }}"
+                                required
                           
                             />
                             </div>
@@ -254,6 +262,7 @@
                                 
                                 name="userProfile"
                                 value="{{ old('userProfile') }}"
+                                required
                                 
                             />
                             </div>

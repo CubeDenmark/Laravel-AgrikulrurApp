@@ -64,8 +64,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:11'],
-            //'user_type' => ['required', 'string', 'max:2'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'user_type' => ['required', 'string', 'max:2'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-zA-Z])(?=.*\d).+$/'],
 
             'valImage' => ['required','image','mimes:jpeg,jpg,png,gif,svg','max:2048'],
             'userProfile' => ['required','image','mimes:jpeg,jpg,png,gif,svg','max:2048'],
