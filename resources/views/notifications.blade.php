@@ -142,9 +142,9 @@
                                   </div> 
                                 @endif
                             @endif
-                            @if(session('unAuthorized'))
+                            @if(session('unAuthorized'.$notification->data['auction_id']))
                               <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
-                                <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('unAuthorized') }}</p>
+                                <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('unAuthorized'.$notification->data['auction_id']) }}</p>
                                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                               </div> 
                             @endif
@@ -331,6 +331,104 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script type="module">//type="module" is important! do not remove it.
+
+window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
+    .notification((notification) => {
+        console.log('Notification received:', notification.data['auction_id']);
+        // Handle the notification data as needed
+
+        // Update UI with received message
+        let auction = notification.data['auction_id'];
+        //let crop = notification.crop;
+        let creator = notification.data['creator_id'];
+        //let user_type = notification.user_type;
+        let bidder_id = notification.data['bidder_id'];
+
+        let phase = notification.data['phase'];
+
+        let row = document.createElement("tr");
+
+        if(phase == 1)
+        {
+          let name = document.createElement("td");
+        
+          name.innerHTML = `
+                <tr>
+                  <td>
+                  @if(Auth::user()->id == $notification->data['creator_id'] )
+                            
+                            <a
+                              href="{{ url('send-bid')}}?auction_id=${auction}"
+                              class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                            >
+                          @elseif(Auth::user()->id == $notification->data['bidder_id'])
+                              @if($notification->data['auction_id'])
+                                  @if(session('finishedTrans'.$notification->data['auction_id']))
+                                    <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
+                                      <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('finishedTrans'.$notification->data['auction_id']) }}</p>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div> 
+                                  @endif
+                              @endif
+                              @if(session('unAuthorized'))
+                                <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
+                                  <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('unAuthorized') }}</p>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div> 
+                              @endif
+                            <a 
+                              href="{{ url('congratulation')}}?auction_id=${auction}"
+                              class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                              >
+                          @else
+                            <a
+                              href="{{ url('send-bid')}}?auction_id=${auction}"
+                              class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                            >
+                          @endif
+                     
+                      <img
+                        src="../assets/winner.svg"
+                        width="150px"
+                        height="150px"
+                        class="rounded-circle bg-white object-fit-cover"
+                      />
+                      <div>
+                        <p class="md-title text-success">
+                              @if(Auth::user()->id == $notification->data['creator_id'] )
+                                <p class="md-title text-success">
+                                  Your auction listing has ended
+                                </p>
+                              @elseif(Auth::user()->id == $notification->data['bidder_id'])
+                                <p class="md-title text-success">
+                                  Congratulations! You won an auction!
+                                </p>
+                              @else
+                                <p class="md-title text-danger">
+                                  Thank you for participating on the Auction!
+                                </p>
+                              @endif
+                        </p>
+                        <p class="sm-title text-secondary">
+                          Auction ID: ${auction}
+                        </p>
+                      </div>
+                    </a>
+                  </td>
+                </tr>`;
+           
+        row.appendChild(name);
+
+        $("tbody").prepend(row);
+        }
+
+       
+       
+    });
+        
+
+
+/*
     // Add your WebSocket event listener here
     window.Echo.channel('notification{{Auth::user()->id}}').listen('.notifier.message', (data) => {
         // Update UI with received message
@@ -375,7 +473,8 @@
         row.appendChild(name);
 
         $("tbody").prepend(row);
-    });
+    });*/
+
 </script>
 <script>
     // Disable the back button

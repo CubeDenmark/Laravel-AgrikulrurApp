@@ -267,11 +267,16 @@ class AuctionsControll extends Controller
         if($finishAuction)
         {
             $auctions = auctions::where('auction_id', $finishAuction->auction_id)->get();
+            
             foreach($auctions as $auction)
             {
                 $creator = $auction->user_id;
                 $cropname = $auction->crop_id;
-                $users = User::where('id', $creator)->get();
+                $winner = bids::where('auction_id', $finishAuction->auction_id)
+                //->where('auction_id', $finishAuction->auction_id)
+                ->get('user_id')->max();
+                //dd($winner->user_id);
+                $users = User::where('id', $winner->user_id)->get();
                 $crops = crops::where('crop_id', $cropname)->get();
                 $highestbid = bids::where('auction_id', $auction->auction_id)->get('bid_amount')->max();
                 $volume =  $auction->crop_volume;
@@ -284,7 +289,8 @@ class AuctionsControll extends Controller
         }
         else
         {
-            return back()->with('unAuthorized','Transaction completed');
+            return //back()->with('unAuthorized1','Transaction completed');
+            back()->with('unAuthorized'.$auction_id, 'Auction '.$auction_id.' transaction is completed');
         }
            
 
@@ -422,11 +428,40 @@ class AuctionsControll extends Controller
     }
     public function finished(Request $request)
     {
-        $auction = $request->input('auction_id');
-        $farmer = pending_transactions::where('auction_id', $auction)->first('creator_id');
-        $users = User::where('id', $farmer->creator_id)->get();
+        $auction_id = $request->input('auction_id');
+
+        $winner = bids::where('auction_id', $auction_id)
+                ->get('user_id')->max();
+
+        if($winner)
+        {
+            $winnerBidder = $winner->user_id;
+        }
+        else
+        {
+            return back()->with('error','Not your Auction');
+        }
+
+        if($winner->user_id == Auth::user()->id)
+        {
+            $users = User::where('id', $winner->user_id)->get();
         
-        return view('finish', compact('users'));
+            return view('finish', compact('users'));
+        }
+        elseif(!$winner->user_id)
+        {
+            return back()->with('unAuthorized','Not your Auction');
+        }
+
+
+
+        //$farmer = pending_transactions::where('auction_id', $auction_id)->first('creator_id');
+
+        //$users = User::where('id', $farmer->creator_id)->get();
+        
+        //return view('finish', compact('users'));
+
+        
     }
     public function update_info(Request $request)
     {

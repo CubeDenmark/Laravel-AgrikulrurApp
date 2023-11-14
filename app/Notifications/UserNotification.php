@@ -3,11 +3,13 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserNotification extends Notification
+class UserNotification extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
@@ -34,7 +36,7 @@ class UserNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -53,7 +55,32 @@ class UserNotification extends Notification
      *
      * @return array<string, mixed>
      */
+
+     /*
     public function toArray(object $notifiable): array
+    {
+        return [
+            'auction_id' => $this->auction_id,
+            'creator_id' => $this->creator_id,
+            'bidder_id' => $this->bidder_id,
+            'phase' => $this->phase,
+        ];
+    }
+    */
+    public function toBroadcast($notifiable): array
+{
+    return [
+        'data' => [
+            'auction_id' => $this->auction_id,
+            'creator_id' => $this->creator_id,
+            'bidder_id' => $this->bidder_id,
+            'phase' => $this->phase,
+        ],
+        'message' => "$this->auction_id (Message for $notifiable->name)",
+    ];
+}
+
+    public function toDatabase($notifiable)
     {
         return [
             'auction_id' => $this->auction_id,

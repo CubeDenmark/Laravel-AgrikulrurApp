@@ -45,7 +45,7 @@
         >
           <span class="navbar-toggler-icon fs-1"></span>
           
-          <!-- Notification Red Dot for Mobile -->
+          <!-- Notification Red Dot for Mobile -
           @forelse (Auth::user()->notifications as $notification)
           
           <div class="notif-dot "></div>
@@ -54,7 +54,7 @@
               @endif
           @empty
 
-          @endforelse
+          @endforelse-->
           
           <!-- Notification Red Dot for Mobile -->
         </button>
@@ -76,16 +76,18 @@
                 href="{{ url('notifications') }}?id={{ Auth::user()->id }}"
                 id="nav-link"
                 >
-                <!-- Notification Red Dot for Mobile -->
+                <!-- Notification Red Dot for Mobile 
                 @forelse (Auth::user()->notifications as $notification)
 
-                  <i class="fa-solid fa-circle notif-dot-fa"></i>
+                 
                   @if(!$notification->read_at)
+                  <i class="fa-solid fa-circle notif-dot-fa"></i>
                     {{ $notification->markAsRead() }}
+                    
                   @endif
                 @empty
 
-                @endforelse
+                @endforelse-->
                
                 <!-- Notification Red Dot for Mobile -->
                 <i class="fa-solid fa-bell"></i>Notifications</a
