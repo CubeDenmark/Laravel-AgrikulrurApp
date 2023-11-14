@@ -374,7 +374,7 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
           name.innerHTML = `
                 <tr>
                   <td>
-                  @if(!empty(Auth::user()->id == $notification->data['creator_id']))
+                  @if(!empty(Auth::user()->notification))
                   @if(Auth::user()->id == $notification->data['creator_id'] )
                             
                             <a
@@ -435,7 +435,8 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
                       </div>
                     </a>
                   </td>
-                </tr>`;
+                </tr>
+                @endif`;
            
         row.appendChild(name);
 
