@@ -94,7 +94,13 @@
             alt=""
             id="profile-pic"
           />
-          <p class="md-title">{{ Auth::user()->user_type == 0 ? "Farmer": "Consumer"}}</p>
+          @if(@Auth::user()->user_type == 0)
+            <p class="md-title">Farmer</p>
+          @elseif
+            <p class="md-title">Consumer</p>
+          @else
+          @endif
+          
           <label for="change-prof" class="md-title mt-5"
             >Change Profile Picture</label
           >
