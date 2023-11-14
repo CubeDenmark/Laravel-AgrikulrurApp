@@ -194,7 +194,7 @@
                                     id="farmer-type"
                                     onchange="radioChange('farmer')"             
                                     name="user_type"
-                                    value="2"
+                                    value="0"
 
                                     />
                                     <label class="form-check-label" for="farmer-type">
@@ -210,7 +210,7 @@
                                     name="user_type"
                                     id="consumer-type"
                                     onchange="radioChange('consumer')"
-                                    value="3"
+                                    value="1"
 
                                     />
                                     <label class="form-check-label" for="consumer-type">
