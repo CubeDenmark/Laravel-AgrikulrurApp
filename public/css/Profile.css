@@ -173,6 +173,12 @@ main {
     opacity: 80%;
     color: red;
 }
+#google_translate_element * {
+    font-size: large;
+}
+#translate-btn:hover {
+    opacity: 100% !important;
+}
 @media screen and (max-width: 576px) {
     .logo-pic {
         width: 50px;

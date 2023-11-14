@@ -36,6 +36,25 @@
     <!--Font Links-->
 
     <main class="container-fluid">
+       <!-- Translate Button -->
+       <button id="translate-btn" class="btn btn-success rounded-circle position-absolute fs-1 m-2 opacity-50" data-bs-toggle="modal" data-bs-target="#translateModal"><i class="fa-solid fa-language" ></i></button>
+<div class="modal fade" id="translateModal" tabindex="-1" aria-labelledby="translateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">Translate Page?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div id="google_translate_element"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary fs-2" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+      <!-- Translate Button -->
       {{-- Help Button --}}
     <button class="btn btn-success help-btn" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fa-solid fa-circle-info help-txt"></i></button>
     {{-- Help Button --}}
@@ -214,4 +233,12 @@
       </div>
     </main>
     <script src="../js/index.js"></script>
+        <!-- Google Translate Script -->
+        <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- Google Translate Script -->
 @endsection

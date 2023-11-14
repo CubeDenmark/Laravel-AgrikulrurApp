@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agrikultur'App</title>
     <meta name="description" content="Online Agricultural Produce Auction in the Philippines">
-    <meta name="keywords" content="Agrikulturapp, agrikulturapp, Produce Auction, Online Produce Auction, Agrikultura, Philippines, Agriculture">
+    <meta name="keywords" content="Agrikulturapp, agrikulturapp, Produce Auction, Online Produce Auction">
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon"> 
     <link
@@ -99,6 +99,25 @@
       <img src="../assets/cabbage2.png" alt="" class="img-fluid" />
     </div>
     <main>
+      <!-- Translate Button -->
+    <button id="translate-btn" class="btn btn-success rounded-circle position-absolute fs-1 m-2 opacity-50" data-bs-toggle="modal" data-bs-target="#translateModal"><i class="fa-solid fa-language" ></i></button>
+<div class="modal fade" id="translateModal" tabindex="-1" aria-labelledby="translateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">Translate Page?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div id="google_translate_element"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary fs-2" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+      <!-- Translate Button -->
       <!--Hero Section-->
       <section
         class="hero-section d-flex justify-content-center flex-column align-items-center p-2"
@@ -632,5 +651,13 @@
       </div>
     </footer>
     <!--Footer-->
+    <!-- Google Translate Script -->
+      <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- Google Translate Script -->
   </body>
 </html>
