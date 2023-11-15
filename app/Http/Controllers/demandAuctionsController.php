@@ -212,12 +212,12 @@ class demandAuctionsController extends Controller
         {
             $auction_id = $openAuctions->auction_id;
             $crop_id = $openAuctions->crop_id;
-            $creator_id = $openAuctions->user_id;
-            $bidder_id =  $bid->user_id;    
+            $creator_id = $openAuctions->creator_id;
+            $bidder_id =  $bid->bidder_id;    
             $phase = 1;      
   
         }
-        
+        /*
         farmerNotif::create([
             'auction_id' => $auction_id,
             'crop_id' => $crop_id,
@@ -228,7 +228,7 @@ class demandAuctionsController extends Controller
             'auction_id' => $auction_id,
             'crop_id' => $crop_id,
             'bidder_id' => $bidder_id,
-        ]);
+        ]);*/
 
         //send notification on websocket
         event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
