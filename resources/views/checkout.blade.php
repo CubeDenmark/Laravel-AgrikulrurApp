@@ -217,6 +217,10 @@
       </div>
     </main>
     <script src="../js/copy.js"></script>
+    <script>
+      let ror = "{{$user}}";
+      console.log(ror);
+    </script>
      <!-- Google Translate Script -->
      <script type="text/javascript">
 function googleTranslateElementInit() {
