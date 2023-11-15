@@ -337,12 +337,14 @@
             </div>
             <form
               class="col d-flex flex-column align-items-center p-5 justify-content-evenly"
+              action="mailto:agrikulturapp@gmail.com" method="get" enctype="text/plain"
             >
               <div class="form-floating w-100 mb-4 mg-md-0">
                 <input
                   type="text"
                   class="form-control"
                   id="contact-name"
+                  name="subject"
                   placeholder="input name here"
                 />
                 <label for="contact-name" class="label-form">Name</label>
@@ -352,6 +354,7 @@
                   type="email"
                   class="form-control"
                   id="contact-email"
+                  name="email"
                   placeholder="input email here"
                 />
                 <label for="contact-email" class="label-form">Email</label>
@@ -362,6 +365,7 @@
                   id="contact-message"
                   cols="200"
                   rows="10"
+                  name="body"
                   placeholder="Message"
                 ></textarea>
               </div>
