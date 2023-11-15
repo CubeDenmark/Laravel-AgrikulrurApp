@@ -434,7 +434,7 @@ class AuctionsControll extends Controller
         $auction_id = $request->input('auction_id');
 
         $winner = pending_transactions::where('auction_id', $auction_id)->first('bidder_id');
-        //$farmer = pending_transactions::where('auction_id', $auction_id)->first('creator_id');
+        $farmer = pending_transactions::where('auction_id', $auction_id)->first('creator_id');
         bids::where('auction_id', $auction_id)
                 ->get('user_id')->max();
 
