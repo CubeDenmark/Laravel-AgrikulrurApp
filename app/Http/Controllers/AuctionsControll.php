@@ -272,10 +272,11 @@ class AuctionsControll extends Controller
             {
                 $creator = $auction->user_id;
                 $cropname = $auction->crop_id;
-                $winner = bids::where('auction_id', $finishAuction->auction_id)
+                //$winner = bids::where('auction_id', $finishAuction->auction_id)
                 //->where('auction_id', $finishAuction->auction_id)
-                ->get('bid_amount')->max();
+                //->get('bid_amount')->max();
                 //dd($winner->user_id);
+                $winner = pending_transactions::where('auction_id', $auction_id)->first('bidder_id');
                 $users = User::where('id', $winner->user_id)->get();
                 $crops = crops::where('crop_id', $cropname)->get();
                 $highestbid = bids::where('auction_id', $auction->auction_id)->get('bid_amount')->max();
