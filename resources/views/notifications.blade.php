@@ -367,14 +367,13 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
 
         let row = document.createElement("tr");
 
-        if(phase == 1)
-        {
+        
           let name = document.createElement("td");
         
           name.innerHTML = `
                 <tr>
                   <td>
-                  @if(!empty(Auth::user()->notification))
+                  @if(!empty($notification->data))
                   @if(Auth::user()->id == $notification->data['creator_id'] )
                             
                             <a
@@ -436,12 +435,13 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
                     </a>
                   </td>
                 </tr>
+                
                 @endif`;
            
         row.appendChild(name);
 
         $("tbody").prepend(row);
-        }
+        
 
        
        
