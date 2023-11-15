@@ -43,28 +43,39 @@ Artisan::command('fetch:auctions', function () {
         if($auction->end_time <= $now)
         {
             $openAuctions = auctions::where('auction_id', $auction->auction_id)->first();
-            auctions::where('end_time', '<=', $now)->update(['status' => 'closed']);
-
-            $thesebids = bids::where('auction_id',  $openAuctions)->get();
-
-            $bidders = bids::where('auction_id',  $openAuctions)->pluck('user_id');
-            $farmer = auctions::where('auction_id', $openAuctions)->pluck('user_id');
+            $close_auction = auctions::where('auction_id', $auction->auction_id)->update(['status' => 'closed']);
+            
+            $thesebids = bids::where('auction_id', $auction->auction_id)->get();
+            
+            $bidders = bids::where('auction_id', $auction->auction_id)->pluck('user_id');
+            $farmer = auctions::where('auction_id', $auction->auction_id)->pluck('user_id');
             
             //$toNotify = $bidders->merge($farmer)->unique();
             $toNotify = $bidders->merge($farmer)->unique()->toArray();
-
+    
             $user = User::whereIn('id', $toNotify)->get();
-            
-            foreach($thesebids as $bid)
+            /*$user =  array();
+            foreach ($toNotify as $key => $value) 
             {
-                $auction_id = $auction->auction_id;
-                $crop_id = $auction->crop_id;
-                $creator_id = $auction->user_id;
-                $bidder_id =  $bid->user_id;
-                $phase = 1;
-                
-                         
-                /*farmerNotif::create([
+                $pushUser = User::where('id', [$key => $value])->get();
+                $user[] = $pushUser;
+            }*/
+            //$show = User::all();
+            //return response()->json($users);
+            
+            // Now, $userIds contains the unique user IDs from both tables
+    
+            
+                foreach($thesebids as $bid)
+                {
+                    $auction_id = $openAuctions->auction_id;
+                    $crop_id = $openAuctions->crop_id;
+                    $creator_id = $openAuctions->user_id;
+                    $bidder_id =  $bid->user_id;    
+                    $phase = 1;      
+          
+                }
+                farmerNotif::create([
                     'auction_id' => $auction_id,
                     'crop_id' => $crop_id,
                     'creator_id' => $creator_id,
@@ -75,34 +86,13 @@ Artisan::command('fetch:auctions', function () {
                     'crop_id' => $crop_id,
                     'bidder_id' => $bidder_id,
                 ]);
-     
-                
-            /*  notifications::create([
-                    'auction_id' => $auction_id,
-                    'crop_id' => $crop_id,
-                    'creator_id' => $creator_id,
-                    'bidder_id' => $bidder_id,
-                ]); */
-               /*event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
-                event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));*/    
-               
-            }
-            farmerNotif::create([
-                'auction_id' => $auction_id,
-                'crop_id' => $crop_id,
-                'creator_id' => $creator_id,
-            ]); 
-            
-            consNotif::create([
-                'auction_id' => $auction_id,
-                'crop_id' => $crop_id,
-                'bidder_id' => $bidder_id,
-            ]);
-            event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
-            event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
-
-            Notification::send($user, new UserNotification($auction_id, $creator_id, $bidder_id, $phase));
-              
+    
+                //send notification on websocket
+                //event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
+                //event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
+    
+                //save the notifiaction on database
+                Notification::send($user, new UserNotification($auction_id, $creator_id, $bidder_id, $phase)); 
         }
 
     }
