@@ -276,10 +276,12 @@ class AuctionsControll extends Controller
                 //->where('auction_id', $finishAuction->auction_id)
                 //->get('bid_amount')->max();
                 //dd($winner->user_id);
-                $problem = pending_transactions::where('auction_id', $auction_id)->first('bidder_id');
-                $users = User::where('id', $problem->bidder_id)->get();
+                //$problem = pending_transactions::where('auction_id', $auction_id)->first('bidder_id');
+                
                 $crops = crops::where('crop_id', $cropname)->get();
                 $highestbid = bids::where('auction_id', $auction->auction_id)->get('bid_amount')->max();
+                $problem = bids::where('auction_id', $auction->auction_id)->get('bid_amount')->max();
+                $users = User::where('id', $problem->bidder_id)->get();
                 $volume =  $auction->crop_volume;
                 $highest = $highestbid->bid_amount;
                 $total = $highest * $volume;
@@ -432,8 +434,8 @@ class AuctionsControll extends Controller
         $auction_id = $request->input('auction_id');
 
         $winner = pending_transactions::where('auction_id', $auction_id)->first('bidder_id');
-        $farmer = pending_transactions::where('auction_id', $auction_id)->first('creator_id');
-        /*bids::where('auction_id', $auction_id)
+        //$farmer = pending_transactions::where('auction_id', $auction_id)->first('creator_id');
+        bids::where('auction_id', $auction_id)
                 ->get('user_id')->max();
 
         if($winner)
@@ -443,20 +445,13 @@ class AuctionsControll extends Controller
         else
         {
             return back()->with('error','Not your Auction');
-        }*/
+        }
 
         if($farmer->creator_id == Auth::user()->id)
-        {
-            $auctions = auctions::where('auction_id', $auction_id)->get();
-            foreach($auctions as $auction)
-            {
-               
-                $users = User::where('id', $creator)->get();
-    
-                return view('finish', compact('users'));
-            } 
-            
-        
+        { 
+            $users = User::where('id', $winnerBidder)->get();
+
+            return view('finish', compact('users')); 
            
         }
         elseif($farmer->creator_id != Auth::user()->id)
