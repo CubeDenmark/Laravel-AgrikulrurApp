@@ -444,13 +444,13 @@ class AuctionsControll extends Controller
             return back()->with('error','Not your Auction');
         }
 
-        if($winner->user_id == Auth::user()->id)
+        if($winner->bidder_id == Auth::user()->id)
         {
-            $users = User::where('id', $winner->user_id)->get();
+            $users = User::where('id', $winner->bidder_id)->get();
         
             return view('finish', compact('users'));
         }
-        elseif($winner->user_id != Auth::user()->id)
+        elseif($winner->bidder_id != Auth::user()->id)
         {
             return back()->with('unAuthorized','Not your Auction');
         }
