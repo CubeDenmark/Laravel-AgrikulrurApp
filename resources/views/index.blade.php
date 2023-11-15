@@ -230,7 +230,7 @@
                     Leader/Programmer
                   </figcaption>
                   <figcaption class="figure-caption text-center fs-1">
-                    <a href="" class="btn btn-outline-success fs-4 w-100"
+                    <a href="https://github.com/aecial" class="btn btn-outline-success fs-4 w-100"
                       >Learn More</a
                     >
                   </figcaption>
@@ -251,7 +251,7 @@
                     Programmer
                   </figcaption>
                   <figcaption class="figure-caption text-center fs-1">
-                    <a href="" class="btn btn-outline-success fs-4 w-100"
+                    <a href="https://github.com/CubeDenmark" class="btn btn-outline-success fs-4 w-100"
                       >Learn More</a
                     >
                   </figcaption>
@@ -272,7 +272,7 @@
                     Visual Designer
                   </figcaption>
                   <figcaption class="figure-caption text-center fs-1">
-                    <a href="" class="btn btn-outline-success fs-4 w-100"
+                    <a href="https://github.com/arvee01" class="btn btn-outline-success fs-4 w-100"
                       >Learn More</a
                     >
                   </figcaption>
@@ -293,7 +293,7 @@
                     Technical Writer
                   </figcaption>
                   <figcaption class="figure-caption text-center fs-1">
-                    <a href="" class="btn btn-outline-success fs-4 w-100"
+                    <a href="https://github.com/EmmanIP" class="btn btn-outline-success fs-4 w-100"
                       >Learn More</a
                     >
                   </figcaption>
@@ -638,13 +638,13 @@
           </ul>
         </div>
         <div class="col d-flex justify-content-center align-items-center">
-          <a href="" class="md-title m-5 footer-link"
+          <a href="https://web.facebook.com/profile.php?id=61553276683083" class="md-title m-5 footer-link"
             ><i class="fa-brands fa-facebook"></i> Facebook</a
           >
-          <a href="" class="md-title m-5 footer-link"
+          <a href="https://www.instagram.com/agrikulturapp/" class="md-title m-5 footer-link"
             ><i class="fa-brands fa-square-instagram"></i> Instagram</a
           >
-          <a href="" class="md-title footer-link"
+          <a href="https://www.tiktok.com/@agrikulturapp" class="md-title footer-link"
             ><i class="fa-brands fa-tiktok"></i> Tiktok</a
           >
         </div>
