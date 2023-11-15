@@ -430,8 +430,8 @@ class AuctionsControll extends Controller
     {
         $auction_id = $request->input('auction_id');
 
-        $winner = pending_transactions::where('auction_id', $auction)->first('bidder_id');
-        
+        $winner = pending_transactions::where('auction_id', $auction_id)->first('bidder_id');
+        $farmer = pending_transactions::where('auction_id', $auction_id)->first('creator_id');
         /*bids::where('auction_id', $auction_id)
                 ->get('user_id')->max();*/
 
@@ -446,7 +446,7 @@ class AuctionsControll extends Controller
 
         if($winner->bidder_id == Auth::user()->id)
         {
-            $users = User::where('id', $winner->bidder_id)->get();
+            $users = User::where('id', $farmer->creator_id)->get();
         
             return view('finish', compact('users'));
         }
