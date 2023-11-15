@@ -13,7 +13,7 @@
         <a
           class="navbar-brand d-flex align-items-center text-success"
           id="brand"
-          href="Admin.html"
+          href="{{ url('admin') }}"
           ><img src="../assets/logo-nobg.png" class="img-fluid logo-pic" />
           <p class="title">Agrikultur'App</p></a
         >
