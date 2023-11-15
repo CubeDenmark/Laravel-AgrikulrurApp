@@ -6,9 +6,11 @@ use App\Events\end_auction;
 use App\Events\notifier;
 use App\Models\auctions;
 use App\Models\bids;
+use App\Models\consNotif;
 use App\Models\crops;
 use App\Models\demand_bids;
 use App\Models\demandAuctions;
+use App\Models\farmerNotif;
 use App\Models\User;
 use App\Notifications\UserNotification;
 //use Illuminate\Notifications\Notification;
@@ -215,7 +217,7 @@ class demandAuctionsController extends Controller
             $phase = 1;      
   
         }
-        /*
+        
         farmerNotif::create([
             'auction_id' => $auction_id,
             'crop_id' => $crop_id,
@@ -226,7 +228,7 @@ class demandAuctionsController extends Controller
             'auction_id' => $auction_id,
             'crop_id' => $crop_id,
             'bidder_id' => $bidder_id,
-        ]);*/
+        ]);
 
         //send notification on websocket
         event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
