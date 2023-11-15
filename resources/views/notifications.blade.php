@@ -84,10 +84,7 @@
         <tbody>
           @forelse (Auth::user()->notifications as $notification)
             @if($notification->data['phase'] == 1)
-                <tr>
-                
-                     
-                      
+                <tr>                 
                       <td>
                         @if(Auth::user()->id == $notification->data['creator_id'] )
                             
@@ -364,48 +361,24 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
         let bidder_id = notification.data['bidder_id'];
 
         let phase = notification.data['phase'];
+        let user = `{{Auth::user()->id}}`;
 
         let row = document.createElement("tr");
 
         
-          let name = document.createElement("td");
+        let name = document.createElement("td");
         
-          name.innerHTML = `
+        if(phase == 1)
+        {
+          if(user == creator)
+          {
+            name.innerHTML = `
                 <tr>
-                  <td>
-                  @if(!empty($notification->data))
-                  @if(Auth::user()->id == $notification->data['creator_id'] )
-                            
-                            <a
-                              href="{{ url('send-bid')}}?auction_id=${auction}"
-                              class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
-                            >
-                          @elseif(Auth::user()->id == $notification->data['bidder_id'])
-                              @if($notification->data['auction_id'])
-                                  @if(session('finishedTrans'.$notification->data['auction_id']))
-                                    <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
-                                      <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('finishedTrans'.$notification->data['auction_id']) }}</p>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div> 
-                                  @endif
-                              @endif
-                              @if(session('unAuthorized'))
-                                <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
-                                  <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('unAuthorized') }}</p>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div> 
-                              @endif
-                            <a 
-                              href="{{ url('congratulation')}}?auction_id=${auction}"
-                              class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
-                              >
-                          @else
-                            <a
-                              href="{{ url('send-bid')}}?auction_id=${auction}"
-                              class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
-                            >
-                          @endif
-                     
+                  <td>  
+                      <a
+                        href="{{ url('send-bid')}}?auction_id=${auction}"
+                        class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                      >
                       <img
                         src="../assets/winner.svg"
                         width="150px"
@@ -414,30 +387,198 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
                       />
                       <div>
                         <p class="md-title text-success">
-                              @if(Auth::user()->id == $notification->data['creator_id'] )
-                                <p class="md-title text-success">
-                                  Your auction listing has ended
-                                </p>
-                              @elseif(Auth::user()->id == $notification->data['bidder_id'])
-                                <p class="md-title text-success">
-                                  Congratulations! You won an auction!
-                                </p>
-                              @else
-                                <p class="md-title text-danger">
-                                  Thank you for participating on the Auction!
-                                </p>
-                              @endif
+                          <p class="md-title text-success">
+                            Your auction listing has ended
+                          </p>
                         </p>
                         <p class="sm-title text-secondary">
                           Auction ID: ${auction}
                         </p>
                       </div>
+
                     </a>
                   </td>
-                </tr>
-                
-                @endif`;
-           
+                </tr>`;
+          }
+          else if(user == bidder_id)
+          {
+            name.innerHTML = `
+                <tr>
+                  <td>
+                      <a 
+                        href="{{ url('congratulation')}}?auction_id=${auction}"
+                        class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                        >
+                      <img
+                        src="../assets/winner.svg"
+                        width="150px"
+                        height="150px"
+                        class="rounded-circle bg-white object-fit-cover"
+                      />
+                      <div>
+                        <p class="md-title text-success">   
+                          <p class="md-title text-success">
+                            Congratulations! You won an auction!
+                          </p>                  
+                        </p>
+                        <p class="sm-title text-secondary">
+                          Auction ID: ${auction}
+                        </p>
+                      </div>
+
+                    </a>
+                  </td>
+                </tr>`;
+          }
+          else
+          {
+            name.innerHTML = `
+                <tr>
+                  <td>
+                      <a
+                        href="{{ url('send-bid')}}?auction_id=${auction}"
+                        class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                      >
+                      <img
+                        src="../assets/winner.svg"
+                        width="150px"
+                        height="150px"
+                        class="rounded-circle bg-white object-fit-cover"
+                      />
+                      <div>
+                        <p class="md-title text-success">
+                          <p class="md-title text-danger">
+                            Thank you for participating on the Auction!
+                          </p>
+                        <p class="sm-title text-secondary">
+                          Auction ID: ${auction}
+                        </p>
+                      </div>
+
+                    </a>
+                  </td>
+                </tr>`;
+          }
+
+          /*name.innerHTML = `
+                <tr>
+                  <td>
+
+                    
+                      <a
+                        href="{{ url('send-bid')}}?auction_id=${auction}"
+                        class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                      >
+
+
+                      <a 
+                        href="{{ url('congratulation')}}?auction_id=${auction}"
+                        class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                        >
+
+                      <a
+                        href="{{ url('send-bid')}}?auction_id=${auction}"
+                        class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                      >
+
+
+                      <img
+                        src="../assets/winner.svg"
+                        width="150px"
+                        height="150px"
+                        class="rounded-circle bg-white object-fit-cover"
+                      />
+                      <div>
+                        <p class="md-title text-success">
+
+
+                                <p class="md-title text-success">
+                                  Your auction listing has ended
+                                </p>
+
+                                
+                                <p class="md-title text-success">
+                                  Congratulations! You won an auction!
+                                </p>
+
+                                
+                                <p class="md-title text-danger">
+                                  Thank you for participating on the Auction!
+
+                                  
+                        </p>
+                        <p class="sm-title text-secondary">
+                          Auction ID: ${auction}
+                        </p>
+                      </div>
+
+                    </a>
+                  </td>
+                </tr>`;*/
+                     
+        }
+        else if(phase == 2)
+        {
+
+
+          name.innerHTML = `
+          <tr>
+                        <td>
+                            <a
+                              href="{{ url('confirm_payment')}}?auction_id=${auction}"
+                              class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                            >
+                            <img
+                              src="../assets/transferMoney.png"
+                              width="150px"
+                              height="150px"
+                              id="notif-img"
+                              class="rounded-circle bg-white object-fit-cover"
+                            />
+                            <div>
+                              <p class="md-title text-success">
+                                Winning bidder just paid for your item,
+                                Confirm Payment Now!
+                              </p>
+                              <p class="sm-title text-secondary">
+                                Auction ID: ${auction}
+                              </p>
+                            </div>
+                          </a>
+                        </td>
+                      </tr>f`;
+
+        }
+        else
+        {
+          name.innerHTML = `
+          
+          <tr>
+                      <td>
+                          <a
+                            href="{{ url('finished')}}?auction_id=${auction}"
+                            class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                          >
+                          <img
+                            src="../assets/present.svg"
+                            width="150px"
+                            height="150px"
+                            id="notif-img"
+                            class="rounded-circle bg-white object-fit-cover"
+                          />
+                          <div>
+                            <p class="md-title text-success">
+                              Farmer just confirmed your payment! Claim your Item Now!
+                            </p>
+                            <p class="sm-title text-secondary">
+                              Auction ID: ${auction}
+                            </p>
+                          </div>
+                        </a>
+                      </td>
+                    </tr>`;
+
+        }
         row.appendChild(name);
 
         $("tbody").prepend(row);
@@ -497,13 +638,6 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
     });*/
 
 </script>
-<script>
-    // Disable the back button
-    history.pushState(null, null, document.URL);
-    window.addEventListener('popstate', function () {
-        history.pushState(null, null, document.URL);
-    });
-    </script>
 </main>
     <!-- Google Translate Script -->
     <script type="text/javascript">

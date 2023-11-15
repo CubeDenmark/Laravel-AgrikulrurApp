@@ -61,7 +61,7 @@ class AuctionsControll extends Controller
                 'crop_volume' => $crop_volume,
                 'user_id' => $user['id'],
                 'status' => 'active',
-                'end_time' => Carbon::now()->addHours(6),
+                'end_time' => Carbon::now()->addHours(6), //addMinutes(1) or addHours(6)
                 'auctionCropImage' => $cropImgLoc,
             ]);
 
@@ -552,8 +552,8 @@ class AuctionsControll extends Controller
             ]);
 
             //send notification on websocket
-            event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
-            event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
+            //event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
+            //event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
 
             //save the notifiaction on database
             Notification::send($user, new UserNotification($auction_id, $creator_id, $bidder_id, $phase));
