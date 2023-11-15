@@ -30,7 +30,7 @@
         <a
           class="navbar-brand d-flex align-items-center "
           id="brand"
-          href="#"
+          href="{{ url('crop-options') }}"
           ><img src="../assets/logo-nobg.png" class="img-fluid logo-pic" />
           <p class="title">Agrikultur'App</p></a
         >
