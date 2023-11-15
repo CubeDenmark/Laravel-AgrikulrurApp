@@ -173,11 +173,11 @@
                     <span class="text-success" id="total">{{$total}}</span>
                   </p>
                 </div>
-                <a
+                <!-- <a
                   class="btn btn-outline-danger fs-1 w-50 mb-4"
                   href="Congratulations.html"
                   >I did not receive any payment</a
-                >
+                > -->
                 <a
                   class="btn btn-success fs-1 w-100"
                   href="{{ url('checkout_farmer')}}?auction_id={{$auction->auction_id}}"
