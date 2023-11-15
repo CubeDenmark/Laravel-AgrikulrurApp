@@ -437,7 +437,7 @@ class AuctionsControll extends Controller
 
         if($winner)
         {
-            $winnerBidder = $winner->user_id;
+            $winnerBidder = $winner->bidder_id;
         }
         else
         {
