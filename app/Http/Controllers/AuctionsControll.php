@@ -449,7 +449,7 @@ class AuctionsControll extends Controller
 
         if($winner->bidder_id == Auth::user()->id)
         { 
-            $users = User::where('id', $winnerBidder)->get();
+            $users = User::where('id', $farmer->creator_id)->get();
 
             return view('finish', compact('users')); 
            
