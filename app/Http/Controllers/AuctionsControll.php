@@ -454,7 +454,7 @@ class AuctionsControll extends Controller
             return view('finish', compact('users')); 
            
         }
-        elseif($farmer->creator_id != Auth::user()->id)
+        else
         {
             return back()->with('unAuthorized','Not your Auction');
         }
