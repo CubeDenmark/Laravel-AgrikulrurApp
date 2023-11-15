@@ -83,93 +83,119 @@
         <thead></thead>
         <tbody>
           @forelse (Auth::user()->notifications as $notification)
-            @if($notification->data['phase'] == 1)
-                <tr>                 
-                      <td>
-                        @if(Auth::user()->id == $notification->data['creator_id'] )
-                            
-                          <a
-                            href="{{ url('send-bid')}}?auction_id={{ $notification->data['auction_id'] }}"
-                            class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
-                          >
-                        @elseif(Auth::user()->id == $notification->data['bidder_id'])
-                            @if($notification->data['auction_id'])
-                                @if(session('finishedTrans'.$notification->data['auction_id']))
-                                  <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
-                                    <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('finishedTrans'.$notification->data['auction_id']) }}</p>
-                                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                  </div> 
-                                @endif
-                            @endif
-                            @if(session('unAuthorized'))
-                              <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
-                                <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('unAuthorized') }}</p>
-                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                              </div> 
-                            @endif
-                          <a 
-                            href="{{ route('congratulation', ['auction_id' => $notification->data['auction_id']]) }}" 
-                            class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
-                            >
-                        @else
-                          <a
-                            href="{{ url('send-bid')}}?auction_id={{ $notification->data['auction_id'] }}"
-                            class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
-                          >
-                        @endif
-                          <img
-                            src="../assets/winner.svg"
-                            width="150px"
-                            height="150px"
-                            id="notif-img"
-                            class="rounded-circle bg-white object-fit-cover"
-                          />
-                          <div>
-                          
-                            @if(Auth::user()->id == $notification->data['creator_id'] )
-                              <p class="md-title text-success">
-                                Your auction listing has ended
-                              </p>
-                            @elseif(Auth::user()->id == $notification->data['bidder_id'])
-                              <p class="md-title text-success">
-                                Congratulations! You won an auction!
-                              </p>
-                            @else
-                              <p class="md-title text-danger">
-                                Thank you for participating on the Auction!
-                              </p>
-                            @endif
-                          
-                            <p class="sm-title text-secondary">
-                              Auction ID:{{ $notification->data['auction_id'] }}
-                            </p>
-                          </div>
-                        </a>
-                      </td>
-                    </tr>
-            @elseif($notification->data['phase'] == 2)
-                    <tr>
+              @if($notification->data['phase'] == 1)
+                  <tr>                 
                         <td>
-                        @if($notification->data['auction_id'])
-                                @if(session('finishedTrans'.$notification->data['auction_id']))
-                                  <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
-                                    <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('finishedTrans'.$notification->data['auction_id']) }}</p>
-                                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                  </div> 
-                                @endif
-                            @endif
-                            @if(session('unAuthorized'.$notification->data['auction_id']))
-                              <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
-                                <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('unAuthorized'.$notification->data['auction_id']) }}</p>
-                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                              </div> 
-                            @endif
+                          @if(Auth::user()->id == $notification->data['creator_id'] )
+                              
                             <a
-                              href="{{ url('confirm_payment')}}?auction_id={{ $notification->data['auction_id'] }}"
+                              href="{{ url('send-bid')}}?auction_id={{ $notification->data['auction_id'] }}"
+                              class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                            >
+                          @elseif(Auth::user()->id == $notification->data['bidder_id'])
+                              @if($notification->data['auction_id'])
+                                  @if(session('finishedTrans'.$notification->data['auction_id']))
+                                    <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
+                                      <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('finishedTrans'.$notification->data['auction_id']) }}</p>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div> 
+                                  @endif
+                              @endif
+                              @if(session('unAuthorized'))
+                                <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
+                                  <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('unAuthorized') }}</p>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div> 
+                              @endif
+                            <a 
+                              href="{{ route('congratulation', ['auction_id' => $notification->data['auction_id']]) }}" 
+                              class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                              >
+                          @else
+                            <a
+                              href="{{ url('send-bid')}}?auction_id={{ $notification->data['auction_id'] }}"
+                              class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                            >
+                          @endif
+                            <img
+                              src="../assets/winner.svg"
+                              width="150px"
+                              height="150px"
+                              id="notif-img"
+                              class="rounded-circle bg-white object-fit-cover"
+                            />
+                            <div>
+                            
+                              @if(Auth::user()->id == $notification->data['creator_id'] )
+                                <p class="md-title text-success">
+                                  Your auction listing has ended
+                                </p>
+                              @elseif(Auth::user()->id == $notification->data['bidder_id'])
+                                <p class="md-title text-success">
+                                  Congratulations! You won an auction!
+                                </p>
+                              @else
+                                <p class="md-title text-danger">
+                                  Thank you for participating on the Auction!
+                                </p>
+                              @endif
+                            
+                              <p class="sm-title text-secondary">
+                                Auction ID:{{ $notification->data['auction_id'] }}
+                              </p>
+                            </div>
+                          </a>
+                        </td>
+                      </tr>
+              @elseif($notification->data['phase'] == 2)
+                      <tr>
+                          <td>
+                          @if($notification->data['auction_id'])
+                                  @if(session('finishedTrans'.$notification->data['auction_id']))
+                                    <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
+                                      <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('finishedTrans'.$notification->data['auction_id']) }}</p>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div> 
+                                  @endif
+                              @endif
+                              @if(session('unAuthorized'.$notification->data['auction_id']))
+                                <div class="alert alert-danger alert-dismissible fade show float-end addAlert" role="alert">
+                                  <p class="md-title text-start"><i class="fa-regular fa-circle-check"></i> {{ session('unAuthorized'.$notification->data['auction_id']) }}</p>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div> 
+                              @endif
+                              <a
+                                href="{{ url('confirm_payment')}}?auction_id={{ $notification->data['auction_id'] }}"
+                                class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
+                              >
+                              <img
+                                src="../assets/transferMoney.png"
+                                width="150px"
+                                height="150px"
+                                id="notif-img"
+                                class="rounded-circle bg-white object-fit-cover"
+                              />
+                              <div>
+                                <p class="md-title text-success">
+                                  Winning bidder just paid for your item,
+                                  Confirm Payment Now!
+                                </p>
+                                <p class="sm-title text-secondary">
+                                  Auction ID: {{ $notification->data['auction_id'] }}
+                                </p>
+                              </div>
+                            </a>
+                          </td>
+                        </tr>
+              @elseif($notification->data['phase'] == 3)
+                      <tr>
+                        <td>
+                            <a
+                              href="{{ url('finished')}}?auction_id={{ $notification->data['auction_id'] }}"
                               class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
                             >
                             <img
-                              src="../assets/transferMoney.png"
+                              src="../assets/present.svg"
                               width="150px"
                               height="150px"
                               id="notif-img"
@@ -177,8 +203,7 @@
                             />
                             <div>
                               <p class="md-title text-success">
-                                Winning bidder just paid for your item,
-                                Confirm Payment Now!
+                                Farmer just confirmed your payment! Claim your Item Now!
                               </p>
                               <p class="sm-title text-secondary">
                                 Auction ID: {{ $notification->data['auction_id'] }}
@@ -187,32 +212,7 @@
                           </a>
                         </td>
                       </tr>
-            @elseif($notification->data['phase'] == 3)
-                    <tr>
-                      <td>
-                          <a
-                            href="{{ url('finished')}}?auction_id={{ $notification->data['auction_id'] }}"
-                            class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
-                          >
-                          <img
-                            src="../assets/present.svg"
-                            width="150px"
-                            height="150px"
-                            id="notif-img"
-                            class="rounded-circle bg-white object-fit-cover"
-                          />
-                          <div>
-                            <p class="md-title text-success">
-                              Farmer just confirmed your payment! Claim your Item Now!
-                            </p>
-                            <p class="sm-title text-secondary">
-                              Auction ID: {{ $notification->data['auction_id'] }}
-                            </p>
-                          </div>
-                        </a>
-                      </td>
-                    </tr>
-            @endif
+              @endif
 
 
           <!-- 
@@ -361,7 +361,7 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
         let bidder_id = notification.data['bidder_id'];
 
         let phase = notification.data['phase'];
-        let user = `{{Auth::user()->id}}`;
+        let user = "{{Auth::user()->id}}";
 
         let row = document.createElement("tr");
 
@@ -459,63 +459,7 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
                   </td>
                 </tr>`;
           }
-
-          /*name.innerHTML = `
-                <tr>
-                  <td>
-
-                    
-                      <a
-                        href="{{ url('send-bid')}}?auction_id=${auction}"
-                        class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
-                      >
-
-
-                      <a 
-                        href="{{ url('congratulation')}}?auction_id=${auction}"
-                        class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
-                        >
-
-                      <a
-                        href="{{ url('send-bid')}}?auction_id=${auction}"
-                        class="notif-link d-flex align-items-center gap-5 text-decoration-none p-4"
-                      >
-
-
-                      <img
-                        src="../assets/winner.svg"
-                        width="150px"
-                        height="150px"
-                        class="rounded-circle bg-white object-fit-cover"
-                      />
-                      <div>
-                        <p class="md-title text-success">
-
-
-                                <p class="md-title text-success">
-                                  Your auction listing has ended
-                                </p>
-
-                                
-                                <p class="md-title text-success">
-                                  Congratulations! You won an auction!
-                                </p>
-
-                                
-                                <p class="md-title text-danger">
-                                  Thank you for participating on the Auction!
-
-                                  
-                        </p>
-                        <p class="sm-title text-secondary">
-                          Auction ID: ${auction}
-                        </p>
-                      </div>
-
-                    </a>
-                  </td>
-                </tr>`;*/
-                     
+              
         }
         else if(phase == 2)
         {
@@ -638,6 +582,7 @@ window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
     });*/
 
 </script>
+
 </main>
     <!-- Google Translate Script -->
     <script type="text/javascript">

@@ -51,7 +51,7 @@
           <div
             class="row bg-light d-flex align-items-center justify-content-center border-bottom border-black h-50 p-2"
           >         
-            <p class="demand-text text-center text-success">{{$auction->crop_name}}</p> 
+            <p class="demand-text text-center text-success">{{$farmer->crop_name}}</p> 
           
           </div>
           <div class="row bg-light row-cols-2 p-2">
@@ -284,7 +284,7 @@
                         type="button"
                         class="btn btn-success fs-3"
                         
-                        href="{{ url('manual_close')}}?auction_id={{ $auction->auction_id }}"
+                        href="{{ url('manual_closeDemand')}}?auction_id={{ $auction->auction_id }}"
                       >
                         Close the Bidding
                       </a>
@@ -363,9 +363,9 @@
                 </h1>
               </div>
               <div class="web-img-cont d-flex align-items-center justify-content-center overflow-hidden mb-2">
-              <!-- @foreach($auctionData as $auction)  -->
+             
                 <p class="demand-text text-success text-center">{{$auction->crop_name }}</p>
-              <!-- @endforeach -->
+             
               </div>
               <div
                 class="d-flex justify-content-center align-items-center gap-5"
@@ -594,7 +594,7 @@
                                   type="button"
                                   class="btn btn-success fs-3"
                                   
-                                  href="{{ url('manual_close')}}?auction_id={{ $auction->auction_id }}"
+                                  href="{{ url('manual_closeDemand')}}?auction_id={{ $auction->auction_id }}"
                                 >
                                   Close the Bidding
                                 </a>

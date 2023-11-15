@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\end_auction;
+use App\Events\notifier;
 use App\Models\auctions;
 use App\Models\bids;
 use App\Models\crops;
 use App\Models\demand_bids;
 use App\Models\demandAuctions;
 use App\Models\User;
+use App\Notifications\UserNotification;
+//use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Notification;
 class demandAuctionsController extends Controller
 {
     public function demandAuctions()
@@ -82,7 +86,7 @@ class demandAuctionsController extends Controller
             'demand_auctions.starting_price',
             'demand_auctions.pick_up_date',
             'demand_auctions.end_time',
-            'demand_auctions.crop_name',
+            //'demand_auctions.crop_name',
             'demand_auctions.starting_price',
             'demand_auctions.status',
             'demand_auctions.creator_id',
@@ -101,7 +105,7 @@ class demandAuctionsController extends Controller
                         'demand_auctions.crop_volume', 
                         'demand_auctions.starting_price', 
                         'demand_auctions.pick_up_date', 
-                        'demand_auctions.crop_name',
+                        //'demand_auctions.crop_name',
                         'demand_auctions.starting_price',
                         'demand_auctions.status',
                         'demand_auctions.creator_id',
@@ -174,4 +178,72 @@ class demandAuctionsController extends Controller
         }
         
     }
+
+    public function manual_closeDemand(Request $request)
+{
+    $thisAuction_id = $request->input('auction_id');
+    $openAuctions = demandAuctions::where('auction_id', $thisAuction_id)->first();
+    $close_auction = demandAuctions::where('auction_id', $thisAuction_id)->update(['status' => 'closed']);
+    
+    $thesebids = demand_bids::where('auction_id', $thisAuction_id)->get();
+    
+    $bidders = demand_bids::where('auction_id', $thisAuction_id)->pluck('bidder_id');
+    $farmer = demandAuctions::where('auction_id', $thisAuction_id)->pluck('creator_id');
+    
+    //$toNotify = $bidders->merge($farmer)->unique();
+    $toNotify = $bidders->merge($farmer)->unique()->toArray();
+
+    $user = User::whereIn('id', $toNotify)->get();
+    /*$user =  array();
+    foreach ($toNotify as $key => $value) 
+    {
+        $pushUser = User::where('id', [$key => $value])->get();
+        $user[] = $pushUser;
+    }*/
+    //$show = User::all();
+    //return response()->json($users);
+    
+    // Now, $userIds contains the unique user IDs from both tables
+
+    
+        foreach($thesebids as $bid)
+        {
+            $auction_id = $openAuctions->auction_id;
+            $crop_id = $openAuctions->crop_id;
+            $creator_id = $openAuctions->user_id;
+            $bidder_id =  $bid->user_id;    
+            $phase = 1;      
+  
+        }
+        /*
+        farmerNotif::create([
+            'auction_id' => $auction_id,
+            'crop_id' => $crop_id,
+            'creator_id' => $creator_id,
+        ]); 
+        
+        consNotif::create([
+            'auction_id' => $auction_id,
+            'crop_id' => $crop_id,
+            'bidder_id' => $bidder_id,
+        ]);*/
+
+        //send notification on websocket
+        event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
+        event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
+
+        //save the notifiaction on database
+        Notification::send($user, new UserNotification($auction_id, $creator_id, $bidder_id, $phase));
+
+    if($close_auction)
+    {
+        return back()->with('closed', 'Auction is now closed');
+    }
+    return back()->with('active', 'Failed to close');
+    
+
+    
 }
+
+}
+

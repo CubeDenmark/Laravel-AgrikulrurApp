@@ -121,7 +121,7 @@ Route::middleware(['auth', 'user-access:bidder'])->group(function () {
     Route::post('/new_demAuction' ,[demandAuctionsController::class , 'new_demAuction'])->name('new_demAuction');
 
     Route::post('/update_baseDemand', [demandAuctionsController::class ,'update_baseDemand'])->name('update_baseDemand');
-    Route::get('/manual_closeDemand' ,[AuctionsControll::class , 'manual_closeDemand']);
+    Route::get('/manual_closeDemand' ,[demandAuctionsController::class , 'manual_closeDemand']);
    
 
 });

@@ -88,8 +88,8 @@ Artisan::command('fetch:auctions', function () {
                 ]);
     
                 //send notification on websocket
-                //event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
-                //event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
+                event(new notifier($auction_id, $crop_id, $creator_id, $bidder_id ));
+                event(new end_auction($auction_id, $crop_id, $creator_id, $bidder_id ));
     
                 //save the notifiaction on database
                 Notification::send($user, new UserNotification($auction_id, $creator_id, $bidder_id, $phase)); 
