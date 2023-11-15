@@ -447,7 +447,7 @@ class AuctionsControll extends Controller
             return back()->with('error','Not your Auction');
         }
 
-        if($farmer->creator_id == Auth::user()->id)
+        if($winner->bidder_id == Auth::user()->id)
         { 
             $users = User::where('id', $winnerBidder)->get();
 
