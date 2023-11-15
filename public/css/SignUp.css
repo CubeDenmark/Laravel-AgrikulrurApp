@@ -1,9 +1,18 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.help-btn {
+    position: fixed;
+    right: 5px;
+    opacity: 65%;
+    z-index: 2;
+}
+.help-txt {
+    font-size: xx-large;
 }
