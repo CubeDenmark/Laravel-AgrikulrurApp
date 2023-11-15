@@ -276,8 +276,8 @@ class AuctionsControll extends Controller
                 //->where('auction_id', $finishAuction->auction_id)
                 //->get('bid_amount')->max();
                 //dd($winner->user_id);
-                $winner = pending_transactions::where('auction_id', 11)->first('bidder_id');
-                $users = User::where('id', $winner->user_id)->get();
+                $problem = pending_transactions::where('auction_id', $auction_id)->first('bidder_id');
+                $users = User::where('id', $problem->bidder_id)->get();
                 $crops = crops::where('crop_id', $cropname)->get();
                 $highestbid = bids::where('auction_id', $auction->auction_id)->get('bid_amount')->max();
                 $volume =  $auction->crop_volume;
