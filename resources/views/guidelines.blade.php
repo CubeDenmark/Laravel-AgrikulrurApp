@@ -203,7 +203,10 @@
                 
             @endforeach
           @endif
-      <p class="md-title">Last Updated: {{$info->updated_at->format('F j, Y')}}</p>
+      <div class="d-flex justify-content-between">
+        <p class="md-title">Last Updated: {{$info->updated_at->format('F j, Y')}}</p>
+        <a href="https://www.da.gov.ph/price-monitoring/" target="_blank" class="btn btn-success upd-btn">D.A. Price Watch</a>
+      </div>
       <table class="table text-center text-md-start" id="myTable">
         <thead class="bg-success">
           <tr>
