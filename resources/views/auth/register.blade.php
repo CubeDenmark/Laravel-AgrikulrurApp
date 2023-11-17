@@ -260,7 +260,7 @@
                                 type="file"
                                 class="form-control"
                                 id="credentials"
-                                
+                                accept="image/png, image/jpeg, application/pdf"
                                 name="valImage"
                                 value="{{ old('valImage') }}"
                                 required
