@@ -134,6 +134,7 @@
             class="col cta-col bg-light pb-4 border-top border-2 border-black"
           >
             <p class="title text-start">Top Bidders</p>
+            <button id="ror">BTN</button>
             <div class="row bids-row bg-light-subtle mb-4">
               <div class="bids-table mt-2">
                 <table class="table table-striped">
@@ -203,10 +204,12 @@
             >
               <button
                 class="btn btn-success h-100"
+                id="update-btn-mobile"
                 data-bs-toggle="modal"
                 data-bs-target="#updateMobileModal"
               >
                 <p class="fs-1 text-light p-2">
+
                   <i class="fa-solid fa-pen-to-square"></i> Update Base Bid
                   Price
                 </p>
@@ -449,6 +452,7 @@
               @endforeach
               <div class="d-flex flex-column align-items-center">
                 <p class="title">Top Bidders</p>
+                <button id="ror2">BTN</button>
                 <div class="row bids-row bg-light-subtle mb-4 w-100">
                   <div class="bids-table mt-2">
                     <table class="table table-striped">
@@ -519,6 +523,7 @@
 
                           <button
                           class="btn btn-success"
+                          id="update-btn"
                           data-bs-toggle="modal"
                           data-bs-target="#updateModal"
                         >
@@ -962,6 +967,20 @@ function googleTranslateElementInit() {
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <!-- Google Translate Script -->
+
+{{-- REMOVE ELEMENT JS --}}
+<script>
+  const bidWeb = document.getElementById("ror2");
+  const bidMobile = document.getElementById("ror");
+  const updateWeb = document.getElementById("update-btn");
+  const updateMobile = document.getElementById("update-btn-mobile");
+
+  bidMobile.addEventListener("click", function() {
+      updateMobile.remove();
+      updateWeb.remove();
+      console.log("passed");    
+  });
+</script>
 
       <!-- <script src="../js/biddings.js"></script> -->
 </main>
