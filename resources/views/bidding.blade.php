@@ -1013,7 +1013,7 @@ function googleTranslateElementInit() {
       updateWeb.remove();
       console.log("passed");    
   });
-</script>-->
+</script>
 
       <!-- <script src="../js/biddings.js"></script> -->
 </main>
