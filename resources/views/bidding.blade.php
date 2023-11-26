@@ -980,6 +980,11 @@ function googleTranslateElementInit() {
       updateWeb.remove();
       console.log("passed");    
   });
+  bidWeb.addEventListener("click", function() {
+      updateMobile.remove();
+      updateWeb.remove();
+      console.log("passed");    
+  });
 </script>
 
       <!-- <script src="../js/biddings.js"></script> -->
