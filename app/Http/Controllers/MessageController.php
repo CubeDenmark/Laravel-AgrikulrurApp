@@ -246,6 +246,8 @@ public function sendBid(Request $request)
 
         $auctions = auctions::where('auction_id', $on_auction)->get();
         $highestbid = bids::where('auction_id', $on_auction)->get('bid_amount')->max();
+
+        //dd($bids);
         foreach($auctions as $auction)
         {
             $creator = User::where('id', $auction->user_id)->get();

@@ -134,7 +134,6 @@
             class="col cta-col bg-light pb-4 border-top border-2 border-black"
           >
             <p class="title text-start">Top Bidders</p>
-            <button id="ror">BTN</button>
             <div class="row bids-row bg-light-subtle mb-4">
               <div class="bids-table mt-2">
                 <table class="table table-striped">
@@ -202,18 +201,21 @@
               <div
               class="border border-black w-75 d-flex justify-content-center align-items-center p-2 gap-2"
             >
+            @if(empty($highestbid))
               <button
                 class="btn btn-success h-100"
                 id="update-btn-mobile"
                 data-bs-toggle="modal"
                 data-bs-target="#updateMobileModal"
               >
+            
                 <p class="fs-1 text-light p-2">
 
                   <i class="fa-solid fa-pen-to-square"></i> Update Base Bid
                   Price
                 </p>
               </button>
+              @endif
               <div
                 class="modal fade"
                 id="updateMobileModal"
@@ -452,7 +454,6 @@
               @endforeach
               <div class="d-flex flex-column align-items-center">
                 <p class="title">Top Bidders</p>
-                <button id="ror2">BTN</button>
                 <div class="row bids-row bg-light-subtle mb-4 w-100">
                   <div class="bids-table mt-2">
                     <table class="table table-striped">
@@ -520,18 +521,20 @@
                             </div>
                           @endif
                           <!-- For update bid price -->
-
+                          @if(empty($highestbid))
                           <button
                           class="btn btn-success"
                           id="update-btn"
                           data-bs-toggle="modal"
                           data-bs-target="#updateModal"
                         >
+                        
                           <p class="md-title text-light p-2">
                             <i class="fa-solid fa-pen-to-square"></i> Update Base Bid
                             Price
                           </p>
                         </button>
+                        @endif
                         <div
                           class="modal fade"
                           id="updateModal"
@@ -814,6 +817,26 @@
         let profile_img = data.profile_img;
         let on_time = data.bid_on;
 
+        //remove update base bid price
+        const bidWeb = document.getElementById("ror2");
+        const bidMobile = document.getElementById("ror");
+        const updateWeb = document.getElementById("update-btn");
+        const updateMobile = document.getElementById("update-btn-mobile");
+
+        if(updateMobile)
+        {
+          updateMobile.remove();
+          console.log("passed 1");
+        }
+        if(updateWeb)
+        {
+          updateWeb.remove();
+          console.log("passed 1");
+        }
+      
+
+        // end update bbp
+
         let row = document.createElement("tr");
 
         let imagecol = document.createElement("td");
@@ -853,6 +876,12 @@
         lbp3.innerText = `${latestprice2}`;
         lbp.innerText = `${latestprice2}`;
         lbp.innerText = `${latestprice2}`;
+
+       
+
+        
+            
+
 
   
         //inputPrice2.value = null;
@@ -965,9 +994,13 @@ function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
 }
 </script>
+
+
+
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <!-- Google Translate Script -->
 
+<!--  
 {{-- REMOVE ELEMENT JS --}}
 <script>
   const bidWeb = document.getElementById("ror2");
@@ -980,7 +1013,7 @@ function googleTranslateElementInit() {
       updateWeb.remove();
       console.log("passed");    
   });
-</script>
+</script>-->
 
       <!-- <script src="../js/biddings.js"></script> -->
 </main>
