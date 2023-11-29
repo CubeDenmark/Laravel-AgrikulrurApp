@@ -9,10 +9,10 @@ form.addEventListener("submit", (e) => {
 */
 
 function edit() {
-  preventDefault();
-  let btn = document.querySelector(".form-control");
-  alert(val);
-  btn.disabled = false;
+    preventDefault();
+    let btn = document.querySelector(".form-control");
+    alert(val);
+    btn.disabled = false;
 }
 // Change Img on file upload and enables save button on the image container
 let img = document.getElementById("profile-pic");
@@ -20,16 +20,18 @@ let input = document.getElementById("change-prof");
 let saveImg = document.getElementById("save-img-btn");
 let mySaveBtn = document.getElementById("save-btn");
 input.addEventListener("change", () => {
-  img.src = URL.createObjectURL(input.files[0]);
-  saveImg.disabled = false;
+    img.src = URL.createObjectURL(input.files[0]);
+    saveImg.disabled = false;
 });
 
 // Disable the text input on the different form control on the form container
 function ror(val) {
-  document.getElementById(`${val}`).disabled = false;
+    let saveBtn = document.getElementById("save-btn");
+    saveBtn.disabled = false;
+    document.getElementById(`${val}`).disabled = false;
 }
 
 // enable save btn on form cotnainer
 function boom() {
-  mySaveBtn.disabled = false;
+    mySaveBtn.disabled = false;
 }

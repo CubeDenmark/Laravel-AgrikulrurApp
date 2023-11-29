@@ -230,6 +230,7 @@
               type="submit"
               class="btn btn-success fs-1"
               id="save-btn"
+              disabled
             >
               Save
             </button>
