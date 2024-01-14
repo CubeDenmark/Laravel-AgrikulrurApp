@@ -4,7 +4,7 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-
+/*
 $(document).ready(function() {
     $('#sendmess').click(function() {
         var message = $('#input-message').val();
@@ -15,18 +15,23 @@ $(document).ready(function() {
         })
     })
 })
+*/
     
-    /*
+    
     $(document).ready(function() {
         $('#sendmess').click(function(event) {
             event.preventDefault();
             var message = $('#input-message').val();
+            var user_id = $('#input-id').val();
             if (message.trim() !== '') {
                 // AJAX request to send the message to the server
                 $.ajax({
                     method: 'GET',
                     url: '/chat-message', // Replace with your route
-                    data: { message: message },
+                    data: { 
+                            'message': message,
+                            'user_id': user_id
+                          },
                     success: function(response) {
                         // Handle success if needed
                         console.log('Message sent successfully: ', response);
@@ -39,8 +44,8 @@ $(document).ready(function() {
             }
         });
     });
-*/
-/*const channel = Echo.join('pressence.chat.1');
+/*
+const channel = Echo.join('pressence.chat.1');
 
 channel.here( (users) => {
     var userOnline = [users];
@@ -66,8 +71,8 @@ channel.here( (users) => {
     Li.textContent = username + ' : ' + message;
 
     ListMessage.append(Li);
-})*/
-
+});
+*/
 
 
 

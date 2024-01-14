@@ -13,9 +13,12 @@ class testMessageControl extends Controller
     public function testMessage(Request $request){
 
         $testmessage = $request->input('message');
+        $user = auth()->user();
+
+        $uid = $request->input('user_id');
 
         //event(new PlaygroundEvent($testmessage));
-        event(new PlaygroundEvent($request->message));
+        event(new PlaygroundEvent($testmessage, $user, $uid));
 
         return response()->json([$testmessage => true]);
     }

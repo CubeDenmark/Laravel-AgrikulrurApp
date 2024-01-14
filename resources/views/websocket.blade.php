@@ -13,11 +13,44 @@
  
             <input id="input-message" type="text" placeholder="Message....">
             <button id="sendmess">Send</button>
+            <br><br>
+            <input id="input-id" type="nuber" placeholder="To User #id">
 
         
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script type="module">
+        const channel = Echo.join('pressence.chat.{{ Auth::user()["id"] }}');
+
+            channel.here( (users) => {
+                var userOnline = [users];
+
+                console.log({users})
+                console.log('subscribed!');
+            })
+            .joining((user) => {
+                console.log({user}, ' joined')
+            })
+            .leaving((user) => {
+                console.log({user}, ' Leaving')
+            })
+
+
+            .listen('.chat-message', (event) => {
+                console.log(event);
+
+                var message = event.message;
+                var username = event.user['name'];
+                var ListMessage = document.getElementById("List-messages");
+                var Li = document.createElement('li');
+                Li.textContent = username + ' : ' + message;
+
+                ListMessage.append(Li);
+            });
+    </script>
+
     <!-- 
-        <script>>
+        <script>
         $(document).ready(function() {
         $('#sendmess').click(function() {
             var message = $('#input-message').val();

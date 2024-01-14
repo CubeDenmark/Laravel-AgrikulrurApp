@@ -20,10 +20,13 @@ class PlaygroundEvent implements ShouldBroadcast
 
      public $testmessage;
      public $user;
-    public function __construct($testmessage, $user)
+
+    public $uid;
+    public function __construct($testmessage, $user, $uid)
     {
         $this->testmessage = $testmessage;
         $this->user = $user;
+        $this->uid = $uid;
     }
 
     /**
@@ -45,7 +48,7 @@ class PlaygroundEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PresenceChannel('pressence.chat.1'),
+            new PresenceChannel('pressence.chat.'.$this->uid),
         ];
     }
 }

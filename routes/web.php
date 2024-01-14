@@ -123,6 +123,10 @@ Route::middleware(['auth', 'user-access:bidder'])->group(function () {
     Route::post('/update_baseDemand', [demandAuctionsController::class ,'update_baseDemand'])->name('update_baseDemand');
     Route::get('/manual_closeDemand' ,[demandAuctionsController::class , 'manual_closeDemand']);
    
+    //teting chat
+    Route::post('/chat-message', [testMessageControl::class, 'testMessage']);//for axiom in app.js
+    Route::get('/chat-message', [testMessageControl::class, 'testMessage']);//for internal js on weboscket.blade.php
+
 
 });
 
@@ -466,8 +470,8 @@ Route::post('/chat-message', function (\Illuminate\Http\Request $request) {
     return response()->json([$request->message => true]);
 });
 
-//Route::post('/chat-message', [testMessageControl::class, 'testMessage']);
-//Route::get('/chat-message', [testMessageControl::class, 'testMessage']);
+Route::post('/chat-message', [testMessageControl::class, 'testMessage']);
+Route::get('/chat-message', [testMessageControl::class, 'testMessage']);
 
 //testing routes
 
