@@ -17,3 +17,6 @@ Note: change the ip address to your machine/pc's ip address
 
 
 ------------------- Nag configure lang ng name and email pre -------------
+ 
+
+ --testing (Jan 15)
