@@ -2,12 +2,10 @@
 
 namespace Illuminate\Foundation\Auth;
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use App\Models\User;
 
 trait AuthenticatesUsers
 {
@@ -85,22 +83,9 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
-
         return $this->guard()->attempt(
             $this->credentials($request), $request->boolean('remember')
         );
-
-        /*
-        //this is the login logic
-        $users = User::where($this->username(), $request->email)->where('status', '1')->first();
-     
-            if($users) 
-            {
-                return $this->guard()->attempt(
-                    $this->credentials($request), $request->boolean('remember')
-                );
-            }
-        */
     }
 
     /**
@@ -122,7 +107,6 @@ trait AuthenticatesUsers
      */
     protected function sendLoginResponse(Request $request)
     {
-
         $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
@@ -134,26 +118,6 @@ trait AuthenticatesUsers
         return $request->wantsJson()
                     ? new JsonResponse([], 204)
                     : redirect()->intended($this->redirectPath());
-
-        /*
-        $request->session()->regenerate();
-
-        $this->clearLoginAttempts($request);
-
-        // if it is Admin
-        if(Auth::user()->user_type == '1')
-        {
-            return redirect()->intended(RouteServiceProvider::ADMIN);
-        }
-
-        if ($response = $this->authenticated($request, $this->guard()->user())) {
-            return $response;
-        }
-
-        return $request->wantsJson()
-                    ? new JsonResponse([], 204)
-                    : redirect()->intended($this->redirectPath());
-        */
     }
 
     /**

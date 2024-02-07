@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit64dcb799466f26e22e8059ba186ea8d7
+class ComposerStaticInitca8311776477a79423c2142fc23301f1
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -420,8 +420,8 @@ class ComposerStaticInit64dcb799466f26e22e8059ba186ea8d7
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -614,6 +614,7 @@ class ComposerStaticInit64dcb799466f26e22e8059ba186ea8d7
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\NewMessageEvent' => __DIR__ . '/../..' . '/app/Events/NewMessageEvent.php',
         'App\\Events\\PlaygroundEvent' => __DIR__ . '/../..' . '/app/Events/PlaygroundEvent.php',
+        'App\\Events\\demandBids_send' => __DIR__ . '/../..' . '/app/Events/demandBids_send.php',
         'App\\Events\\end_auction' => __DIR__ . '/../..' . '/app/Events/end_auction.php',
         'App\\Events\\notifier' => __DIR__ . '/../..' . '/app/Events/notifier.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -631,8 +632,9 @@ class ComposerStaticInit64dcb799466f26e22e8059ba186ea8d7
         'App\\Http\\Controllers\\ImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageController.php',
         'App\\Http\\Controllers\\MessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/MessageController.php',
         'App\\Http\\Controllers\\TeEventController' => __DIR__ . '/../..' . '/app/Http/Controllers/TeEventController.php',
+        'App\\Http\\Controllers\\UserTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserTypeController.php',
         'App\\Http\\Controllers\\WebSocketController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebSocketController.php',
-        'App\\Http\\Controllers\\bidsControl' => __DIR__ . '/../..' . '/app/Http/Controllers/bidsControl.php',
+        'App\\Http\\Controllers\\demandAuctionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/demandAuctionsController.php',
         'App\\Http\\Controllers\\testMessageControl' => __DIR__ . '/../..' . '/app/Http/Controllers/testMessageControl.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -642,19 +644,25 @@ class ComposerStaticInit64dcb799466f26e22e8059ba186ea8d7
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
+        'App\\Http\\Middleware\\UserAccess' => __DIR__ . '/../..' . '/app/Http/Middleware/UserAccess.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Middleware\\requestChecker' => __DIR__ . '/../..' . '/app/Http/Middleware/requestChecker.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\auctions' => __DIR__ . '/../..' . '/app/Models/auctions.php',
         'App\\Models\\bids' => __DIR__ . '/../..' . '/app/Models/bids.php',
         'App\\Models\\consNotif' => __DIR__ . '/../..' . '/app/Models/consNotif.php',
         'App\\Models\\crops' => __DIR__ . '/../..' . '/app/Models/crops.php',
+        'App\\Models\\demandAuctions' => __DIR__ . '/../..' . '/app/Models/demandAuctions.php',
+        'App\\Models\\demand_bids' => __DIR__ . '/../..' . '/app/Models/demand_bids.php',
         'App\\Models\\farmerNotif' => __DIR__ . '/../..' . '/app/Models/farmerNotif.php',
         'App\\Models\\image' => __DIR__ . '/../..' . '/app/Models/image.php',
         'App\\Models\\messages' => __DIR__ . '/../..' . '/app/Models/messages.php',
+        'App\\Models\\notificatio' => __DIR__ . '/../..' . '/app/Models/notificatio.php',
         'App\\Models\\notifications' => __DIR__ . '/../..' . '/app/Models/notifications.php',
         'App\\Models\\payment' => __DIR__ . '/../..' . '/app/Models/payment.php',
         'App\\Models\\pending_transactions' => __DIR__ . '/../..' . '/app/Models/pending_transactions.php',
+        'App\\Notifications\\UserNotification' => __DIR__ . '/../..' . '/app/Notifications/UserNotification.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -6824,9 +6832,9 @@ class ComposerStaticInit64dcb799466f26e22e8059ba186ea8d7
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit64dcb799466f26e22e8059ba186ea8d7::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit64dcb799466f26e22e8059ba186ea8d7::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit64dcb799466f26e22e8059ba186ea8d7::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitca8311776477a79423c2142fc23301f1::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitca8311776477a79423c2142fc23301f1::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitca8311776477a79423c2142fc23301f1::$classMap;
 
         }, null, ClassLoader::class);
     }
