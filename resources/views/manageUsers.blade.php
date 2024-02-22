@@ -95,6 +95,7 @@
             {{-- <a href="{{url('banUser')}}?id={{ $user->id}}" class="btn btn-outline-danger sm-title">Ban user</a> --}}
             <div class="modal fade" id="{{ $user->id }}userBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
+
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Ban User ID: {{ $user->id }}</h5>
@@ -108,6 +109,7 @@
                     <a class="btn btn-outline-danger fs-2" href="{{url('banUser')}}?id={{ $user->id}}">Ban User</a>
                   </div>
                 </div>
+                
               </div>
             </div>
             </td>
